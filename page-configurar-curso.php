@@ -100,27 +100,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                 </div>
                                                                 
-                                                              <div class="row">
-                                                                    <div class="col s12 m12 l12">
-                                                                        <label >Plan de Estudios:</label>
-                                                                        <select id="disco" class="browser-default" name="plan" required="">
-                                                                            <option value="" disabled>Escoge un Plan de Estudios</option>
-                                                                            <?php
-                                                                            
-                                                                            $buscarD = "SELECT * FROM plan";
-                                                                            $result = $conexion->query($buscarD) or die($conexion->error);
-                                                                            while ($fila = $result->fetch_assoc()) {
-                                                                            ?>
-                                                                                <option value="<?php echo $fila['PlanId']; ?>" <?php if ($fila['PlanId'] == $provBD['CursoPlan']) {
-                                                                                echo "selected";
-                                                                            } ?>><?php echo $fila['PlanNombre']; ?></option>
-                                                                            <?php }
-                                                                             
-                                                                            ?>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+                                                              
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
@@ -129,12 +109,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                 </div>
                                                                 
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="silabus" required="" value="<?php echo $provBD['CursoSilabus']; ?>">
-                                                                        <label class="active" for="nombre">Silabus :</label>
-                                                                    </div>
-                                                                </div>
+                                                                
                                                                 
                                                                 </div>
                                                                 <br>

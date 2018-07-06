@@ -87,10 +87,8 @@ if (!isset($_SESSION['usuario'])) {
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Codigo</th>
-                                                                        <th>Plan</th>
-                                                                        <th>Nombre</th>
-                                                                        <th>Silabus</th>
+                                                                        <th>Codigo</th>                                                                        
+                                                                        <th>Nombre</th>                                                                        
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -98,10 +96,8 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tfoot>
                                                                     <tr>
-                                                                        <th>Codigo</th>
-                                                                        <th>Plan</th>
-                                                                        <th>Nombre</th>
-                                                                        <th>Silabus</th>
+                                                                         <th>Codigo</th>                                                                        
+                                                                        <th>Nombre</th>                                                                        
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -112,19 +108,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                     $consultaUser = "SELECT * FROM curso WHERE CursoEstReg='A'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
-                                                                        echo "<tr>
-                                                                        <td>" . $row['CursoId'] . "</td>";
-                                                                        
-                                                                        $consultaCat = "SELECT * FROM plan WHERE PlanId='" . $row['CursoPlan'] . "'";
-                                                                        $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
-                                                                        while ($row2 = $resultado2->fetch_assoc()) {
-                                                                            echo "<td>" . $row2['PlanNombre'] . "</td>";
-                                                                        }
-                                                                      
-                              
-                                                                        echo "<td>" . $row['CursoNombre'] . "</td>";
-                                                                        echo "<td>" . $row['CursoSilabus'] . "</td>";
-                                                                            
+                                                                         echo "<tr>
+                                                                        <td>" . $row['CursoId'] . "</td>
+                                                                        <td>" . $row['CursoNombre'] . "</td>";
+                                                                       
                                                                         
                                                                         echo "<td><a href=\"page-configurar-curso.php?id=" . $row['CursoId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
                                                                         <td><a href=\"control/eliminarCurso.php?id=" . $row['CursoId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>

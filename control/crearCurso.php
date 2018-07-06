@@ -3,16 +3,16 @@
 include '../conexion.php';
 
 //reciviendo datos del formulario
-$codigo=$_POST['cursocodigo'];
-$plan = $_POST['cursoplan'];
-$nombre=$_POST['cursonombre'];
-$silabus=$_POST['cursosilabus'];
 
-if (!isset($codigo) || !isset($plan) || !isset($nombre) || !isset($silabus)) {
+
+$nombre=$_POST['cursonombre'];
+
+
+if (!isset($nombre)) {
     header("location:../page-crear-curso.php");
 }
 
-$insertar="INSERT INTO curso(CursoId, CursoPlan, CursoNombre, CursoSilabus) VALUES ('$codigo', '$plan', '$nombre', '$silabus')";
+$insertar="INSERT INTO curso(CursoNombre) VALUES ( '$nombre')";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';

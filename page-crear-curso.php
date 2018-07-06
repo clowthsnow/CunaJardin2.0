@@ -86,26 +86,9 @@ if (!isset($_SESSION['usuario'])) {
                                                         <div class="row">
                                                             <form id="create" class="col s12" action="control/crearCurso.php" method="POST">
 
-                                                                 <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="cursocodigo" required="">
-                                                                        <label for="nombre">Codigo:</label>
-                                                                    </div>
-                                                                </div>
+                                                                 
                                                                 
-                                                                <div class="row">
-                                                                    <div class="col s12 m12 l12">
-                                                                        <label>Plan de Estudios:</label>
-                                                                        <select id="disco" class="browser-default" name="cursoplan" required="">
-                                                                            <option value="" disabled selected>Escoge una plan de estudios</option>
-                                                                            <?php while ($row = $result->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['PlanId']; ?>"><?php echo $row['PlanNombre']; ?></option>
-                                                                            <?php }
-                                                                            ?>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+                                                               
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
@@ -114,12 +97,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                 </div>
                                                                 
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="cursosilabus" required="">
-                                                                        <label for="nombre">Silabus del Curso:</label>
-                                                                    </div>
-                                                                </div>
+                                                                
 
                                                                 <br>
                                                                 <div class="divider"></div>
