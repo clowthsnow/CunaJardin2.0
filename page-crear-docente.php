@@ -90,8 +90,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                                           
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="docentedni" required="">
-                                                                        <label for="nombre">Dni:</label>
+                                                                        <input id="dni" type="text" class="validate" name="docentedni" required="">
+                                                                        <label for="dni">Dni:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -104,8 +104,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="docenteapellido" required="">
-                                                                        <label for="nombre">Apellido:</label>
+                                                                        <input id="ape" type="text" class="validate" name="docenteapellido" required="">
+                                                                        <label for="ape">Apellido:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -118,15 +118,15 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="docentecorreo" required="">
-                                                                        <label for="nombre">Correo:</label>
+                                                                        <input id="cor" type="text" class="validate" name="docentecorreo" required="">
+                                                                        <label for="cor">Correo:</label>
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="docentetelefono" required="">
-                                                                        <label for="nombre">Telefono:</label>
+                                                                        <input id="tel" type="text" class="validate" name="docentetelefono" required="">
+                                                                        <label for="tel">Telefono:</label>
                                                                     </div>
                                                                 </div>
                                                                 
