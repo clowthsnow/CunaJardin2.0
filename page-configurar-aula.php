@@ -17,8 +17,9 @@ if (!isset($_SESSION['usuario'])) {
     }
     $provBD = $resultado->fetch_assoc();
     
-    $buscarEsc = "SELECT * FROM escuela";
-    $resultEsc = $conexion->query($buscarEsc);
+    
+    $buscarDoc = "SELECT * FROM docente";
+    $resultDoc = $conexion->query($buscarDoc);
    
     ?>
 
@@ -108,12 +109,26 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                 </div>
                                                                 
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="numero" type="text" class="validate" name="numeroaula" required="" value="<?php echo $provBD['AulaGrado']; ?>">
+                                                                        <label class="active" for="numero">Nombre de aula:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="ubi" type="text" class="validate" name="anhoaula" required="" value="<?php echo $provBD['AulaAnho']; ?>">
+                                                                        <label class="active" for="ubi">Anho:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                                 <div class="col s12 m6 l6">
-                                                                        <label >Escuela:</label>
-                                                                        <select id="esc" class="browser-default" name="aulaescuela" required="">
+                                                                        <label >Docente:</label>
+                                                                        <select id="esc" class="browser-default" name="auladocente" required="">
                                                                             <option value="" disabled selected>Selecciona</option>
-                                                                            <?php while ($row = $resultEsc->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['EscuelaId']; ?>"><?php echo $row['EscuelaNombre']; ?></option>
+                                                                            <?php while ($row = $resultDoc->fetch_assoc()) { ?>
+                                                                                <option value="<?php echo $row['DocenteDni']; ?>"><?php echo $row['DocenteNombre']; ?></option>
                                                                             <?php }
                                                                             ?>
 
@@ -122,20 +137,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 </div>
                                                                 
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="numero" type="text" class="validate" name="numeroaula" required="" value="<?php echo $provBD['AulaNumero']; ?>">
-                                                                        <label class="active" for="numero">Numero de aula:</label>
-                                                                    </div>
-                                                                </div>
+                                                                
                                                                 
                                                                                                                              
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="ubi" type="text" class="validate" name="ubicacionaula" required="" value="<?php echo $provBD['AulaUbiacion']; ?>">
-                                                                        <label class="active" for="ubi">Ubicacion:</label>
-                                                                    </div>
-                                                                </div>
+                                                                
                                                                 
                                                                 
                                                         
@@ -170,7 +175,7 @@ if (!isset($_SESSION['usuario'])) {
                                 <p> Escuela modificada correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-escuela.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-aula.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal error-->

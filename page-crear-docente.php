@@ -5,6 +5,9 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
+    include 'conexion.php';
+    date_default_timezone_set('America/Lima');
+    $fecha = new DateTime();
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -72,7 +75,7 @@ if (!isset($_SESSION['usuario'])) {
                                         <div id="roboto">
                                             <h4 class="header">Creación de Docentes</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevos Docentes con los que cuenta en la Escuela.
+                                                En este panel usted podra crear nuevos Docentes con los que cuenta la Cuna Jardin.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
@@ -108,8 +111,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="docentetelefono" required="">
-                                                                        <label for="nombre">Telefono:</label>
+                                                                        <input id="titulo" type="text" class="validate" name="docentetitulo" required="">
+                                                                        <label for="titulo">Titulo:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -119,7 +122,148 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label for="nombre">Correo:</label>
                                                                     </div>
                                                                 </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="nombre" type="text" class="validate" name="docentetelefono" required="">
+                                                                        <label for="nombre">Telefono:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="pais" type="text" class="validate" name="docentepais" required="">
+                                                                        <label for="pais">Pais de Nacimiento:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="ciu" type="text" class="validate" name="docenteciudad" required="">
+                                                                        <label for="ciu">Ciudad de Nacimiento:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12 m6 l6">
+                                                                        <input id="fecha" type="text" class="datepicker" name="docentefecha" required="" value="<?php echo $fecha->format('d-m-Y'); ?>">
+                                                                        <label for="fecha" class="active">Fecha de nacimiento:</label>
+                                                                    </div>
+                                                                </div>
 
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="dom" type="text" class="validate" name="docentedomicilio" required="">
+                                                                        <label for="dom">Domicilio:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="dis" type="text" class="validate" name="docentedistrito" required="">
+                                                                        <label for="dis">Distrito:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="grado" type="text" class="validate" name="docentegrado" required="">
+                                                                        <label for="grado">Grado de instruccion:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="ocu" type="text" class="validate" name="docenteocupacion" required="">
+                                                                        <label for="ocu">Ocupacion:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="di" type="text" class="validate" name="docentedirtrabajo" required="">
+                                                                        <label for="di">Direccion de trabajo:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="cen" type="text" class="validate" name="docentecentro" required="">
+                                                                        <label for="cen">Centro de trabajo:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="san" type="text" class="validate" name="docentesangre" required="">
+                                                                        <label for="san">Tipo de sangre:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="unsa" type="text" class="validate" name="docenteUNSA" required="">
+                                                                        <label for="unsa">Vinculo con UNSA(Si/No):</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="vin" type="text" class="validate" name="docentevinculo" required="">
+                                                                        <label for="vin">Especifique el vinculo:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="sit" type="text" class="validate" name="docentesituacion" required="">
+                                                                        <label for="sit">Situacion laboral:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="det" type="text" class="validate" name="docentedetallelab" required="">
+                                                                        <label for="det">Detalle su situacion laboral:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="tip" type="text" class="validate" name="docentetipo" required="">
+                                                                        <label for="tip">Tipo de docente:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="seg" type="text" class="validate" name="docenteseguro" required="">
+                                                                        <label for="seg">Seguro social(Si/no):</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="soc" type="text" class="validate" name="docentesocial" required="">
+                                                                        <label for="soc">Detalle su seguro social:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="foto" type="text" class="validate" name="imagen" required="">
+                                                                        
+                                                                        <label for="foto">Foto:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="curr" type="text" class="validate" name="docentecurr" required="">
+                                                                        <label for="curr">Curriculum:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                                 <br>
                                                                 <div class="divider"></div>
                                                                 <div class="row">

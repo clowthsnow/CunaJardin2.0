@@ -4,17 +4,17 @@ include '../conexion.php';
 
 //recibiendo datos del formulario
 
-$escuela = $_POST['aulaescuela'];
-$numero = $_POST['numeroaula'];
-$ubicacion = $_POST['ubicacionaula'];
+$grado = $_POST['gradoaula'];
+$anho = $_POST['anhoaula'];
+$docente = $_POST['docenteaula'];
 
 
 
-if (!isset($escuela) ||  !isset($numero)|| !isset($ubicacion)) {
+if (!isset($grado) ||  !isset($anho)|| !isset($docente)) {
     header("location:../page-crear-aula.php");
 }
 
-$insertar="INSERT INTO aula( AulaEscuela, AulaNumero, AulaUbiacion) VALUES ('$escuela','$numero','$ubicacion')";
+$insertar="INSERT INTO aula( AulaGrado, AulaAnho, AulaDocente) VALUES ('$grado','$anho','$docente')";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';

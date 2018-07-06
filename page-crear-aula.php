@@ -6,8 +6,8 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
-    $buscarEsc = "SELECT * FROM escuela";
-    $resultEsc = $conexion->query($buscarEsc);
+    $buscarDoc = "SELECT * FROM docente";
+    $resultDoc = $conexion->query($buscarDoc);
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -87,12 +87,28 @@ if (!isset($_SESSION['usuario'])) {
                                                             <form id="create" class="col s12" action="control/crearAula.php" method="POST">
                                                                 
                                                                 <div class="row">
+                                                                    <div class="input-field col s12">
+
+                                                                        <input id="num" type="text" class="validate" name="gradoaula" required="">
+                                                                        <label for="num">Nombre de aula: </label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+
+                                                                        <input id="anho" type="text" class="validate" name="anhoaula" required="">
+                                                                        <label for="anho">Anho: </label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
                                                                     <div class="col s12 m12 l12">
-                                                                        <label>Escuela:</label>
-                                                                        <select id="escuela" class="browser-default" name="aulaescuela" required="">
+                                                                        <label>Docente:</label>
+                                                                        <select id="escuela" class="browser-default" name="docenteaula" required="">
                                                                             <option value="" disabled selected>Selecciona</option>
-                                                                            <?php while ($row = $resultEsc->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['EscuelaId']; ?>"><?php echo $row['EscuelaNombre']; ?></option>
+                                                                            <?php while ($row = $resultDoc->fetch_assoc()) { ?>
+                                                                                <option value="<?php echo $row['DocenteDni']; ?>"><?php echo $row['DocenteNombre']; ?></option>
                                                                             <?php }
                                                                             ?>
 
@@ -100,21 +116,6 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                 </div>
                                                                 
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-
-                                                                        <input id="num" type="text" class="validate" name="numeroaula" required="">
-                                                                        <label for="num">Número de aula: </label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-
-                                                                        <input id="ubi" type="text" class="validate" name="ubicacionaula" required="">
-                                                                        <label for="ubi">Ubicacion: </label>
-                                                                    </div>
-                                                                </div>
                                                                 
                                                                 
                                                                 
