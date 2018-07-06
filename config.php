@@ -1,5 +1,5 @@
 <?php
 $hostname="localhost";
-$database="asistencia";
+$database="cunajardin";
 $username="root";
 $password="";
