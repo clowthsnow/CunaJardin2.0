@@ -24,9 +24,9 @@ if (!isset($_SESSION['usuario'])) {
         $usuario = $resultado->fetch_assoc();
         if ($usuario['UsuarioEstReg'] === "A") {
             $_SESSION['usuario'] = $usuario['UsuarioId'];
-            $nombres = $usuario['UsuarioNombre'] . ' ' . $usuario['UsuarioApellido'];
+            $nombres = $usuario['UsuarioNombre'] . ' ' . $usuario['UsuarioApellidos'];
             $_SESSION['usuarioNombres'] = $nombres;
-            $_SESSION['permisos'] = $usuario['UsuarioTipo'];
+            $_SESSION['permisos'] = $usuario['UsuarioTipoUsuario'];
             
             header("location:../index.php");
 //            echo(MD5($contra));

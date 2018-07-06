@@ -15,6 +15,7 @@ if ('1'== $_SESSION['permisos']) {
                     <div class="card-action">
                         <a href="page-crear-usuario.php" class="lime-text text-accent-1">Crear Usuario</a>
                         <a href="page-ver-usuarios.php" class="lime-text text-accent-1">Ver Usuarios</a>
+                        <a href="page-datos-alumno.php" class="lime-text text-accent-1">Datos Alumnos</a>
                     </div>
                 </div>
             </div>
