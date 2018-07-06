@@ -4,15 +4,16 @@ include '../conexion.php';
 
 //reciviendo datos del formulario
 
-$nombre = $_POST['nombretipo'];
+$alumno = $_POST['id'];
+$aula=$_POST['aula'];
 
 
-if (  !isset($nombre)) {
-    header("location:../page-crear-tipoConcepto.php");
+if (  !isset($alumno) || !isset($aula)) {
+    header("location:../page-matricula-estudiante.php");
 }
 
 
-$insertar="INSERT INTO tipoconcepto( TipoConceptoDetalle) VALUES ('$nombre')";
+$insertar="INSERT INTO aulaalumnos( AulaAlumnosId,AulaAlumnosAlumno) VALUES ('$aula','$alumno')";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';
@@ -23,8 +24,3 @@ if($conexion->query($insertar)==TRUE){
     //echo "Error, nombre de usuario existente";
 }
 $conexion->close();
-
-
-
-
-

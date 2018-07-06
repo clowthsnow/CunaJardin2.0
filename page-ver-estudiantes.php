@@ -87,12 +87,12 @@ if (!isset($_SESSION['usuario'])) {
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Codigo</th>
+
                                                                         <th>Dni</th>
                                                                         <th>Nombre</th>
                                                                         <th>Apellido</th>
-                                                                        <th>Anio</th>
-                                                                        <th>Correo</th>
+                                                                        <th>Año de Nac</th>
+                                                                        <th>Matricular</th>
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -100,12 +100,12 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tfoot>
                                                                     <tr>
-                                                                        <th>Codigo</th>
+
                                                                         <th>Dni</th>
                                                                         <th>Nombre</th>
                                                                         <th>Apellido</th>
-                                                                        <th>Anio</th>
-                                                                        <th>Correo</th>
+                                                                        <th>Año de Nac</th>
+                                                                        <th>Matricular</th>
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -113,20 +113,26 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM estudiante WHERE EstudianteEstReg='A'";
+                                                                    $consultaUser = "SELECT * FROM alumno WHERE AlumnoEstReg='A'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
+                                                                        $DNIA = $row['AlumnoDni'];
                                                                         echo "<tr>
-                                                                        <td>" . $row['EstudianteCui'] . "</td>
-                                                                        <td>" . $row['EstudianteDni'] . "</td>
-                                                                        <td>" . $row['EstudianteNombre'] . "</td>
-                                                                        <td>" . $row['EstudianteApellido'] . "</td>
-                                                                        <td>" . $row['EstudianteAnio'] . "</td>
-                                                                        <td>" . $row['EstudianteCorreo'] . "</td>";
-                                                                        
-                                                                        
-                                                                        echo "<td><a href=\"page-configurar-estudiante.php?id=" . $row['EstudianteCui'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarEstudiante.php?id=" . $row['EstudianteCui'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                       
+                                                                        <td>" . $row['AlumnoDni'] . "</td>
+                                                                        <td>" . $row['AlumnoNombre'] . "</td>
+                                                                        <td>" . $row['AlumnoApellidos'] . "</td>
+                                                                        <td>" . $row['AlumnoFechaNacimiento'] . "</td>";
+
+                                                                        $consultaMatri = "SELECT * FROM aulaalumnos WHERE AulaAlumnosAlumno='$DNIA'";
+                                                                        $resultado2 = $conexion->query($consultaMatri);
+                                                                        if ($resultado2->num_rows === 0) {
+                                                                            echo "<td><a href=\"page-matricula-estudiante.php?id=" . $row['AlumnoDni'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>";
+                                                                        } else {
+                                                                            echo "<td><span class=\"task-cat cyan\">Matriculado</span></a></td>";
+                                                                        }
+                                                                        echo "<td><a href=\"page-configurar-estudiante.php?id=" . $row['AlumnoDni'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarEstudiante.php?id=" . $row['AlumnoDni'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>

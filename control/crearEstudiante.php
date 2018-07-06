@@ -3,27 +3,71 @@
 include '../conexion.php';
 
 //reciviendo datos del formulario
+$nombreImagen = $_FILES['foto']['name']; //Nombre de la imagen
+$archivo = $_FILES['foto']['tmp_name']; //Archivo
+$ruta = "../fotoEstudiante";
+$ruta = $ruta . "/" . $nombreImagen;
+move_uploaded_file($archivo, $ruta);
 
-$cui = $_POST['estudiantecui'];
-$dni = $_POST['estudiantedni'];
-$nombre = $_POST['estudiantenombre'];
-$apellido = $_POST['estudianteapellido'];
-$anio = $_POST['estudianteanio'];
-$correo = $_POST['estudiantecorreo'];
+$nombre = $_POST['nombre'];
+$apellido = $_POST['apellido'];
+$nacimientoF = $_POST['fechaNac'];
+$dni = $_POST['dni'];
+$sexo = $_POST['sexo'];
+$edad = $_POST['edad'];
+$lugarNac = $_POST['nacimiento'];
+$direccion = $_POST['direccion'];
+$escolaridad = $_POST['escolaridad'];
+$controlmed = $_POST['controlmed'];
+$parto = $_POST['parto'];
+$peso = $_POST['peso'];
+$talla = $_POST['talla'];
+$dificultad = $_POST['dificultad'];
+$lactancia = $_POST['lactancia'];
+$vacunas = $_POST['vacunas'];
+$temores = $_POST['temores'];
+$temordet = $_POST['temordetalle'];
+$limitacionf = $_POST['limitacionfis'];
+$limitacionfdet = $_POST['limitacionfisdetalle'];
+$dificultadsen = $_POST['dificultadsens'];
+$dificultadsendet = $_POST['dificultadsensdet'];
+$alergias = $_POST['alergia'];
+$alergiasdet = $_POST['alergiadet'];
+$dnim = $_POST['dnim'];
+$dnip = $_POST['dnip'];
+$vtipo = $_POST['vivtipo'];
+$vmat = $_POST['vivmaterial'];
+$habitaciones = $_POST['vivhab'];
+$personas = $_POST['vivpers'];
+$agua = $_POST['vivagua'];
+$luz = $_POST['vivluz'];
+$servicios = $_POST['vivserv'];
 
-
-if ( !isset($nombre)||!isset($dni)||!isset($nombre)||!isset($apellido)||!isset($anio)||!isset($correo)) {
-    header("location:../page-crear-estudiante.php");
+if (!isset($nombre) || !isset($dni) || !isset($sexo) || !isset($apellido) || !isset($edad) || !isset($parto)) {
+    header("location:../page-datos-alumno.php");
 }
 
-$insertar="INSERT INTO estudiante( EstudianteCui,EstudianteDni,EstudianteNombre,EstudianteApellido,EstudianteAnio,EstudianteCorreo) VALUES ('$cui','$dni','$nombre','$apellido','$anio','$correo')";
+var_dump($_FILES);
 
-if($conexion->query($insertar)==TRUE){
-    echo '1';
+echo "<br>";
+var_dump($_POST);
+
+$insertaralumno = "INSERT INTO alumno ( AlumnoDni,AlumnoNombre,AlumnoApellidos,AlumnoEdad,AlumnoTutorIdMadre,AlumnoTipoAlumno,AlumnoFoto,AlumnoFechaNacimiento,AlumnoTutorIdPadre,AlumnoSexo,AlumnoLugarNacimiento,AlumnoDomicilio,AlumnoSituacionPromovido,AlumnoControlMedico,AlumnoParto,AlumnoPeso,AlumnoTalla,AlumnoDifucaltades,AlumnoLactanciaTipo,AlumnoTemores,AlumnoTemoresDetalles,AlumnoLimitacionFisica,AlumnoLimitacionFisicaDet,AlumnoDificultadControl,AlumnoDificultadControlDet,AlumnoAlergias,AlumnoAlergiasDet,AlumnoVacunas,AlumnoCodigoUgel,AlumnoSiagie) "
+        . "VALUES ('$dni','$nombre','$apellido','$edad','$dnim','1','$nombreImagen','$nacimientoF','$dnip','$sexo','$lugarNac','$direccion','$escolaridad','$controlmed','$parto','$peso','$talla','$dificultad','$lactancia','$temores','$temordet','$limitacionf','$limitacionfdet','$dificultadsen','$dificultadsendet','$alergias','$alergiasdet','$vacunas','00000','---')";
+//
+if ($conexion->query($insertaralumno) == TRUE) {
+
+    $insertarVivienda = "INSERT INTO vivienda (ViviendaAlumno,ViviendaTipo,ViviendaMaterial,ViviendaHabitaciones,ViviendaPersonas,ViviendaAguaTipo,ViviendaLuz,ViviendaSsHh)"
+            . "VALUES ('$dni','$vtipo','$vmat','$habitaciones','$personas','$agua','$luz','$servicios')";
+    if ($conexion->query($insertarVivienda) == TRUE) {
+        echo '1';
+        header("location:../page-declaracion-jurada.php?usuario=$dni&padre=$dnim");
+    }
+//    echo '2';
     //echo "Registro exitoso";
-        //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
-}else{
-    echo '0';
+    //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
+} else {
+    echo '1';
     //echo "Error, nombre de usuario existente";
 }
 $conexion->close();

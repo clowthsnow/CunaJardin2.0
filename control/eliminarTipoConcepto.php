@@ -2,6 +2,7 @@
 
 include '../conexion.php';
 
+
 //reciviendo datos del formulario
 $id = $_GET['id'];;
 if (!isset($id) ) {

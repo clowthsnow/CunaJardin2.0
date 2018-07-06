@@ -36,6 +36,7 @@ if (!isset($_SESSION['usuario'])) {
                 <!-- START WRAPPER -->
                 <div class="wrapper">
 
+                    
                     <!-- START LEFT SIDEBAR NAV-->
                     <?php include 'inc/menu.inc'; ?>
                     <!-- END LEFT SIDEBAR NAV-->

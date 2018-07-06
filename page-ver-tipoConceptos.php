@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
 
+
 if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
