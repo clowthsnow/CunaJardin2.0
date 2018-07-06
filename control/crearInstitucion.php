@@ -14,7 +14,7 @@ if (!isset($nom) || !isset($dir) || !isset($tel) || !isset($correo)) {
     header("location:../page-crear-institucion.php");
 }
 
-$insertar="INSERT INTO institucion(InstitucionId,InstitucionNombre, InstitucionDireccion, InstitucionTelefono, InstitucionCorreo) VALUES ('$nom','$dir', '$tel', '$correo' )";
+$insertar="INSERT INTO institucion(InstitucionNombre, InstitucionDireccion, InstitucionTelefono, InstitucionCorreo) VALUES ('$nom','$dir', '$tel', '$correo' )";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';
