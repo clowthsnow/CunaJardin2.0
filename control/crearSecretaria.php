@@ -14,7 +14,7 @@ if (!isset($dni) ||  !isset($nombre)|| !isset($ape) || !isset($telefono) || !iss
     header("location:../page-crear-secretaria.php");
 }
 
-$insertar="INSERT INTO secretaria( SecretariaDni,SecretariaNombre, SecretariaApellido,SecretariaCorreo, SecretariaTelefono ) VALUES ('$dni','$nombre','$ape','$email','$telefono')";
+$insertar="INSERT INTO secretaria(ContadorDni,ContadorNombre, ContadorApellidos,ContadorCorreo, ContadorTelefono) VALUES ('$dni','$nombre','$ape','$email','$telefono')";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';
