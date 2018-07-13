@@ -18,7 +18,7 @@ if (!isset($_SESSION['usuario'])) {
     $provBD = $resultado->fetch_assoc();
     
     
-    $buscarDoc = "SELECT * FROM docente";
+    $buscarDoc = "SELECT * FROM docente where DocenteEstReg='A'";
     $resultDoc = $conexion->query($buscarDoc);
    
     ?>
@@ -112,7 +112,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="numero" type="text" class="validate" name="numeroaula" required="" value="<?php echo $provBD['AulaGrado']; ?>">
-                                                                        <label class="active" for="numero">Nombre de aula:</label>
+                                                                        <label class="active" for="numero">Grado:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -172,7 +172,7 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="green-text">EXITO!!!</h4>
-                                <p> Escuela modificada correctamente.</p>
+                                <p> Aula modificada correctamente.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="page-ver-aula.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
@@ -182,7 +182,7 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>La escuela no pudo ser modificada, intentelo de nuevo.</p>
+                                <p>El aula no pudo ser modificada, intentelo de nuevo.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
@@ -229,7 +229,7 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-                $(document).ready(function () {
+                 $(document).ready(function () {
                     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
                     
                     $('#modal1').modal();

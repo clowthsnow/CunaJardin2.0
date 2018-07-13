@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario'])) {
     <html lang="es">
 
         <head>
-            <title>Ver Administrador</title>
+            <title>Ver Aulas</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -53,11 +53,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Ver Administrador</h5>
+                                        <h5 class="breadcrumbs-title">Ver Aula</h5>
                                         <ol class="breadcrumb">
-                                            <li class=" grey-text lighten-4">Gestion de Usuarios
+                                            <li class=" grey-text lighten-4">Gestion de Aulas
                                             </li>
-                                            <li class="active blue-text">Ver Administrador</li>
+                                            <li class="active blue-text">Ver Aula</li>
                                         </ol>
 
                                     </div>
@@ -72,9 +72,9 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Ver Administrador</h4>
+                                            <h4 class="header">Ver Aula</h4>
                                             <p class="caption">
-                                                En este panel usted podra ver todos los datos del Administrador.
+                                                En este panel usted podra ver todos los datos de las aulas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
@@ -87,11 +87,9 @@ if (!isset($_SESSION['usuario'])) {
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>                                                                        
-                                                                        <th>Nombre</th>
-                                                                        <th>Apellido</th>
-                                                                        <th>Tipo</th>
-                                                                        <th>Correo</th>
-                                                                        <th>Telefono</th>                                                                        
+                                                                        <th>Grado</th>
+                                                                        <th>Anho</th>
+                                                                        <th>Docente</th>                                                                                                                                              
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -99,11 +97,9 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tfoot>
                                                                     <tr>
-                                                                        <th>Nombre</th>
-                                                                        <th>Apellido</th>
-                                                                        <th>Tipo</th>
-                                                                        <th>Correo</th>
-                                                                        <th>Telefono</th>                                                                        
+                                                                        <th>Grado</th>
+                                                                        <th>Anho</th>
+                                                                        <th>Docente</th>                                                                                                                                              
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -111,19 +107,18 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM administrador WHERE AdministradorEstReg='A'";
+                                                                    $consultaUser = "SELECT * FROM aula WHERE AulaEstReg='A'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>                                                                        
-                                                                        <td>" . $row['AdministradorNombre'] . "</td>
-                                                                        <td>" . $row['AdministradorApellidos'] . "</td>
-                                                                        <td>" . $row['AdministradorTipo'] . "</td>
-                                                                        <td>" . $row['AdministradorCorreo'] . "</td>
-                                                                        <td>" . $row['AdministradorTelefono'] . "</td>";
+                                                                        <td>" . $row['AulaGrado'] . "</td>
+                                                                        <td>" . $row['AulaAnho'] . "</td>
+                                                                        <td>" . $row['AulaDocente'] . "</td>";
+                                                                       
                                                                         
                                                                         
-                                                                        echo "<td><a href=\"page-configurar-administrador.php?id=" . $row['AdministradorDni'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarAdministrador.php?id=" . $row['AdministradorDni'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        echo "<td><a href=\"page-configurar-aula.php?id=" . $row['AulaId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarAula.php?id=" . $row['AulaId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
@@ -145,10 +140,10 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>Administrador no encontrado en la base de datos</p>
+                                <p>Aula no encontrada en la base de datos</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-contador.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-aula.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal eliminar-->
