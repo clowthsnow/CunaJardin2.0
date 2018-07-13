@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
-    $buscarDoc = "SELECT * FROM docente";
+    $buscarDoc = "SELECT * FROM docente where DocenteEstReg='A'";
     $resultDoc = $conexion->query($buscarDoc);
     ?>
     <!DOCTYPE html>
@@ -89,8 +89,16 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
 
+                                                                        <input id="cod" type="text" class="validate" name="cod" required="">
+                                                                        <label for="cod">Codigo aula: </label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+
                                                                         <input id="num" type="text" class="validate" name="gradoaula" required="">
-                                                                        <label for="num">Nombre de aula: </label>
+                                                                        <label for="num">Grado de aula: </label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -203,33 +211,36 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-                $(document).ready(function () {
-                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-                    $('input#ruc').characterCounter();
-                    $('#modal2').modal();
-                    $('#modal1').modal();
-                });
-                var frm = $('#create');
+               $(document).ready(function () {
+                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-                frm.submit(function (ev) {
-                    ev.preventDefault();
-                    $.ajax({
-                        type: frm.attr('method'),
-                        url: frm.attr('action'),
-                        data: frm.serialize(),
-                        success: function (respuesta) {
-                            if (respuesta == 1) {
-                                $('#modal2').openModal();
-                                //document.location.href = "page-crear-producto.php";
-                            } else {
+                $('#modal2').modal();
+                $('#modal1').modal();
+            });
 
-                                $('#modal1').openModal();
-                            }
+            var frm = $('#create');
+            frm.submit(function (ev) {
+                ev.preventDefault();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (respuesta) {
+                        if (respuesta == 1) {
+                            //$('#modal2').openModal();
+                            //document.location.href = "page-crear-proveedor.php";
+    //                                location.reload();
+                            $('#modal2').openModal();
+
+                        } else {
+
+                            $('#modal1').openModal();
                         }
-                    });
-
-
+                    }
                 });
+
+
+            }); 
             </script>
         </body>
 

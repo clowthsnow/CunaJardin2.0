@@ -3,20 +3,19 @@
 include '../conexion.php';
 
 //recibiendo datos del formulario
-
+$id = $_POST['cod'];
 $grado = $_POST['gradoaula'];
 $anho = $_POST['anhoaula'];
 $docente = $_POST['docenteaula'];
 
 
 
-if (!isset($grado) ||  !isset($anho)|| !isset($docente)) {
-    header("location:../page-crear-aula.php");
+if (!isset($id) || !isset($grado) ||  !isset($anho)|| !isset($docente)) {
+   header("location:../page-crear-aula.php");
 }
 
-$insertar="INSERT INTO aula( AulaGrado, AulaAnho, AulaDocente) VALUES ('$grado','$anho','$docente')";
-
-if($conexion->query($insertar)==TRUE){
+$in = "INSERT INTO aula(AulaId, AulaGrado, AulaAnho, AulaDocente) VALUES ('$id', '$grado', '$anho', '$docente')";
+if($conexion->query($in)==TRUE){
     echo '1';
     //echo "Registro exitoso";
         //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
