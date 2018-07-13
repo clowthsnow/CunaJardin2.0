@@ -12,13 +12,14 @@ if (!isset($antigua) || !isset($n1)) {
 }
 
 
-$buscaU = "SELECT * FROM usuario WHERE usuarioId='$usuario'";
+$buscaU = "SELECT * FROM usuario WHERE UsuarioId='$usuario'";
 $result1 = $conexion->query($buscaU);
 $user = $result1->fetch_assoc();
-$cantigua=$user['usuarioContra'];
-
+$cantigua=$user['UsuarioContra'];
+$antigua= md5($antigua);
 if ($antigua == $cantigua) {
-    $upd = "UPDATE usuario SET usuarioContra='$n1' WHERE usuarioId='$usuario'";
+    $n1= md5($n1);
+    $upd = "UPDATE usuario SET UsuarioContra='$n1' WHERE usuarioId='$usuario'";
     if ($conexion->query($upd) == TRUE) {
         echo '1';
         //echo "Registro exitoso";

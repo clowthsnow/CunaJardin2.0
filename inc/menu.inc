@@ -1,4 +1,5 @@
 <?php
+include 'conexion.php';
 if ('1' == $_SESSION['permisos']) {
     ?>
     <aside id="left-sidebar-nav">
@@ -22,13 +23,22 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Usuarios</a>
                         <div class="collapsible-body">
                             <ul>
+                                <li><a href="page-crear-contador.php">Crear Administrador</a>
+                                </li>                                        
+                                <li><a href="page-ver-contador.php">Ver Administradores</a>
                                 <li><a href="page-crear-contador.php">Crear Nuevo Contador</a>
                                 </li>                                        
-                                <li><a href="page-ver-contador.php">Ver Contadores</a>
-                                </li>
+                                <li><a href="page-ver-contador.php">Ver Contadores</a></li>
+                                <li><a href="page-crear-padre.php">Crear Nuevo Padre</a>
+                                </li>                                        
+                                <li><a href="page-ver-padres.php">Ver Padres</a> 
                                 <li><a href="page-datos-alumno.php">Crear nuevo Estudiante</a>
                                 </li>
                                 <li><a href="page-ver-Estudiantes.php">Ver Estudiantes</a>
+                                </li>
+                                <li><a href="page-crear-docente.php">Crear Docente</a>
+                                </li>
+                                <li><a href="page-ver-docentes.php">Ver Docente</a>
                                 </li>
                                 <li><a href="page-crear-tipoAlumno.php">Crear Tipo Alumno</a>
                                 </li>
@@ -38,12 +48,12 @@ if ('1' == $_SESSION['permisos']) {
                         </div>
                     </li>
 
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Notas</a>
+                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Gestion de Notas</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="page-crear-competencia.php">Crear Competencia</a>
+                                <li><a href="page-crear-nota.php">Ingresar Nota</a>
                                 </li>                                        
-                                <li><a href="page-ver-competencias.php">Ver competencias</a>
+                                <li><a href="page-ver-notas.php">Ver Notas</a>
                                 </li>
 
                             </ul>
@@ -51,31 +61,20 @@ if ('1' == $_SESSION['permisos']) {
                     </li>
 
 
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Matricula</a>
+                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Gestion de Matricula</a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="page-matricula-estudiante.php">Gestionar Matricula</a>
                                 </li>                                        
-                                <li><a href="page-">Ver ALumnos por Aula</a>
+                                <li><a href="page-ver-matriculados.php">Ver Matriculados</a>
                                 </li>
 
                             </ul>
                         </div>
                     </li>
 
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Escuela</a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="page-crear-escuela.php">Crear Nueva Escuela</a>
-                                </li>                                        
-                                <li><a href="page-ver-escuela.php">Ver Escuela</a>
-                                </li>
 
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Aula</a>
+                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-balance-wallet"></i>Gestion de Aula</a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="page-crear-aula.php">Crear Nueva Aula</a>
@@ -87,30 +86,52 @@ if ('1' == $_SESSION['permisos']) {
                         </div>
                     </li>
 
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-shopping-cart"></i>Gestion de Curso</a>
+                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-balance"></i>Gestion de Curso</a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="page-crear-grupo.php">Crear Curso</a>
                                 </li>
                                 <li><a href="page-ver-grupos.php">Ver Curso</a>
                                 </li>
-                                
+                                <li><a href="page-crear-competencia.php">Crear Competencia</a>
+                                </li>                                        
+                                <li><a href="page-ver-competencias.php">Ver competencias</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-info"></i>Gestion de Comunicados</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="page-crear-comunicado.php">Crear Comunicado</a>
+                                </li>
+                                <li><a href="page-ver-comunicados.php">Ver Comunicado</a>
+                                </li>
+
+
 
                             </ul>
                         </div>
                     </li>
 
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Contabilidad</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
-                                    </li>
-                                    <li><a href="page-ver-tipoConceptos.php">Ver Tipos de Concepto</a>
-                                    </li>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
+                                </li>
+                                <li><a href="page-ver-contabilidad.php">Ver Registro</a>
+                                </li>
+                                <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
+                                </li>
+                                <li><a href="page-ver-tipoConceptos.php">Ver Tipos de Concepto</a>
+                                </li>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </li>
             <li class="li-hover"><div class="divider"></div></li>
@@ -138,7 +159,19 @@ if ('1' == $_SESSION['permisos']) {
                     <div class="col col s8 m8 l8">
 
                         <a class="btn-flat waves-effect waves-light white-text profile-btn" href="#!"><?php echo $_SESSION['usuarioNombres']; ?></a>
-                        <p class="user-roal"></p>
+                        <p class="user-roal"><?php
+                            switch ($_SESSION['permisos']) {
+                                case 2:
+                                    echo "Docente";
+                                    break;
+                                case 3:
+                                    echo "Contador";
+                                    break;
+                                case 4:
+                                    echo "Padre";
+                                    break;
+                            }
+                            ?></p>
                     </div>
                 </div>
             </li>
@@ -147,108 +180,76 @@ if ('1' == $_SESSION['permisos']) {
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <?php if ('2' == $_SESSION['permisos']) { ?>
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-shopping-cart"></i>Gestion de Deposito</a>
+
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Gestion de Notas</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-ingreso-mercaderia.php">Ingreso de Licores</a>
+                                    <li><a href="page-crear-nota.php">Ingresar Nota</a>
+                                    </li>                                        
+                                    <li><a href="page-ver-notas.php">Ver Notas</a>
                                     </li>
-                                    <li><a href="page-salida-mercaderia.php">Salida de Licores</a>
-                                    </li>
-                                    <li><a href="page-inventario.php">Inventario</a>
-                                    </li>
-                                    <li class="divider"></li><li><a href="pedido-mes.php">Pedido Mensual</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li><a href="page-ver-ingresoMercaderia.php">Ver Ingreso Licores</a>
-                                    </li>
-                                    <li><a href="page-ver-salidaMercaderia.php">Ver Salidas Licores </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li><a href="page-crear-licor.php">Crear Nuevo Licor</a>
-                                    </li>    
-                                    <li><a href="page-ver-licores.php">Ver Licores</a>
-                                    </li> 
-                                    </li>
+
                                 </ul>
                             </div>
-                        </li><?php } ?>
-                    <?php if ('3' == $_SESSION['permisos']) { ?>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-account-balance-wallet"></i> Gestion de Gastos</a>
+                        </li>
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-info"></i>Gestion de Comunicados</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-crear-ingresoEconomico.php">Registrar Ingreso</a>
+                                    <li><a href="page-crear-comunicado.php">Crear Comunicado</a>
                                     </li>
-                                    <li><a href="page-crear-gasto.php">Registrar Gasto</a>
+                                    <li><a href="page-ver-comunicados.php">Ver Comunicado</a>
                                     </li>
-                                    <li><a href="page-gastos-vs-ingresos.php">Gastos Vs Ingresos</a>
+
+
+
+                                </ul>
+                            </div>
+                        </li> <?php } ?>
+                    <?php if ('3' == $_SESSION['permisos']) { ?>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Contabilidad</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="page-crear-contabilidad.php">Crear Registro</a>
                                     </li>
-                                    <li class="divider"></li>
-                                    <!--                                <li><a href="page-filtrar-gastos.php">Ver Gastos Detallado</a>
-                                                                    </li>-->
-                                    <li><a href="page-filtrar-gastosDia.php">Ver Gastos Diarios</a>
+                                    <li><a href="page-ver-contabilidad.php">Ver Registro</a>
                                     </li>
-                                    <li><a href="page-filtrar-gastosMes.php">Ver Gastos Mensuales</a>
+                                    <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
                                     </li>
-                                    <li><a href="page-ver-ingresosEconomicos.php">Ver Ingresos</a>
+                                    <li><a href="page-ver-tipoConceptos.php">Ver Tipos de Concepto</a>
                                     </li>
-                                    <li><a href="page-ver-gastos.php">Ver Gastos</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li><a href="page-crear-proveedor.php">Registrar Proveedores</a>
-                                    </li>  
-                                    <li><a href="page-ver-proveedores.php">Ver Proveedores</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                     <?php } ?>
                     <?php if ('4' == $_SESSION['permisos']) { ?>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-assignment"></i> Kardex</a>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Matricula</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-ver-kardexGenerales.php">Kardex Generales</a>
-                                    </li>
-                                    <li><a href="page-ver-kardexDiario.php">Kardex Diarios</a>
-                                    </li>
-                                    <li><a href="page-verfecha-kardexDiario.php">Ver Kardex por Fecha</a>
-                                    </li>
-                                    <li><a href="page-verMes-kardexDiario.php">Ver Kardex por Mes</a>
-                                    </li>
-                                    <li><a href="page-ver-cartas.php">Cartas</a>
-                                    </li>
-                                    <li class="divider"></li>
+                                    <?php
+                                    $userid = $_SESSION['usuario'];
+                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                                    while ($fila = $resulthijos->fetch_assoc()) {
+                                        ?>
+                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <?php
+                                    }
+                                    ?>
 
-                                    <li><a href="page-crear-discoteca.php">Registrar Discotecas</a>
-                                    </li>
-                                    <li><a href="page-crear-barra.php">Registrar Barras</a>
-                                    </li>
-                                    <li><a href="page-ver-discotecas.php">Ver Discotecas</a>
-                                    </li>
-
-                                    <li><a href="page-ver-barras.php">Ver Barras</a>
+                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
                                     </li>
 
-                                    </li>
                                 </ul>
                             </div>
                         </li>
 
                     <?php } ?>
-                    <?php if ('2' == $_SESSION['permisos']) { ?>
-        <!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Entradas</a>
-                                    <div class="collapsible-body">
-                                        <ul>
-                                            <li><a href="form-elements.html">Crear Cliente</a>
-                                            </li>
-                                            <li><a href="form-layouts.html">Ver Clientes</a>
-                                            </li>
-                                            <li><a href="form-layouts.html">Asistencias</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>-->
 
-                    <?php } ?>
 
                 </ul>
             </li>

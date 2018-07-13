@@ -5,6 +5,8 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
+    date_default_timezone_set('America/Lima');
+    $fecha = new DateTime();
     include 'conexion.php';
     $buscar = "SELECT * FROM alumno";
     $result = $conexion->query($buscar);
@@ -141,9 +143,13 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 
                                                                 <div class="row">
-                                                                    <div class="input-field col s12">
+<!--                                                                    <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="ContabilidadFecha" required="">
                                                                         <label for="nombre">Fecha:</label>
+                                                                    </div>-->
+                                                                    <div class="input-field col s12 m12 l12">
+                                                                        <input id="fecha" type="text" class="datepicker" name="ContabilidadFecha" required="" value="<?php echo $fecha->format('Y-m-d'); ?>">
+                                                                        <label for="fecha" class="active">*Fecha del Comunicado:</label>
                                                                     </div>
                                                                 </div>
                                                                 

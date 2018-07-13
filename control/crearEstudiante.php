@@ -68,8 +68,11 @@ if ($conexion->query($insertaralumno) == TRUE) {
     //echo "Registro exitoso";
     //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
 } else {
-    echo '1';
+    echo '0';
     //echo "Error, nombre de usuario existente";
+   echo "<script type='text/javascript'>";
+    echo "window.history.back(-1)";
+    echo "</script>";
 }
 $conexion->close();
 
