@@ -259,7 +259,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="curr" type="text" class="validate" name="docentecurr" required="">
+                                                                        <input id="curr" type="file" class="validate" name="docentecurr" required="">
                                                                         <label for="curr">Curriculum:</label>
                                                                     </div>
                                                                 </div>

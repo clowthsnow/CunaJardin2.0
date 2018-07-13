@@ -8,12 +8,12 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     $id = $_GET['id'];
     if (!isset($id)) {
-        header("location:page-ver-administrador.php");
+        header("location:page-ver-comunicados.php");
     }
-    $buscar = "SELECT * FROM administrador WHERE AdministradorDni='$id'";
+    $buscar = "SELECT * FROM comunicado WHERE ComunicadoId='$id'";
     $resultado = $conexion->query($buscar);
     if ($resultado->num_rows === 0) {
-        header("location:page-ver-administrador.php");
+        header("location:page-ver-comunicados.php");
     }
     $provBD = $resultado->fetch_assoc();
     ?>
@@ -21,7 +21,7 @@ if (!isset($_SESSION['usuario'])) {
     <html lang="es">
 
         <head>
-            <title>Configurar Administrador</title>
+            <title>Configurar Comunicados</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -61,12 +61,12 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Configurar Administrador</h5>
+                                        <h5 class="breadcrumbs-title">Configurar Comunicados</h5>
                                         <ol class="breadcrumb">
-                                            <li class=" grey-text lighten-4">Gestion de Usuarios
+                                            <li class=" grey-text lighten-4">Gestion de Comunicados
                                             </li>
-                                            <li class="grey-text lighten-4" >Ver Administrador</li>
-                                            <li class="active blue-text">Configurar Administrador</li>
+                                            <li class="grey-text lighten-4" >Ver Comunicados</li>
+                                            <li class="active blue-text">Configurar Comunicados</li>
                                         </ol>
 
                                     </div>
@@ -81,63 +81,63 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Configuracion de Administrador</h4>
+                                            <h4 class="header">Configuracion de Comunicados</h4>
                                             <p class="caption">
-                                                En este panel usted podra hacer la configuracion del Administrador.
+                                                En este panel usted podra hacer la configuracion de las comunicados, como cambiar nombre y categoria.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Contador: <?php echo $provBD['AdministradorNombre']; ?></h4>
+                                                        <h4 class="header2">Comunicados: <?php echo $provBD['ComunicadoFecha']; ?></h4>
                                                         <div class="row">
-                                                            <form id="configurar" class="col s12" action="control/modificarAdministrador.php" method="POST">
+                                                            <form id="configurar" class="col s12" action="control/modificarComunicado.php" method="POST">
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="username" type="text" class="validate" name="id" required="" hidden="true" value="<?php echo $provBD['AdministradorDni']; ?>">
+                                                                        <input id="username" type="text" class="validate" name="id" required="" hidden="true" value="<?php echo $provBD['ComunicadoId']; ?>">
 
                                                                     </div>
                                                                 </div>
                                                                 
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="nombreAdministrador" required="" value="<?php echo $provBD['AdministradorNombre']; ?>">
-                                                                        <label class="active" for="nombre">Nombre:</label>
+                                                              <div class="row">
+                                                                    <div class="col s12 m12 l12">
+                                                                        <label>Aula:</label>
+                                                                        <select id="disco" class="browser-default" name="ComunicadoAula" required="">
+                                                                            <option value="" disabled>Escoge un Aula</option>
+                                                                            <?php
+                                                                            
+                                                                            $buscarD = "SELECT * FROM aula";
+                                                                            $result = $conexion->query($buscarD) or die($conexion->error);
+                                                                            while ($fila = $result->fetch_assoc()) {
+                                                                            ?>
+                                                                                <option value="<?php echo $fila['AulaId']; ?>" <?php if ($fila['AulaId'] == $provBD['ComunicadoAula']) {
+                                                                                echo "selected";
+                                                                            } ?>><?php echo $fila['AulaId']; ?></option>
+                                                                            <?php }
+                                                                             
+                                                                            ?>
+
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="apellido" type="text" class="validate" name="apellidoAdministrador" required="" value="<?php echo $provBD['AdministradorApellidos']; ?>">
-                                                                        <label class="active" for="apellido">Apellido:</label>
+                                                                        <input id="nombre" type="text" class="validate" name="ComunicadoDescripcion" required="" value="<?php echo $provBD['ComunicadoDescripcion']; ?>">
+                                                                        <label class="active" for="nombre">Descripcion :</label>
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="tipo" type="text" class="validate" name="tipoAdministrador" required="" value="<?php echo $provBD['AdministradorTipo']; ?>">
-                                                                        <label class="active" for="tipo">Tipo:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="email" type="text" class="validate" name="emailAdministrador" required="" value="<?php echo $provBD['AdministradorCorreo']; ?>">
-                                                                        <label class="active" for="email">Correo:</label>
+                                                                        <input id="nombre" type="text" class="validate" name="ComunicadoFecha" required="" value="<?php echo $provBD['ComunicadoFecha']; ?>">
+                                                                        <label class="active" for="nombre">Fecha :</label>
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="telefono" type="text" class="validate" name="telefonoAdministrador" required="" value="<?php echo $provBD['AdministradorTelefono']; ?>">
-                                                                        <label class="active" for="telefono">Telefono:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                                                                                <br>
+                                                                <br>
                                                                 <div class="divider"></div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
@@ -163,17 +163,17 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="green-text">EXITO!!!</h4>
-                                <p> Dato modificado correctamente.</p>
+                                <p> Comunicado modificado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-administrador.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-comunicados.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal error-->
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>El dato no puede ser modificado, intentelo de nuevo.</p>
+                                <p>El comunicado no puedo ser modificado, intentelo de nuevo.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>

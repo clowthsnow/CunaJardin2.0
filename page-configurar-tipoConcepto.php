@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
 
+
 if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
@@ -8,20 +9,21 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     $id = $_GET['id'];
     if (!isset($id)) {
-        header("location:page-ver-administrador.php");
+        header("location:page-ver-tipoConceptos.php");
     }
-    $buscar = "SELECT * FROM administrador WHERE AdministradorDni='$id'";
+    $buscar = "SELECT * FROM tipoconcepto WHERE TipoConceptoId='$id'";
     $resultado = $conexion->query($buscar);
     if ($resultado->num_rows === 0) {
-        header("location:page-ver-administrador.php");
+        header("location:page-ver-tipoConceptos.php");
     }
     $provBD = $resultado->fetch_assoc();
+//    print_r($provBD);
     ?>
     <!DOCTYPE html>
     <html lang="es">
 
         <head>
-            <title>Configurar Administrador</title>
+            <title>Configurar Tipo Concepto</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -61,12 +63,12 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Configurar Administrador</h5>
+                                        <h5 class="breadcrumbs-title">Configurar Tipo de Concepto</h5>
                                         <ol class="breadcrumb">
-                                            <li class=" grey-text lighten-4">Gestion de Usuarios
+                                            <li class=" grey-text lighten-4">Gestion de Contabilidad
                                             </li>
-                                            <li class="grey-text lighten-4" >Ver Administrador</li>
-                                            <li class="active blue-text">Configurar Administrador</li>
+                                            <li class="grey-text lighten-4" >Ver Tipo de Conceptos</li>
+                                            <li class="active blue-text">Configurar Tipo de Concepto</li>
                                         </ol>
 
                                     </div>
@@ -81,63 +83,33 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Configuracion de Administrador</h4>
+                                            <h4 class="header">Configuracion de Tipo de Concepto</h4>
                                             <p class="caption">
-                                                En este panel usted podra hacer la configuracion del Administrador.
+                                                En este panel usted podra hacer la configuracion respectiva de Tipo de Concepto.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Contador: <?php echo $provBD['AdministradorNombre']; ?></h4>
+                                                        <h4 class="header2">Turno: <?php echo $provBD['TipoConceptoDetalle']; ?></h4>
                                                         <div class="row">
-                                                            <form id="configurar" class="col s12" action="control/modificarAdministrador.php" method="POST">
+                                                            <form id="configurar" class="col s12" action="control/modificarTipoConcepto.php" method="POST">
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="username" type="text" class="validate" name="id" required="" hidden="true" value="<?php echo $provBD['AdministradorDni']; ?>">
+                                                                        <input id="username" type="text" class="validate" name="id" required="" hidden="true" value="<?php echo $provBD['TipoConceptoId']; ?>">
 
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="nombreAdministrador" required="" value="<?php echo $provBD['AdministradorNombre']; ?>">
-                                                                        <label class="active" for="nombre">Nombre:</label>
+                                                                        <input id="nombre" type="text" class="validate" name="nombretipo" required="" value="<?php echo $provBD['TipoConceptoDetalle']; ?>">
+                                                                        <label class="active" for="nombre">Detalle:</label>
                                                                     </div>
                                                                 </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="apellido" type="text" class="validate" name="apellidoAdministrador" required="" value="<?php echo $provBD['AdministradorApellidos']; ?>">
-                                                                        <label class="active" for="apellido">Apellido:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="tipo" type="text" class="validate" name="tipoAdministrador" required="" value="<?php echo $provBD['AdministradorTipo']; ?>">
-                                                                        <label class="active" for="tipo">Tipo:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="email" type="text" class="validate" name="emailAdministrador" required="" value="<?php echo $provBD['AdministradorCorreo']; ?>">
-                                                                        <label class="active" for="email">Correo:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="telefono" type="text" class="validate" name="telefonoAdministrador" required="" value="<?php echo $provBD['AdministradorTelefono']; ?>">
-                                                                        <label class="active" for="telefono">Telefono:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                                                                                <br>
+
+                                                                <br>
                                                                 <div class="divider"></div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
@@ -163,17 +135,17 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="green-text">EXITO!!!</h4>
-                                <p> Dato modificado correctamente.</p>
+                                <p> Turno modificado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-administrador.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-tipoConceptos.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal error-->
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>El dato no puede ser modificado, intentelo de nuevo.</p>
+                                <p>El Turno no puedo ser modificado, intentelo de nuevo.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
@@ -254,6 +226,8 @@ if (!isset($_SESSION['usuario'])) {
     <?php
 }
 ?>
+
+
 
 
 

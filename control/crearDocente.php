@@ -26,8 +26,12 @@ $sitlab = $_POST['docentedetallelab'];
 $tipo= $_POST['docentetipo'];
 $seguro= $_POST['docenteseguro'];
 $segsoc= $_POST['docentesocial'];
-$cur= $_POST['docentecurr'];
 
+$cur= $_FILES['docentecurr']['name'];
+$archivoC = $_FILES['docentecurr']['tmp_name'];
+$ruta1="../curriculum";
+$ruta1=$ruta1."/".$cur;
+move_uploaded_file($archivoC, $ruta1);
 
 
 $foto = $_FILES['imagen']['name'];
