@@ -5,9 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
-    include 'conexion.php';
-    $buscar = "SELECT * FROM plan";
-    $result = $conexion->query($buscar);
+  
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -75,7 +73,7 @@ if (!isset($_SESSION['usuario'])) {
                                         <div id="roboto">
                                             <h4 class="header">Creación de Cursos</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevos Cursos con los que cuenta en la Escuela.
+                                                En este panel usted podra crear nuevos Cursos con los que cuenta la Cuna.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
