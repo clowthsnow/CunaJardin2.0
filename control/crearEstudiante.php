@@ -12,6 +12,7 @@ move_uploaded_file($archivo, $ruta);
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $nacimientoF = $_POST['fechaNac'];
+$tipoAlumno=$_POST['tipoA'];
 $dni = $_POST['dni'];
 $sexo = $_POST['sexo'];
 $edad = $_POST['edad'];
@@ -52,8 +53,8 @@ var_dump($_FILES);
 echo "<br>";
 var_dump($_POST);
 
-$insertaralumno = "INSERT INTO alumno ( AlumnoDni,AlumnoNombre,AlumnoApellidos,AlumnoEdad,AlumnoTutorIdMadre,AlumnoTipoAlumno,AlumnoFoto,AlumnoFechaNacimiento,AlumnoTutorIdPadre,AlumnoSexo,AlumnoLugarNacimiento,AlumnoDomicilio,AlumnoSituacionPromovido,AlumnoControlMedico,AlumnoParto,AlumnoPeso,AlumnoTalla,AlumnoDifucaltades,AlumnoLactanciaTipo,AlumnoTemores,AlumnoTemoresDetalles,AlumnoLimitacionFisica,AlumnoLimitacionFisicaDet,AlumnoDificultadControl,AlumnoDificultadControlDet,AlumnoAlergias,AlumnoAlergiasDet,AlumnoVacunas,AlumnoCodigoUgel,AlumnoSiagie) "
-        . "VALUES ('$dni','$nombre','$apellido','$edad','$dnim','1','$nombreImagen','$nacimientoF','$dnip','$sexo','$lugarNac','$direccion','$escolaridad','$controlmed','$parto','$peso','$talla','$dificultad','$lactancia','$temores','$temordet','$limitacionf','$limitacionfdet','$dificultadsen','$dificultadsendet','$alergias','$alergiasdet','$vacunas','00000','---')";
+$insertaralumno = "INSERT INTO alumno ( AlumnoDni,AlumnoNombre,AlumnoApellidos,AlumnoEdad,AlumnoTutorIdMadre,AlumnoTipoAlumno,AlumnoFoto,AlumnoFechaNacimiento,AlumnoTutorIdPadre,AlumnoSexo,AlumnoLugarNacimiento,AlumnoDomicilio,AlumnoSituacionPromovido,AlumnoControlMedico,AlumnoParto,AlumnoPeso,AlumnoTalla,AlumnoDifucaltades,AlumnoLactanciaTipo,AlumnoTemores,AlumnoTemoresDetalles,AlumnoLimitacionFisica,AlumnoLimitacionFisicaDet,AlumnoDificultadControl,AlumnoDificultadControlDet,AlumnoAlergias,AlumnoAlergiasDet,AlumnoVacunas,AlumnoCodigoUgel,AlumnoDeclaracionJurada,AlumnoSiagie) "
+        . "VALUES ('$dni','$nombre','$apellido','$edad','$dnim','$tipoAlumno','$nombreImagen','$nacimientoF','$dnip','$sexo','$lugarNac','$direccion','$escolaridad','$controlmed','$parto','$peso','$talla','$dificultad','$lactancia','$temores','$temordet','$limitacionf','$limitacionfdet','$dificultadsen','$dificultadsendet','$alergias','$alergiasdet','$vacunas','00000','0','---')";
 //
 if ($conexion->query($insertaralumno) == TRUE) {
 
