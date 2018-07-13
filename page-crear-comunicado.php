@@ -8,6 +8,9 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     $buscar = "SELECT * FROM aula";
     $result = $conexion->query($buscar);
+ 
+    date_default_timezone_set('America/Lima');
+    $fecha = new DateTime();
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -94,7 +97,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <select id="disco" class="browser-default" name="ComunicadoAula" required="">
                                                                             <option value="" disabled selected>Escoge una Aula</option>
                                                                             <?php while ($row = $result->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['AulaId']; ?>"><?php echo $row['AulaGrado']; ?></option>
+                                                                                <option value="<?php echo $row['AulaId']; ?>"><?php echo $row['AulaId']."-". $row['AulaGrado']; ?></option>
                                                                             <?php }
                                                                             ?>
 
@@ -110,9 +113,13 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
 
                                                                 <div class="row">
-                                                                    <div class="input-field col s12">
+<!--                                                                    <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="ComunicadoFecha" required="">
                                                                         <label for="nombre">Fecha del Comunicado:</label>
+                                                                    </div>-->
+                                                                    <div class="input-field col s12 m12 l12">
+                                                                        <input id="fecha" type="text" class="datepicker" name="ComunicadoFecha" required="" value="<?php echo $fecha->format('Y-m-d'); ?>">
+                                                                        <label for="fecha" class="active">*Fecha del Comunicado:</label>
                                                                     </div>
                                                                 </div>
 

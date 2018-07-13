@@ -5,6 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
+    
     include 'conexion.php';
     $user=$_SESSION['usuario'];
     $buscar = "SELECT * FROM usuario WHERE UsuarioId='$user' ";
@@ -86,24 +87,24 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="card-panel">
                                                         <h4 class="header2">Mis Datos</h4>
                                                         <div class="row">
-                                                            <form id="create" class="col s12" action="page-cambio-contra.php" method="POST">
-
+                                                            <form id="create" class="col s12" action="control/guardaContra.php" method="POST">
+                                                                <input name="usuario" hidden="" value="<?php echo $user;?>">
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="prov" type="text" class="validate" name="nombre" required="" readonly="" value="<?php echo $usuario['UsuarioNombre'];?> ">
-                                                                        <label for="prov" class="active">Nombre:</label>
+                                                                        <input id="prov" type="password" class="validate" name="antigua" required="" >
+                                                                        <label for="prov" >Contraseña Actual:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="app" type="text" class="validate" name="apellidos" required="" readonly="" value="<?php echo $usuario['UsuarioApellidos'];?>">
-                                                                        <label for="app" class="active">Apellidos:</label>
+                                                                        <input id="app" type="password" class="validate" name="nueva1" required="" >
+                                                                        <label for="app" >Contraseña Nueva:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="user" type="text" class="validate" name="usuario" required="" readonly="" value="<?php echo $usuario['UsuarioId'];?>">
-                                                                        <label for="user" class="active">Usuario:</label>
+                                                                        <input id="user" type="password" class="validate" name="nueva2" required=""     >
+                                                                        <label for="user" >Repita la contraseña:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -111,8 +112,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="divider"></div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Cambiar Cotraseña
-                                                                            <i class="mdi-image-edit left"></i>
+                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Guardar
+                                                                            <i class="mdi-content-save left"></i>
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -131,7 +132,26 @@ if (!isset($_SESSION['usuario'])) {
                         </div>
                         <!--end container-->
 
-                        
+                        <!--modal error-->
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <h4 class="red-text">ERROR!!!</h4>
+                                <p>Intente de nuevo</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                            </div>
+                        </div>
+                        <!--modal error-->
+                        <div id="modal2" class="modal">
+                            <div class="modal-content">
+                                <h4 class="green-text">EXITO!!!</h4>
+                                <p>Contraseña cambiada Correctamente, ingrese de nuevo con su nueva contraseña</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="logout.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                            </div>
+                        </div>
                     </section>
                     <!-- END CONTENT -->
 
@@ -171,6 +191,35 @@ if (!isset($_SESSION['usuario'])) {
             <!--plugins.js - Some Specific JS codes for Plugin Settings-->
             <script type="text/javascript" src="js/plugins.js"></script>
 
+            <script>
+                $(document).ready(function () {
+                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                    $('input#ruc').characterCounter();
+                    $('#modal2').modal();
+                    $('#modal1').modal();
+                });
+                var frm = $('#create');
+
+                frm.submit(function (ev) {
+                    ev.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: frm.serialize(),
+                        success: function (respuesta) {
+                            if (respuesta == 1) {
+                                $('#modal2').openModal();
+                                //document.location.href = "page-crear-proveedor.php";
+                            } else {
+
+                                $('#modal1').openModal();
+                            }
+                        }
+                    });
+
+
+                });
+            </script>
             
         </body>
 
@@ -178,3 +227,5 @@ if (!isset($_SESSION['usuario'])) {
     <?php
 }
 ?>
+
+
