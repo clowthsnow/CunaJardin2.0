@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     $id = $_GET['id'];
     if (!isset($id)) {
-        header("location:page-ver-contador.php");
+        header("location:page-ver-docente.php");
     }
     $buscar = "SELECT * FROM docente WHERE DocenteDni='$id'";
     $resultado = $conexion->query($buscar);
@@ -257,16 +257,16 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="foto" type="file" class="validate" name="imagen" required="" value="<?php echo $provBD['DocenteFoto']; ?>">
+                                                                        <input id="foto" type="file" class="validate" name="imagen" required="">
                                                                         
-                                                                        <label class="active" for="foto">Foto:</label>
+                                                                        <label for="foto">Foto:</label>
                                                                     </div>
                                                                 </div>
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="curr" type="file" class="validate" name="docentecurr" required="" value="<?php echo $provBD['DocenteCurriculum']; ?>">
-                                                                        <label class="active" for="curr">Curriculum:</label>
+                                                                        <input id="curr" type="file" class="validate" name="docentecurr" required="">
+                                                                        <label for="curr">Curriculum:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -355,7 +355,7 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-
+               
             </script>
 
         </body>
