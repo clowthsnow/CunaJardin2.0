@@ -53,7 +53,7 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Crear Docnetes</h5>
+                                        <h5 class="breadcrumbs-title">Crear Docentes</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Docente
                                             </li>
@@ -84,7 +84,7 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="card-panel">
                                                         <h4 class="header2">Nuevo Docente</h4>
                                                         <div class="row">
-                                                            <form id="create" class="col s12" action="control/crearDocente.php" method="POST">
+                                                            <form id="create" class="col s12" action="control/crearDocente.php" method="POST" enctype="multipart/form-data">
 
                                                                 
                                                                                           
@@ -146,7 +146,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12 m6 l6">
-                                                                        <input id="fecha" type="text" class="datepicker" name="docentefecha" required="" value="<?php echo $fecha->format('d-m-Y'); ?>">
+                                                                        <input id="fecha" type="text" class="datepicker" name="docentefecha" required="" value="<?php echo $fecha->format('Y-m-d'); ?>">
                                                                         <label for="fecha" class="active">Fecha de nacimiento:</label>
                                                                     </div>
                                                                 </div>
@@ -251,7 +251,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="foto" type="text" class="validate" name="imagen" required="">
+                                                                        <input id="foto" type="file" class="validate" name="imagen" required="">
                                                                         
                                                                         <label for="foto">Foto:</label>
                                                                     </div>
@@ -348,36 +348,38 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                
+//            $(document).ready(function () {
+//                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+//
+//                $('#modal2').modal();
+//                $('#modal1').modal();
+//            });
+//
+//            var frm = $('#create');
+//            frm.submit(function (ev) {
+//                ev.preventDefault();
+//                $.ajax({
+//                    type: frm.attr('method'),
+//                    url: frm.attr('action'),
+//                    data: frm.serialize(),
+//                    success: function (respuesta) {
+//                        if (respuesta == 1) {
+//                            //$('#modal2').openModal();
+//                            //document.location.href = "page-crear-proveedor.php";
+//    //                                location.reload();
+//                            $('#modal2').openModal();
+//
+//                        } else {
+//
+//                            $('#modal1').openModal();
+//                        }
+//                    }
+//                });
+//
+//
+//            });
 
-                $('#modal2').modal();
-                $('#modal1').modal();
-            });
-
-            var frm = $('#create');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (respuesta) {
-                        if (respuesta == 1) {
-                            //$('#modal2').openModal();
-                            //document.location.href = "page-crear-proveedor.php";
-    //                                location.reload();
-                            $('#modal2').openModal();
-
-                        } else {
-
-                            $('#modal1').openModal();
-                        }
-                    }
-                });
-
-
-            });
             </script>
         </body>
 
