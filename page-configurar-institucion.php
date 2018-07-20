@@ -5,20 +5,23 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
-    date_default_timezone_set('America/Lima');
-    $fecha = new DateTime();
     include 'conexion.php';
-    $buscar = "SELECT * FROM alumno";
-    $result = $conexion->query($buscar);
-    
-    $buscar2 = "SELECT * FROM tipoconcepto";
-    $result2 = $conexion->query($buscar2);
+    $id = $_GET['id'];
+    if (!isset($id)) {
+        header("location:page-ver-institucion.php");
+    }
+    $buscar = "SELECT * FROM institucion WHERE InstitucionId='$id'";
+    $resultado = $conexion->query($buscar);
+    if ($resultado->num_rows === 0) {
+        header("location:page-ver-institucion.php");
+    }
+    $provBD = $resultado->fetch_assoc();
     ?>
     <!DOCTYPE html>
     <html lang="es">
 
         <head>
-            <title>Crear Contabilidad</title>
+            <title>Configurar Institucion</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -37,7 +40,7 @@ if (!isset($_SESSION['usuario'])) {
 
         </head>
 
-        <body onload="focus();">
+        <body>
 
             <!-- START MAIN -->
             <div id="main">
@@ -58,12 +61,12 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Crear Contabilidad</h5>
+                                        <h5 class="breadcrumbs-title">Configurar Institucion</h5>
                                         <ol class="breadcrumb">
-                                            <li class=" grey-text lighten-4">Gestion de la Contabilidad
+                                            <li class=" grey-text lighten-4">Gestion de Institucion
                                             </li>
-                                            <li class="active blue-text" >Crear Contabilidad</li>
-
+                                            <li class="grey-text lighten-4" >Ver Institucion</li>
+                                            <li class="active blue-text">Configurar Institucion</li>
                                         </ol>
 
                                     </div>
@@ -78,88 +81,63 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Creación de Contabilidad</h4>
+                                            <h4 class="header">Configuracion de Institucion</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevas contabilidas con los que cuenta en la Escuela.
+                                                En este panel usted podra hacer la configuracion de la Institucion.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Nueva Contabilidad</h4>
+                                                        <h4 class="header2">Institucion: <?php echo $provBD['InstitucionNombre']; ?></h4>
                                                         <div class="row">
-                                                            <form id="create" class="col s12" action="control/crearContabilidad.php" method="POST">
-
-                                                              
-
-                                                                <div class="row">
-                                                                    <div class="col s12 m12 l12">
-                                                                        <label>Alumno:</label>
-                                                                        <select id="disco" class="browser-default" name="ContabilidadAlumno" required="">
-                                                                            <option value="" disabled selected>Escoge un Alumno</option>
-                                                                            <?php while ($row = $result->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['AlumnoDni']; ?>"><?php echo $row['AlumnoNombre']; ?></option>
-                                                                            <?php }
-                                                                            ?>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
+                                                            <form id="configurar" class="col s12" action="control/modificarInstitucion.php" method="POST">
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="ContabilidadNumeroRecibo" required="">
-                                                                        <label for="nombre">Numero de Recibo:</label>
-                                                                    </div>
-                                                                </div>
+                                                                        <input id="username" type="text" class="validate" name="id" required="" hidden="true" value="<?php echo $provBD['InstitucionId']; ?>">
 
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="ContabilidadMonto" required="">
-                                                                        <label for="nombre">Monto:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="col s12 m12 l12">
-                                                                        <label>Concepto:</label>
-                                                                        <select id="disco" class="browser-default" name="ContabilidadConcepto" required="">
-                                                                            <option value="" disabled selected>Escoge un TipoConcepto</option>
-                                                                            <?php while ($row2 = $result2->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row2['TipoConceptoId']; ?>"><?php echo $row2['TipoConceptoDetalle']; ?></option>
-                                                                            <?php }
-                                                                            ?>
-
-                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="ContabilidadDescripcion" required="">
-                                                                        <label for="nombre">Descripcion:</label>
+                                                                        <input id="nombre" type="text" class="validate" name="nombreInstitucion" required="" value="<?php echo $provBD['InstitucionNombre']; ?>">
+                                                                        <label class="active" for="nombre">Nombre:</label>
                                                                     </div>
                                                                 </div>
                                                                 
                                                                 <div class="row">
-<!--                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="ContabilidadFecha" required="">
-                                                                        <label for="nombre">Fecha:</label>
-                                                                    </div>-->
-                                                                    <div class="input-field col s12 m12 l12">
-                                                                        <input id="fecha" type="text" class="datepicker" name="ContabilidadFecha" required="" value="<?php echo $fecha->format('Y-m-d'); ?>">
-                                                                        <label for="fecha" class="active">*Fecha del Comunicado:</label>
+                                                                    <div class="input-field col s12">
+                                                                        <input id="dir" type="text" class="validate" name="direccionInstitucion" required="" value="<?php echo $provBD['InstitucionDireccion']; ?>">
+                                                                        <label class="active" for="dir">Direccion:</label>
                                                                     </div>
                                                                 </div>
                                                                 
-
-                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="telefono" type="text" class="validate" name="telefonoInstitucion" required="" value="<?php echo $provBD['InstitucionTelefono']; ?>">
+                                                                        <label class="active" for="telefono">Telefono:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="email" type="text" class="validate" name="emailInstitucion" required="" value="<?php echo $provBD['InstitucionCorreo']; ?>">
+                                                                        <label class="active" for="email">Correo:</label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                </div>
+                                                                
+                                                                
+                                                                
+                                                                                                                                <br>
                                                                 <div class="divider"></div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
-                                                                            <i class="mdi-image-edit left"></i>
+                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Guardar Cambios
+                                                                            <i class="mdi-content-save left"></i>
                                                                         </button>
                                                                     </div>
                                                                 </div>
@@ -174,28 +152,26 @@ if (!isset($_SESSION['usuario'])) {
                                 </div>
                             </div>
 
-
                         </div>
                         <!--end container-->
-
-                        <!--modal error-->
+                        <!--modal correcto-->
                         <div id="modal1" class="modal">
                             <div class="modal-content">
-                                <h4 class="red-text">ERROR!!!</h4>
-                                <p>Contabilidad no creado correctamente.</p>
+                                <h4 class="green-text">EXITO!!!</h4>
+                                <p> Dato modificado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-institucion.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal error-->
                         <div id="modal2" class="modal">
                             <div class="modal-content">
-                                <h4 class="green-text">EXITO!!!</h4>
-                                <p>Contabilidad creado correctamente.</p>
+                                <h4 class="red-text">ERROR!!!</h4>
+                                <p>El dato no puede ser modificado, intentelo de nuevo.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-crear-contabilidad.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                     </section>
@@ -219,7 +195,7 @@ if (!isset($_SESSION['usuario'])) {
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
             <!-- START FOOTER -->
-            <?php include 'inc/footer.inc'; ?>
+    <?php include 'inc/footer.inc'; ?>
             <!-- END FOOTER -->
 
 
@@ -228,7 +204,8 @@ if (!isset($_SESSION['usuario'])) {
             ================================================ -->
 
             <!-- jQuery Library -->
-            <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    
+            <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>  
+
             <!--materialize js-->
             <script type="text/javascript" src="js/materialize.js"></script>
             <!--scrollbar-->
@@ -238,40 +215,42 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-
-                $('#modal2').modal();
-                $('#modal1').modal();
-            });
-
-            var frm = $('#create');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (respuesta) {
-                        if (respuesta == 1) {
-                            //$('#modal2').openModal();
-                            //document.location.href = "page-crear-proveedor.php";
-                            //                                location.reload();
-                            $('#modal2').openModal();
-
-                        } else {
-
-                            $('#modal1').openModal();
-                        }
-                    }
+                $(document).ready(function () {
+                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                    
+                    $('#modal1').modal();
+                    $('#modal2').modal();
                 });
+                var frm = $('#configurar');
+
+                frm.submit(function (ev) {
+                    ev.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: frm.serialize(),
+                        success: function (respuesta) {
+                            if (respuesta == 1) {
+                                $('#modal1').openModal();
+                            } else {
+
+                                $('#modal2').openModal();
+                            }
+                        }
+                    });
 
 
-            });
+                });
             </script>
+
         </body>
 
     </html>
     <?php
 }
 ?>
+
+
+
+
+

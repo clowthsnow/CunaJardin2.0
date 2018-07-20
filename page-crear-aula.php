@@ -6,17 +6,14 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
-    $buscar = "SELECT * FROM aula";
-    $result = $conexion->query($buscar);
- 
-    date_default_timezone_set('America/Lima');
-    $fecha = new DateTime();
+    $buscarDoc = "SELECT * FROM docente where DocenteEstReg='A'";
+    $resultDoc = $conexion->query($buscarDoc);
     ?>
     <!DOCTYPE html>
     <html lang="es">
 
         <head>
-            <title>Crear Comunicado</title>
+            <title>Crear Aula</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -35,7 +32,7 @@ if (!isset($_SESSION['usuario'])) {
 
         </head>
 
-        <body onload="focus();">
+        <body>
 
             <!-- START MAIN -->
             <div id="main">
@@ -56,11 +53,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Crear Comunicados</h5>
+                                        <h5 class="breadcrumbs-title">Crear Aula</h5>
                                         <ol class="breadcrumb">
-                                            <li class=" grey-text lighten-4">Gestion de Comunicados
+                                            <li class=" grey-text lighten-4">Gestion de Aula
                                             </li>
-                                            <li class="active blue-text" >Crear Comunicados</li>
+                                            <li class="active blue-text" >Crear Aula</li>
 
                                         </ol>
 
@@ -76,55 +73,62 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Creación de Comunicados</h4>
+                                            <h4 class="header">Creación de Aula</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevos Comunicados con los que cuenta en la Escuela.
+                                                En este panel usted podra crear los datos del Aula.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Nuevo Comunicado</h4>
+                                                        <h4 class="header2">Nueva Aula</h4>
                                                         <div class="row">
-                                                            <form id="create" class="col s12" action="control/crearComunicado.php" method="POST">
+                                                            <form id="create" class="col s12" action="control/crearAula.php" method="POST">
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
 
-                                                              
+                                                                        <input id="cod" type="text" class="validate" name="cod" required="">
+                                                                        <label for="cod">Codigo aula: </label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
 
+                                                                        <input id="num" type="text" class="validate" name="gradoaula" required="">
+                                                                        <label for="num">Grado de aula: </label>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+
+                                                                        <input id="anho" type="text" class="validate" name="anhoaula" required="">
+                                                                        <label for="anho">Anho: </label>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                                 <div class="row">
                                                                     <div class="col s12 m12 l12">
-                                                                        <label>Aula:</label>
-                                                                        <select id="disco" class="browser-default" name="ComunicadoAula" required="">
-                                                                            <option value="" disabled selected>Escoge una Aula</option>
-                                                                            <?php while ($row = $result->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['AulaId']; ?>"><?php echo $row['AulaId']."-". $row['AulaGrado']; ?></option>
+                                                                        <label>Docente:</label>
+                                                                        <select id="escuela" class="browser-default" name="docenteaula" required="">
+                                                                            <option value="" disabled selected>Selecciona</option>
+                                                                            <?php while ($row = $resultDoc->fetch_assoc()) { ?>
+                                                                                <option value="<?php echo $row['DocenteDni']; ?>"><?php echo $row['DocenteNombre']; ?></option>
                                                                             <?php }
                                                                             ?>
 
                                                                         </select>
                                                                     </div>
                                                                 </div>
-
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="ComunicadoDescripcion" required="">
-                                                                        <label for="nombre">Descripcion del Comunicado:</label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-<!--                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="ComunicadoFecha" required="">
-                                                                        <label for="nombre">Fecha del Comunicado:</label>
-                                                                    </div>-->
-                                                                    <div class="input-field col s12 m12 l12">
-                                                                        <input id="fecha" type="text" class="datepicker" name="ComunicadoFecha" required="" value="<?php echo $fecha->format('Y-m-d'); ?>">
-                                                                        <label for="fecha" class="active">*Fecha del Comunicado:</label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <br>
-                                                                <div class="divider"></div>
+                                                                
+                                                                
+                                                                
+                                                                
+                                                           
+                                                                
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
@@ -151,7 +155,7 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>Comunicado no creado correctamente.</p>
+                                <p>Aula no creada correctamente.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
@@ -161,10 +165,10 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="green-text">EXITO!!!</h4>
-                                <p>Comunicado creado correctamente.</p>
+                                <p>Aula creada correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-crear-comunicado.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-crear-aula.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                     </section>
@@ -207,7 +211,7 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
+               $(document).ready(function () {
                 // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
                 $('#modal2').modal();
@@ -225,7 +229,7 @@ if (!isset($_SESSION['usuario'])) {
                         if (respuesta == 1) {
                             //$('#modal2').openModal();
                             //document.location.href = "page-crear-proveedor.php";
-                            //                                location.reload();
+    //                                location.reload();
                             $('#modal2').openModal();
 
                         } else {
@@ -236,7 +240,7 @@ if (!isset($_SESSION['usuario'])) {
                 });
 
 
-            });
+            }); 
             </script>
         </body>
 
