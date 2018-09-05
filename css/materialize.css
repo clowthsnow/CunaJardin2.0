@@ -5803,7 +5803,8 @@ small {
 .btn, .btn-large {
   text-decoration: none;
   color: #FFF;
-  background-color: #ff4081;
+  /*background-color: #ff4081;*/
+  background-color: #5e151d;
   text-align: center;
   letter-spacing: .5px;
   -webkit-transition: 0.2s ease-out;
@@ -5812,8 +5813,10 @@ small {
   -ms-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
   cursor: pointer; }
-  .btn:hover, .btn-large:hover {
-    background-color: #ff5a92; }
+.btn:hover, .btn-large:hover {
+    /*background-color: #ff5a92;*/
+    background-color: #651D32;
+  }
 
 .btn-floating {
   display: inline-block;
