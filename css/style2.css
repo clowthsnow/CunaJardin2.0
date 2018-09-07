@@ -3,6 +3,20 @@ html{
     height: 100%;
     background: linear-gradient(rgba(38,128,101,0.9),rgba(52,177,140,0.9));
 }
+.errors, .ok{
+    width: 390px;
+    padding: 5px;
+    background: rgba(238,249,113,0.9);
+    margin: 10px auto 0 auto;
+    border: 1px solid rgba(222,239,10,0.9);
+    border-radius: 4px;
+    color:#333;
+}
+.ok{
+    background: rgba(155,222,143,0.9);
+    border-color: rgba(68,171,50,0.9);
+    color: white;
+}
 body{
     font-family: "Thebuchet MS", tahoma, arial;
 }
@@ -11,6 +25,30 @@ body{
     margin: 50px auto;
     text-align: center;
     position: relative;
+}
+#formulario .acao{
+    width: 100px;
+    background: rgba(38,128,101,0.9);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 12px 0;
+    float: left;
+    margin-right: 5%;
+}
+#formulario .right{
+    width: 100px;
+    background: rgba(38,128,101,0.9);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 12px 0;
+    float: right;
+    margin-right: 5%;
+}
+#formulario .acao:hover{
+    background: rgba(52,177,140,0.9);
+    cursor: pointer;
 }
 /*
 #formulario fieldset{
@@ -25,6 +63,7 @@ body{
     box-sizing: border-box;
     width:80%;
     margin: 0 10%;
+    position:absolute;
 }*/
 #formulario fieldset:not(:first-of-type){
     display:none;

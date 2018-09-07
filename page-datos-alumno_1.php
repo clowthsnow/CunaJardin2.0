@@ -8,6 +8,8 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     date_default_timezone_set('America/Lima');
     $fecha = new DateTime();
+    
+    
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -27,10 +29,36 @@ if (!isset($_SESSION['usuario'])) {
             <link href="css/style2.css" type="text/css" rel="stylesheet" >
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script src="js/peticion.js"></script>
+            <script src="js/datosPadre.js"></script>
+            
+            <script src="js/modal.js"></script>
 
 
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
+            <style>
+                table {
+                    width: 100%;
+                    border: 1px solid #000;
+                }
+                th, td {
+                   width: 25%;
+                   text-align: left;
+                   vertical-align: top;
+                   border: 1px solid #000;
+                   border-collapse: collapse;
+                   padding: 0.3em;
+                   caption-side: bottom;
+                }
+                caption {
+                   padding: 0.3em;
+                   color: #fff;
+                    background: #000;
+                }
+                th {
+                   background: #eee;
+                }
+            </style>
 
 
         </head>
@@ -86,18 +114,22 @@ if (!isset($_SESSION['usuario'])) {
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
+                                                
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
                                                         <h4 class="header2">Estudiante:</h4>
                                                         <div class="row">
-                                                            <form id="formulario" action="control/crearEstudiante.php" method="POST" >
+                                                            <div class="resp"></div>
+                                                            
+                                                            <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
+                                                            <form id="formulario" action="control/crearEstudiante.php" method="POST" enctype="multipart/form-data" name="formulario">
                                                                 <ul id="progress">
                                                                     <li class="activo">Principal</li>
                                                                     <li>Datos Generales del niño</li>
                                                                     <li>Datos de Atencion al niño</li>
                                                                     <li>Datos Familiares</li>
-                                                                    <li>Complementos</li>
+                                                                    <li>Vivienda</li>
                                                                 </ul>
                                                                 
                                                                 <fieldset>
@@ -141,7 +173,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="submit" name="next" class="next" value="Proximo"/>
+                                                                    <input type="button" name="next1" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 <fieldset>
                                                                     <div class="divider"></div>
@@ -184,8 +216,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label for="escolaridad">Situacion de Escolaridad Promovido:</label>
                                                                     </div>
                                                                 </div>
-                                                                    <input type="submit" name="prev" class="prev" value="Anteror"/>
-                                                                    <input type="submit" name="next" class="next" value="Proximo"/>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anteror"/>
+                                                                    <input type="button" name="next2" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 <fieldset>
                                                                     <div class="divider"></div>
@@ -313,15 +345,26 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                 </div>
 
-                                                                    <input type="submit" name="prev" class="prev" value="Anteror"/>
-                                                                    <input type="submit" name="next" class="next" value="Proximo"/>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anteror"/>
+                                                                    <input type="button" name="next3" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 
                                                                 <fieldset>
                                                                     <div class="divider"></div>
                                                                     <br>
-                                                                    <h4 class="header2">Datos de Familiares:</h4>
+                                                                    <h4 class="header2">Datos de la Madre:</h4>
 
+                                                                    <!--<div class="row">
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="dnim" type="text" class="validate" name="dnim" required="" maxlength="8" placeholder="Buscar...">
+                                                                            <label for="dnim">*DNI de la Madre:</label>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="dnip" type="text" class="validate" name="dnip" required="" maxlength="8" placeholder="Buscar...">
+                                                                            <label for="dnip">*DNI del Padre:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    -->
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
                                                                             <input id="dnim" type="text" class="validate" name="dnim" required="" maxlength="8" placeholder="Buscar...">
@@ -332,11 +375,18 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <label for="dnip">*DNI del Padre:</label>
                                                                         </div>
                                                                     </div>
-                                                                    <section id="tabla_resultado">
+                                                                    
+                                                                    <div class="row">
                                                                         
-                                                                    </section>
-                                                                    <input type="submit" name="prev" class="prev" value="Anteror"/>
-                                                                    <input type="submit" name="next" class="next" value="Proximo"/>
+                                                                        <section id="tabla_resultado" class="input-field col s12 m6 l6">
+
+                                                                        </section>
+                                                                        <section id="tabla_resultado2" class="input-field col s12 m6 l6">
+
+                                                                        </section>
+                                                                    </div>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anteror"/>
+                                                                    <input type="button" name="next4" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 <fieldset>
                                                                     <div class="divider"></div>
@@ -413,12 +463,12 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </div>
                                                                     </div>
 
-                                                                    <input type="submit" name="prev" class="prev" value="Anterior"/>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anterior"/>
                                                                     
                                                                     <div class="row">
                                                                         <div class="input-field col s12">
-                                                                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
-                                                                                <i class="mdi-image-edit left"></i>
+                                                                            <button class="next right" type="submit" name="action">Registrar
+                                                                                
                                                                             </button>
                                                                         </div>
                                                                     </div>

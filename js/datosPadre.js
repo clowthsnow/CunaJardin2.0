@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function obtener_padre(padre){
+function obtener_registros(padre){
     $.ajax({
       url:'consulta.php',
       type:'POST',
@@ -11,15 +11,15 @@ function obtener_padre(padre){
       data:{padre:padre},
     })
     .done(function(resultado){
-        $("#tabla_resultado").html(resultado);
+        $("#tabla_resultado2").html(resultado);
     })
 }
-$(document).on('keyup','#dnim',function(){
+$(document).on('keyup','#dnip',function(){
     var valorBusqueda=$(this).val();
     if(valorBusqueda!=""){
-        obtener_padre(valorBusqueda)
+        obtener_registros(valorBusqueda)
     }else{
-        obtener_padre();
+        obtener_registros();
     }
 });
 

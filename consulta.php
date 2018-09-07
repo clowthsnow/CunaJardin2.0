@@ -10,13 +10,14 @@ $tabla="";
 $query="SELECT * FROM padre ORDEN BY PadreDni";
 if(isset($_POST['padre'])){
     $q=$conexion->real_escape_string($_POST['padre']);
-    $query="SELECT * FROM padre WHERE PadreDni LIKE '%".$q."%'";
+    //$query="SELECT * FROM padre WHERE PadreDni LIKE '%".$q."%'";
+    $query="SELECT * FROM padre WHERE PadreDni ='$q'";
 }
 $buscarPadre=$conexion->query($query);
 if($buscarPadre->num_rows>0){
     $tabla.=
-            '<table class="table">'
-            . '<tr class="bg-primary">'
+            '<table class="table">';
+            /*. '<tr class="bg-primary">'
             . '<td>Apellidos:</td>'
             . '<td>Nombres:</td>'
             . '<td>Edad:</td>'
@@ -32,11 +33,13 @@ if($buscarPadre->num_rows>0){
             . '<td>Centro de trabajo:</td>'
             . '<td>Direccion del trabajo:</td>'
             . '</tr>';
-    
-    while($filaPadre=$buscarPadre->fetch_assoc()){
+    */
+    /*while($filaPadre=$buscarPadre->fetch_assoc()){
         $tabla.=
                 '<tr>'
-                . '<td>'.$filaPadre['PadreApellidos'].'</td>'
+                . '<th>Apellidos</th>'
+                . '<td>'.$filaPadre['PadreApellidos'].'</td><'
+                . '<th>Nombres</th>'
                 . '<td>'.$filaPadre['PadreNombre'].'</td>'
                 . '<td>'.$filaPadre['PadreEdad'].'</td>'
                 . '<td>'.$filaPadre['PadreFechaNac'].'</td>'
@@ -50,6 +53,39 @@ if($buscarPadre->num_rows>0){
                 . '<td>'.$filaPadre['PadreOcupacionRubro'].'</td>'
                 . '<td>'.$filaPadre['PadreCentroTrabajo'].'</td>'
                 . '<td>'.$filaPadre['PadreDireccionTrabajo'].'</td>'
+                . '</tr>';
+    }*/
+    while($filaPadre=$buscarPadre->fetch_assoc()){
+        $tabla.=
+                '<tr>'
+                . '<th>Apellidos:</th>'
+                . '<td>'.$filaPadre['PadreApellidos'].'</td></tr>'
+                . '<th>Nombres:</th>'
+                . '<td>'.$filaPadre['PadreNombre'].'</td></tr>'
+                . '<th>Edad:</th>'
+                . '<td>'.$filaPadre['PadreEdad'].'</td></tr>'
+                . '<th>Fecha de Nac:</th>'
+                . '<td>'.$filaPadre['PadreFechaNac'].'</td></tr>'
+                . '<th>Telefono:</th>'
+                . '<td>'.$filaPadre['PadreTelefono'].'</td></tr>'
+                . '<th>Celular:</th>'
+                . '<td>'.$filaPadre['PadreCelular'].'</td></tr>'
+                . '<th>Estado Civil:</th>'
+                . '<td>'.$filaPadre['PadreEstCivil'].'</td></tr>'
+                . '<th>Vive con niño(a):</th>'
+                . '<td>'.$filaPadre['PadreViveCon'].'</td></tr>'
+                . '<th>Lugar de Procedencia:</th>'
+                . '<td>'.$filaPadre['PadreProcedenciaLugar'].'</td></tr>'
+                . '<th>Grado de Instruccion:</th>'
+                . '<td>'.$filaPadre['PadreGradoInstruccion'].'</td></tr>'
+                . '<th>Ocupacion actual:</th>'
+                . '<td>'.$filaPadre['PadreOcupacionTipo'].'</td></tr>'
+                . '<th>Tipo de Rubro:</th>'
+                . '<td>'.$filaPadre['PadreOcupacionRubro'].'</td></tr>'
+                . '<th>Centro de trabajo:</th>'
+                . '<td>'.$filaPadre['PadreCentroTrabajo'].'</td></tr>'
+                . '<th>Direccion del trabajo:</th>'
+                . '<td>'.$filaPadre['PadreDireccionTrabajo'].'</td></tr>'
                 . '</tr>';
     }
     $tabla.='</table>';

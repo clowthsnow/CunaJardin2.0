@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario'])) {
     $busca = "SELECT * FROM alumno WHERE AlumnoDni='$usuario'";
     $resultado = $conexion->query($busca);
     if ($resultado->num_rows === 0) {
-        header("location:page-datos-alumno.php");
+        header("location:page-datos-alumno_1.php");
     }
     $provBD = $resultado->fetch_assoc();
     $sugerido = $provBD['AlumnoFechaNacimiento'];

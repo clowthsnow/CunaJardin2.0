@@ -32,7 +32,7 @@ if ('1' == $_SESSION['permisos']) {
                                 <li><a href="page-crear-padre.php">Crear Nuevo Padre</a>
                                 </li>                                        
                                 <li><a href="page-ver-padres.php">Ver Padres</a> 
-                                <li><a href="page-datos-alumno.php">Crear nuevo Estudiante</a>
+                                <li><a href="page-datos-alumno_1.php">Crear nuevo Estudiante</a>
                                 </li>
                                 <li><a href="page-ver-Estudiantes.php">Ver Estudiantes</a>
                                 </li>
