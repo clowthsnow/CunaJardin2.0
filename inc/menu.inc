@@ -32,7 +32,7 @@ if ('1' == $_SESSION['permisos']) {
                                 <li><a href="page-crear-padre.php">Crear Nuevo Padre</a>
                                 </li>                                        
                                 <li><a href="page-ver-padres.php">Ver Padres</a> 
-                                <li><a href="page-datos-alumno.php">Crear nuevo Estudiante</a>
+                                <li><a href="page-datos-alumno_1.php">Crear nuevo Estudiante</a>
                                 </li>
                                 <li><a href="page-ver-Estudiantes.php">Ver Estudiantes</a>
                                 </li>
@@ -221,6 +221,57 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Vouchers</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="page-registar-voucher.php">Registar Voucher</a>
+                                    </li>
+                                    <li><a href="page-ver-vouchers.php">Ver Vouchers</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Boletas</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="page-registrar-boleta.php">Registrar Boleta</a>
+                                    </li>
+                                    <li><a href="page-ver-boletas.php">Ver Boletas</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Ingresos</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="page-registrar-ingresos.php">Registrar R. de Ingresos</a>
+                                    </li>
+                                    <li><a href="page-ver-ingresos.php">Ver Recibo de Ingresos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Egresos</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="page-registrar-egresos.php">Registrar R. de Egresos</a>
+                                    </li>
+                                    <li><a href="page-ver-egresos.php">Ver Recibo de Egresos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Reportes </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="page-crear-contabilidad.php">Registrar R. de Egresos</a>
+                                    </li>
+                                    <li><a href="page-ver-contabilidad.php">Ver Recibo de Egresos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        
                     <?php } ?>
                     <?php if ('4' == $_SESSION['permisos']) { ?>
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Matricula</a>

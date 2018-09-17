@@ -15,7 +15,9 @@
 ------------------------------------------*/
 
 body {
+  
   background-color: #fcfcfc;
+  /*background-size: 1450px;*/
 }
 #main,
 footer {

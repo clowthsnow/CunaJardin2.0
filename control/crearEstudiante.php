@@ -1,7 +1,12 @@
 <?php
 
 include '../conexion.php';
-
+function clear($input){
+    $var= mysqli_escape_string($conexion, $input);
+    //$var=$_POST["'"+$input+"'"];
+    $var= htmlspecialchars($var);
+    return $var;
+}
 //reciviendo datos del formulario
 $nombreImagen = $_FILES['foto']['name']; //Nombre de la imagen
 $archivo = $_FILES['foto']['tmp_name']; //Archivo
