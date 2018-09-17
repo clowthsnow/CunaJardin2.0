@@ -1,12 +1,12 @@
 <?php
 SESSION_START();
-
+include_once 'conexion.php';
 if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
     ?>
-    <!DOCTYPE html>
+    <!DOCTYPE HTML>
     <html lang="es">
 
         <head>
@@ -25,6 +25,7 @@ if (!isset($_SESSION['usuario'])) {
 
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
+
 
 
         </head>
@@ -81,7 +82,9 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="card-panel">
                                                         <h4 class="header2">Nuevo Administrador</h4>
                                                         <div class="row">
-                                                            <form id="create" class="col s12" action="control/crearAdministrador.php" method="POST">
+                                                            <div class="resp"></div>
+                                                            <!--<form id="create" name="formulario" class="col s12" action="control/crearAdministrador.php" method="POST">-->
+                                                            <form id="" method="POST" enctype="multipart/form-data" name="formulario">
 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
@@ -101,39 +104,42 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label for="apellido">Apellido:</label>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="tipo" type="text" class="validate" name="tipoAdmin" required="">
                                                                         <label for="tipo">Tipo:</label>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="email" type="text" class="validate" name="emailAdmin" required="">
                                                                         <label for="email">Email:</label>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="telefono" type="text" class="validate" name="telefonoAdmin" required="">
                                                                         <label for="telefono">Telefono:</label>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <br>
                                                                 <div class="divider"></div>
-                                                                <div class="row">
+                                                                <input type="submit" name="next" class="next right" value="Registrar"/>
+                                                                <!--<div class="row">
                                                                     <div class="input-field col s12">
                                                                         <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
                                                                             <i class="mdi-image-edit left"></i>
                                                                         </button>
                                                                     </div>
-                                                                </div>
+                                                                </div>-->
+
 
                                                             </form>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,7 +201,8 @@ if (!isset($_SESSION['usuario'])) {
             <!-- ================================================
             Scripts
             ================================================ -->
-
+            <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript" src="js/function3.js"></script>
             <!-- jQuery Library -->
             <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    
             <!--materialize js-->

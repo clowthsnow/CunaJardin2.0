@@ -23,9 +23,9 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Usuarios</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="page-crear-contador.php">Crear Administrador</a>
+                                <li><a href="page-crear-administrador.php">Crear Administrador</a>
                                 </li>                                        
-                                <li><a href="page-ver-contador.php">Ver Administradores</a>
+                                <li><a href="page-ver-administrador.php">Ver Administradores</a>
                                 <li><a href="page-crear-contador.php">Crear Nuevo Contador</a>
                                 </li>                                        
                                 <li><a href="page-ver-contador.php">Ver Contadores</a></li>
@@ -216,7 +216,6 @@ if ('1' == $_SESSION['permisos']) {
                                     <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
                                     </li>
                                     <li><a href="page-ver-tipoConceptos.php">Ver Tipos de Concepto</a>
-                                    </li>
                                     </li>
                                 </ul>
                             </div>

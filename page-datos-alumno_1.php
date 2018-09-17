@@ -6,6 +6,7 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
+    include_once 'control/crearEstudiante.php';
     date_default_timezone_set('America/Lima');
     $fecha = new DateTime();
     
@@ -123,7 +124,9 @@ if (!isset($_SESSION['usuario'])) {
                                                             <div class="resp"></div>
                                                             
                                                             <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
+                                                            
                                                             <form id="formulario" action="control/crearEstudiante.php" method="POST" enctype="multipart/form-data" name="formulario">
+                                                            <!--<form id="formulario" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data" name="formulario">-->
                                                                 <ul id="progress">
                                                                     <li class="activo">Principal</li>
                                                                     <li>Datos Generales del niño</li>
@@ -134,7 +137,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 <fieldset>
                                                                     <h4 class="header2">Datos de Matricula:</h4>
-                                                                     <div class="row">
+                                                                    <div class="row">
                                                                         <div class="file-field input-field col s12 m12 l12">
                                                                             <input class="file-path validate" type="text" />
                                                                             <div class="btn">
@@ -177,174 +180,170 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </fieldset>
                                                                 <fieldset>
                                                                     <div class="divider"></div>
-                                                                <br>
-                                                                <h4 class="header2">Datos Generales del niño:</h4>
-                                                                <div class="row">
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="dni" type="number" class="validate" name="dni" required="" maxlength="8">
-                                                                        <label for="dni">*DNI:</label>
+                                                                    <br>
+                                                                    <h4 class="header2">Datos Generales del niño:</h4>
+                                                                    <div class="row">
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="dni" type="number" class="validate" name="dni" required="" maxlength="8">
+                                                                            <label for="dni">*DNI:</label>
+                                                                        </div>
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>Sexo:</label>
+                                                                            <select id="disco" class="browser-default" name="sexo" required="">
+                                                                                <option value="" disabled selected>*Escoge el sexo del niño:</option>
+                                                                                <option value="Femenino" >Femenino</option>
+                                                                                <option value="Masculino" >Masculino</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>Sexo:</label>
-                                                                        <select id="disco" class="browser-default" name="sexo" required="">
-                                                                            <option value="" disabled selected>*Escoge el sexo del niño:</option>
-                                                                            <option value="Femenino" >Femenino</option>
-                                                                            <option value="Masculino" >Masculino</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="edad" type="text" class="validate" name="edad" required="" placeholder=" A años B meses">
-                                                                        <label for="edad" class="active">*Edad:</label>
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    <div class="input-field col s12 m12 l12">
-                                                                        <input id="nacimiento" type="text" class="validate" name="nacimiento" required="">
-                                                                        <label for="nacimiento">*Lugar de Nacimiento:</label>
-                                                                    </div>
-                                                                    <div class="input-field col s12 m12 l12">
-                                                                        <input id="direccion" type="text" class="validate" name="direccion" required="">
-                                                                        <label for="direccion">*Direccion:</label>
+                                                                    <div class="row">
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="edad" type="text" class="validate" name="edad" required="" placeholder=" A años B meses">
+                                                                            <label for="edad" class="active">*Edad:</label>
+                                                                        </div>
                                                                     </div>
 
-                                                                    <div class="input-field col s12 m12 l12">
-                                                                        <input id="escolaridad" type="text" class="validate" name="escolaridad" >
-                                                                        <label for="escolaridad">Situacion de Escolaridad Promovido:</label>
+                                                                    <div class="row">
+                                                                        <div class="input-field col s12 m12 l12">
+                                                                            <input id="nacimiento" type="text" class="validate" name="nacimiento" required="">
+                                                                            <label for="nacimiento">*Lugar de Nacimiento:</label>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m12 l12">
+                                                                            <input id="direccion" type="text" class="validate" name="direccion" required="">
+                                                                            <label for="direccion">*Direccion:</label>
+                                                                        </div>
+
+                                                                        <div class="input-field col s12 m12 l12">
+                                                                            <input id="escolaridad" type="text" class="validate" name="escolaridad" >
+                                                                            <label for="escolaridad">Situacion de Escolaridad Promovido:</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
                                                                     <input type="button" name="prev" class="prev acao" value="Anteror"/>
                                                                     <input type="button" name="next2" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 <fieldset>
                                                                     <div class="divider"></div>
-                                                                <br>
-                                                                <h4 class="header2">Datos de Atencion del niño:</h4>
+                                                                    <br>
+                                                                    <h4 class="header2">Datos de Atencion del niño:</h4>
 
-                                                                <div class="row">
+                                                                    <div class="row">
 
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Control Medico en el Embarazo:</label>
-                                                                        <select id="disco" class="browser-default" name="controlmed" required="">
-                                                                            <option value="" disabled selected>Control Medico:</option>
-                                                                            <option value="Si" >Si</option>
-                                                                            <option value="No" >No</option>
-                                                                        </select>
-                                                                    </div>
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Control Medico en el Embarazo:</label>
+                                                                            <select id="disco" class="browser-default" name="controlmed" required="">
+                                                                                <option value="" disabled selected>Control Medico:</option>
+                                                                                <option value="Si" >Si</option>
+                                                                                <option value="No" >No</option>
+                                                                            </select>
+                                                                        </div>
 
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Parto:</label>
-                                                                        <select id="disco" class="browser-default" name="parto" required="">
-                                                                            <option value="" disabled selected>Tipo de Parto:</option>
-                                                                            <option value="Normal" >Normal</option>
-                                                                            <option value="Cesarea" >Cesarea</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="peso" type="text" class="validate" name="peso" required="">
-                                                                        <label for="peso" >*Peso:</label>
-                                                                    </div>
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="talla" type="text" class="validate" name="talla" required="">
-                                                                        <label for="talla">*Talla:</label>
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Parto:</label>
+                                                                            <select id="disco" class="browser-default" name="parto" required="">
+                                                                                <option value="" disabled selected>Tipo de Parto:</option>
+                                                                                <option value="Normal" >Normal</option>
+                                                                                <option value="Cesarea" >Cesarea</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
 
-                                                                    <div class="input-field col s12 m12 l12">
-                                                                        <input id="dificulta" type="text" class="validate" name="dificultad" >
-                                                                        <label for="dificultad">Dificultades:</label>
+                                                                    <div class="row">
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="peso" type="text" class="validate" name="peso" required="">
+                                                                            <label for="peso" >*Peso:</label>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="talla" type="text" class="validate" name="talla" required="">
+                                                                            <label for="talla">*Talla:</label>
+                                                                        </div>
+
+                                                                        <div class="input-field col s12 m12 l12">
+                                                                            <input id="dificulta" type="text" class="validate" name="dificultad" >
+                                                                            <label for="dificultad">Dificultades:</label>
+                                                                        </div>
                                                                     </div>
 
-                                                                </div>
+                                                                    <div class="row">
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Alimentacion:</label>
+                                                                            <select id="lactancia" class="browser-default" name="lactancia" required="">
+                                                                                <option value="" disabled selected>Tipo de Lactancia:</option>
+                                                                                <option value="Materna" >Materna</option>
+                                                                                <option value="Artificial" >Artificial</option>
+                                                                                <option value="Mixta" >Mixta</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Vacunas:</label>
+                                                                            <select id="vacunas" class="browser-default" name="vacunas" required="">
+                                                                                <option value="" disabled selected>Vacunas:</option>
+                                                                                <option value="Completa" >Completa</option>
+                                                                                <option value="Incompleta" >Incompletas</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
-                                                                <div class="row">
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Alimentacion:</label>
-                                                                        <select id="lactancia" class="browser-default" name="lactancia" required="">
-                                                                            <option value="" disabled selected>Tipo de Lactancia:</option>
-                                                                            <option value="Materna" >Materna</option>
-                                                                            <option value="Artificial" >Artificial</option>
-                                                                            <option value="Mixta" >Mixta</option>
-                                                                        </select>
+                                                                    <div class="row">
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Temores:</label>
+                                                                            <select id="temor" class="browser-default" name="temores" required="">
+                                                                                <option value="" disabled selected>Temores:</option>
+                                                                                <option value="Si" >Si</option>
+                                                                                <option value="No" >No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="temordet" type="text" class="validate" name="temordetalle" >
+                                                                            <label for="temordet">Especifique:</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="row">
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Vacunas:</label>
-                                                                        <select id="vacunas" class="browser-default" name="vacunas" required="">
-                                                                            <option value="" disabled selected>Vacunas:</option>
-                                                                            <option value="Completa" >Completa</option>
-                                                                            <option value="Incompleta" >Incompletas</option>
-                                                                        </select>
+                                                                    <div class="row">
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Limitaciones Fisicas:</label>
+                                                                            <select id="limitacion" class="browser-default" name="limitacionfis" required="">
+                                                                                <option value="" disabled selected>Limitaciones Fisicas:</option>
+                                                                                <option value="Si" >Si</option>
+                                                                                <option value="No" >No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="limitaciondet" type="text" class="validate" name="limitacionfisdetalle" >
+                                                                            <label for="limitaciondet">Especifique:</label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <div class="row">
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Temores:</label>
-                                                                        <select id="temor" class="browser-default" name="temores" required="">
-                                                                            <option value="" disabled selected>Temores:</option>
-                                                                            <option value="Si" >Si</option>
-                                                                            <option value="No" >No</option>
-                                                                        </select>
+                                                                    <div class="row">
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Dificultades Sensoriales:</label>
+                                                                            <select id="sensorial" class="browser-default" name="dificultadsens" required="">
+                                                                                <option value="" disabled selected>Dificultades Sensoriales:</option>
+                                                                                <option value="Si" >Si</option>
+                                                                                <option value="No" >No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="sensorialdet" type="text" class="validate" name="dificultadsensdet" >
+                                                                            <label for="sensorialdet">Especifique:</label>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="temordet" type="text" class="validate" name="temordetalle" >
-                                                                        <label for="temordet">Especifique:</label>
-                                                                    </div>
-                                                                </div>
 
-                                                                <div class="row">
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Limitaciones Fisicas:</label>
-                                                                        <select id="limitacion" class="browser-default" name="limitacionfis" required="">
-                                                                            <option value="" disabled selected>Limitaciones Fisicas:</option>
-                                                                            <option value="Si" >Si</option>
-                                                                            <option value="No" >No</option>
-                                                                        </select>
+                                                                    <div class="row">
+                                                                        <div class="col s12 m6 l6">
+                                                                            <label>*Alergias:</label>
+                                                                            <select id="alergia" class="browser-default" name="alergia" required="">
+                                                                                <option value="" disabled selected>Alergias:</option>
+                                                                                <option value="Si" >Si</option>
+                                                                                <option value="No" >No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="alergiadet" type="text" class="validate" name="alergiadet" >
+                                                                            <label for="alergiadet">Especifique:</label>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="limitaciondet" type="text" class="validate" name="limitacionfisdetalle" >
-                                                                        <label for="limitaciondet">Especifique:</label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Dificultades Sensoriales:</label>
-                                                                        <select id="sensorial" class="browser-default" name="dificultadsens" required="">
-                                                                            <option value="" disabled selected>Dificultades Sensoriales:</option>
-                                                                            <option value="Si" >Si</option>
-                                                                            <option value="No" >No</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="sensorialdet" type="text" class="validate" name="dificultadsensdet" >
-                                                                        <label for="sensorialdet">Especifique:</label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    <div class="col s12 m6 l6">
-                                                                        <label>*Alergias:</label>
-                                                                        <select id="alergia" class="browser-default" name="alergia" required="">
-                                                                            <option value="" disabled selected>Alergias:</option>
-                                                                            <option value="Si" >Si</option>
-                                                                            <option value="No" >No</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="alergiadet" type="text" class="validate" name="alergiadet" >
-                                                                        <label for="alergiadet">Especifique:</label>
-                                                                    </div>
-                                                                </div>
-
                                                                     <input type="button" name="prev" class="prev acao" value="Anteror"/>
                                                                     <input type="button" name="next3" class="next right" value="Proximo"/>
                                                                 </fieldset>
@@ -353,18 +352,6 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="divider"></div>
                                                                     <br>
                                                                     <h4 class="header2">Datos de la Madre:</h4>
-
-                                                                    <!--<div class="row">
-                                                                        <div class="input-field col s12 m6 l6">
-                                                                            <input id="dnim" type="text" class="validate" name="dnim" required="" maxlength="8" placeholder="Buscar...">
-                                                                            <label for="dnim">*DNI de la Madre:</label>
-                                                                        </div>
-                                                                        <div class="input-field col s12 m6 l6">
-                                                                            <input id="dnip" type="text" class="validate" name="dnip" required="" maxlength="8" placeholder="Buscar...">
-                                                                            <label for="dnip">*DNI del Padre:</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    -->
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
                                                                             <input id="dnim" type="text" class="validate" name="dnim" required="" maxlength="8" placeholder="Buscar...">
@@ -464,14 +451,16 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
 
                                                                     <input type="button" name="prev" class="prev acao" value="Anterior"/>
+                                                                    <!--<input type="submit" name="next" class="next right" value="Registrar"/>-->
                                                                     
                                                                     <div class="row">
                                                                         <div class="input-field col s12">
-                                                                            <button class="next right" type="submit" name="action">Registrar
+                                                                            <button class="next right" type="submit" name="registrarEstudiante">Registrar
                                                                                 
                                                                             </button>
                                                                         </div>
                                                                     </div>
+                                                                    
                                                                     <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
                                                                 </fieldset>
                                                                 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -486,8 +475,6 @@ if (!isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                         <!--end container-->
 
