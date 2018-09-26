@@ -135,11 +135,24 @@ if (!isset($_SESSION['usuario'])) {
                                                         <br>
                                                         <div class="divider"></div>
                                                         <div class="row">
-                                                            <div class="input-field col s12">
+                                                            <div class="input-field col s12 m4 l4">
+                                                                <!--                                                                <button class="btn cyan waves-effect waves-light right" > Aceptar y Continuar
+                                                                                                                                    <i class="mdi-image-edit left"></i>
+                                                                                                                                </button>-->
+                                                                <a href="page-imprimir-registro.php" class="btn cyan waves-effect waves-light">Imprimir ficha</a>
+
+                                                            </div>
+                                                            <div class="input-field col s12 m4 l4">
                                                                 <button class="btn cyan waves-effect waves-light right" type="submit" name="action"> Aceptar y Continuar
                                                                     <i class="mdi-image-edit left"></i>
                                                                 </button>
                                                             </div>
+                                                            <div class="input-field col s12 m4 l4">
+                                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action"> Aceptar y Continuar
+                                                                    <i class="mdi-image-edit left"></i>
+                                                                </button>
+                                                            </div>
+
                                                         </div>
 
                                                         </form>
@@ -216,15 +229,12 @@ if (!isset($_SESSION['usuario'])) {
 
     <script>
         $(document).ready(function () {
-            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-            $('#modal1').modal();
-            $('#modal2').modal();
+        $('#modal1').modal();
+        $('#modal2').modal();
         });
         var frm = $('#permisos');
-
-
-
         });
     </script>
 
