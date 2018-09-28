@@ -23,9 +23,9 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Usuarios</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="page-crear-administrador.php">Crear Administrador</a>
+                                <li><a class="lia" href="page-crear-administrador.php">Crear Administrador</a>
                                 </li>                                        
-                                <li><a href="page-ver-administrador.php">Ver Administradores</a>
+                                <li><a class="lia" href="page-ver-administrador.php">Ver Administradores</a>
                                 <li><a href="page-crear-contador.php">Crear Nuevo Contador</a>
                                 </li>                                        
                                 <li><a href="page-ver-contador.php">Ver Contadores</a></li>
@@ -132,6 +132,23 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
+                    
+                    <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Reportes</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="page-reporte-alumnos.php">Alumnos General</a>
+                                </li>
+                                <li><a href="page-reporte-alumnosG.php">Alumnos por Grado</a>
+                                </li>
+                                <li><a href="page-reporte-usuarios.php">Usuario General</a>
+                                </li>
+                                <li><a href="page-reporte-docentes.php">Profesor General</a>
+                                </li>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    
                 </ul>
             </li>
             <li class="li-hover"><div class="divider"></div></li>

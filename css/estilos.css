@@ -6,6 +6,7 @@ body {
 
 #main {
     flex: 1 0 auto;
+    background-color: rgba(50, 48, 50, .1);
 }
 
 @media only screen and (min-width: 993px){

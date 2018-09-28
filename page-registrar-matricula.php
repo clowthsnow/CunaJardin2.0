@@ -34,7 +34,7 @@ if (!isset($_SESSION['usuario'])) {
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-           
+
             <script src="js/modal.js"></script>
 
         </head>
@@ -108,6 +108,13 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label for="idPago">Codigo de Pago:</label>
                                                                     </div>
                                                                     <div class="input-field col s12 m6 l6">
+                                                                        <section id="tabla_resultado" class="input-field col s12 m6 l6">
+
+                                                                        </section>
+                                                                    </div>
+
+                                                                    <!--
+                                                                    <div class="input-field col s12 m6 l6">
                                                                         <a href="#modal1" class="btn modal-trigger">VER</a>
                                                                         <div class="modal" id="modal1">
                                                                             <div class="modal-content">
@@ -124,6 +131,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </div>
 
                                                                     </div>
+                                                                    -->
                                                                 </div>
 
                                                                 <div class="row">
@@ -139,7 +147,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <option value="" disabled selected>Tipo de Alumno:</option>
                                                                             <option value="Nuevo" >Nuevo</option>
                                                                             <option value="Vigente" >Vigente</option>
-                                                                            
+
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -227,36 +235,57 @@ if (!isset($_SESSION['usuario'])) {
             Scripts
             ================================================ -->
             <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
             <script>
-            $(function () {
-                var formulario = $('form[name=formulario]');
-                $('button[type=submit]').click(function (evento) {
-                    var array = formulario.serializeArray();
-                    if (array[0].value == '' || array[1].value == '' || array[2].value == '' || array[3].value == '' || array[4].value == '') {
-                        $('.resp').html('<div class="errors"><p>Informe todos los detalle para finalizar con exito</p></div>');
-                    } else {
-                        $.ajax({
-                            method: 'POST',
-                            url: 'control/crearMatricula.php',
-                            data: {crearMatricula: 'sim', campos: array},
-                            dataType: 'json',
-                            beforeSend: function () {
-                                $('.resp').html('<div class="erros"><p>Espere mientras procesamos sus datos</p></div>');
-                            },
-                            success: function (valor) {
-                                //$('.resp').html(valor);
-                                if (valor.erro == 'sim') {
-                                    $('.resp').html('<div class="erros"><p>' + valor.getErro + '</p></div>');
-                                } else {
-                                    $('.resp').html('<div class="ok">' + valor.msg + '</div>');
-                                }
-                            }
-                        });
-                    }
-                    evento.preventDefault();
-                });
+            function obtener_pago(dni) {
+                $.ajax({
+                    url: 'consultarPago.php',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: {dni: dni},
+                })
+                        .done(function (resultado) {
+                            $("#tabla_resultado").html(resultado);
+                        })
+            }
+            $(document).on('keyup', '#idPago', function () {
+                var valorBusqueda = $(this).val();
+                if (valorBusqueda != "") {
+                    obtener_pago(valorBusqueda)
+                } else {
+                    obtener_pago();
+                }
             });
+
+            </script>
+            <script>
+                $(function () {
+                    var formulario = $('form[name=formulario]');
+                    $('button[type=submit]').click(function (evento) {
+                        var array = formulario.serializeArray();
+                        if (array[0].value == '' || array[1].value == '' || array[2].value == '' || array[3].value == '' || array[4].value == '') {
+                            $('.resp').html('<div class="errors"><p>Informe todos los detalle para finalizar con exito</p></div>');
+                        } else {
+                            $.ajax({
+                                method: 'POST',
+                                url: 'control/crearMatricula.php',
+                                data: {crearMatricula: 'sim', campos: array},
+                                dataType: 'json',
+                                beforeSend: function () {
+                                    $('.resp').html('<div class="erros"><p>Espere mientras procesamos sus datos</p></div>');
+                                },
+                                success: function (valor) {
+                                    //$('.resp').html(valor);
+                                    if (valor.erro == 'sim') {
+                                        $('.resp').html('<div class="erros"><p>' + valor.getErro + '</p></div>');
+                                    } else {
+                                        $('.resp').html('<div class="ok">' + valor.msg + '</div>');
+                                    }
+                                }
+                            });
+                        }
+                        evento.preventDefault();
+                    });
+                });
 
             </script>
             <!-- jQuery Library -->
@@ -270,36 +299,36 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                $(document).ready(function () {
+                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-                $('#modal2').modal();
-                $('#modal1').modal();
-            });
-
-            var frm = $('#create');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (respuesta) {
-                        if (respuesta == 1) {
-                            //$('#modal2').openModal();
-                            //document.location.href = "page-crear-proveedor.php";
-                            //                                location.reload();
-                            $('#modal2').openModal();
-
-                        } else {
-
-                            $('#modal1').openModal();
-                        }
-                    }
+                    $('#modal2').modal();
+                    $('#modal1').modal();
                 });
 
+                var frm = $('#create');
+                frm.submit(function (ev) {
+                    ev.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: frm.serialize(),
+                        success: function (respuesta) {
+                            if (respuesta == 1) {
+                                //$('#modal2').openModal();
+                                //document.location.href = "page-crear-proveedor.php";
+                                //                                location.reload();
+                                $('#modal2').openModal();
 
-            });
+                            } else {
+
+                                $('#modal1').openModal();
+                            }
+                        }
+                    });
+
+
+                });
             </script>
         </body>
 
