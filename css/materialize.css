@@ -2191,7 +2191,7 @@ ul.staggered-list li {
 footer.page-footer {
   margin-top: 20px;
   padding-top: 20px;
-  background-color: #00bcd4; }
+  background-color: #323032; }
   footer.page-footer .footer-copyright {
     overflow: hidden;
     height: 50px;
@@ -6140,7 +6140,7 @@ a.waves-effect .waves-ripple {
     line-height: inherit; }
 .side-nav .collapsible-body {
   border: 0;
-  background-color: #FFF; }
+  background-color: #c9c7c7; }
   .side-nav .collapsible-body li a {
     margin: 0 1rem 0 2rem; }
 
