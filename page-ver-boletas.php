@@ -84,6 +84,8 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
+                                                            <br>
+                                                            <a href="page-registrar-boleta.php"class="btn">Registrar Boleta</a>
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
@@ -114,8 +116,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            <br>
-                                                            <a href="page-registrar-boleta.php"class="btn">Registrar Boleta</a>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

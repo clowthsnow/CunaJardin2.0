@@ -124,9 +124,17 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Contabilidad</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
+<!--                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
                                 </li>
                                 <li><a href="page-ver-contabilidad.php">Ver Registro</a>
+                                </li>-->
+                                <li><a href="page-ver-vouchers.php">Gestion de Voucher</a>
+                                </li>
+                                <li><a href="page-ver-boletas.php">Gestion de Boletas</a>
+                                </li>
+                                <li><a href="page-ver-ingresos.php">Gestion de Ingresos</a>
+                                </li>
+                                <li><a href="page-ver-egresos.php">Gestion de Egresos</a>
                                 </li>
                                 <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
                                 </li>
@@ -142,7 +150,7 @@ if ('1' == $_SESSION['permisos']) {
                             <ul>
                                 <li><a href="page-reporte-alumnos.php">Alumnos General</a>
                                 </li>
-                                <li><a href="page-reporte-alumnosG.php">Alumnos por Grado</a>
+                                <li><a href="page-reporte-alumnosG.php">Reporte de Matriculas</a>
                                 </li>
                                 <li><a href="page-reporte-usuarios.php">Usuario General</a>
                                 </li>

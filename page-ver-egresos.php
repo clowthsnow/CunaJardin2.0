@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
 
+
 if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
@@ -74,28 +75,45 @@ if (!isset($_SESSION['usuario'])) {
                                         <div id="roboto">
                                             <h4 class="header">Ver Egresos</h4>
                                             <p class="caption">
-                                                En este panel usted podra Ver Egresos registrados almacenados en el sistema y poder gestionarlas.
+                                                En este panel usted podra Ver Egresos de Pago almacenadas en el sistema y poder gestionarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">
-                                                    <h4 class="header">EGRESOS REGISTRADOS:</h4>
+                                                    <h4 class="header">Ver Egresos:</h4>
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
+                                                            <a href="page-registrar-egresos.php"class="btn">Registrar Egreso</a>
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Nro</th>
-                                                                        <th>Tipo de Recibo</th>
-                                                                        <th>Nro de Recibo</th>
-                                                                        <th>Fecha emitida</th>
-                                                                        <th>Cantidad</th>
+                                                                        
+                                                                        <th>Tipo de Recibo:</th>
+                                                                        <th>Nro de Recibo:</th>
+                                                                        <th>Fecha emitida:</th>
+                                                                        <th>cantidad</th>
                                                                         <th>Precio Unitario</th>
-                                                                        <th>Total</th>
+                                                                        <th>Monto Total</th>
+                                                                        <th>Configurar</th>
+                                                                        <th>Eliminar</th>
                                                                     </tr>
                                                                 </thead>
+
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        
+                                                                        <th>Tipo de Recibo:</th>
+                                                                        <th>Nro de Recibo:</th>
+                                                                        <th>Fecha emitida:</th>
+                                                                        <th>cantidad</th>
+                                                                        <th>Precio Unitario</th>
+                                                                        <th>Monto Total</th>
+                                                                        <th>Configurar</th>
+                                                                        <th>Eliminar</th>
+                                                                    </tr>
+                                                                </tfoot>
 
                                                                 <tbody>
                                                                     <?php
@@ -103,22 +121,21 @@ if (!isset($_SESSION['usuario'])) {
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
-                                                                        <td>" . $row['EgresosId'] . "</td>";
-                                                                        echo "<td>" . $row['EgresosTipoRecibo'] . "</td>";
-                                                                        echo "<td>" . $row['EgresosNumRecibo'] . "</td>";
-                                                                        echo "<td>" . $row['EgresosFechaEmitida'] . "</td>";
-                                                                        echo "<td>" . $row['EgresosCantidad'] . "</td>";
-                                                                        echo "<td>" . $row['EgresosPrecioUnitario'] . "</td>";
-                                                                        echo "<td>" . $row['EgresosTotal'] . "</td>";
-                                                                        echo "<td><a href=\"page-modificar-egresos.php?id=" . $row['EgresosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarEgresos.php?id=" . $row['EgresosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        <td>" . $row['EgresosTipoRecibo'] . "</td>"
+                                                                                . "<td>" . $row['EgresosNumRecibo'] . "</td>"
+                                                                                . "<td>" . $row['EgresosFechaEmitida'] . "</td>"
+                                                                                . "<td>" . $row['EgresosCantidad'] . "</td>"
+                                                                                . "<td>" . $row['EgresosPrecioUnitario'] . "</td>"
+                                                                                . "<td>" . $row['EgresosTotal'] . "</td>";
+                                                                        
+                                                                                
+                                                                        echo "<td><a href=\"page-configurar-ingreso.php?id=" . $row['EgresosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarIngreso.php?id=" . $row['EgresosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            <br>
-                                                            <a href="page-registrar-egresos.php"class="btn">Registrar Egresos</a>
                                                         </div>
                                                     </div>
                                                 </div> 
@@ -135,17 +152,17 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>Nota no se encontrado en la base de datos</p>
+                                <p>Tipo de concepto no encontrado en la base de datos</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-egresos.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-plan.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal eliminar-->
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ELIMINAR!!!</h4>
-                                <p>¿Desea eliminar esta nota?</p>
+                                <p>¿Desea eliminar este tipo de concepto?</p>
                             </div>
                             <div class="modal-footer">                                
                                 <a href="#!" id="cancelar" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>

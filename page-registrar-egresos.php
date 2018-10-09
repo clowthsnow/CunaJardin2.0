@@ -90,9 +90,14 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label>Tipo de Recibo:</label>
                                                                         <select id="lactancia" class="browser-default" name="EgresosTipoRecibo" required="">
                                                                             <option value="" disabled selected>Tipo de Recibo:</option>
-                                                                            <option value="Materna" >Voleta</option>
-                                                                            <option value="Artificial" >Vaucher</option>
-                                                                            <option value="Mixta" >Otro</option>
+                                                                            <option value="Materna" >Voucher</option>
+                                                                            <option value="Artificial" >Boleta de venta</option>
+                                                                            <option value="Mixta" >Declaracion Jurada</option>
+                                                                            <option value="Mixta" >Factura</option>
+                                                                            <option value="Mixta" >Ticket</option>
+                                                                            <option value="Mixta" >Recibo por honorarios</option>
+                                                                            <option value="Mixta" >Recibo de Servicios Basicos</option>
+                                                                            <option value="Mixta" >Otros</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="col s12 m6 l6">
