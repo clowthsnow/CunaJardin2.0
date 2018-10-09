@@ -33,6 +33,7 @@ if (!isset($_SESSION['usuario'])) {
 
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 
         </head>
@@ -91,30 +92,38 @@ if (!isset($_SESSION['usuario'])) {
                                                         <div class="row">
                                                             <form id="create" class="col s12" action="control/registrarVaucher.php" method="POST">
                                                                 <div class="row">
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <input id="nombre" type="text" class="validate" name="ContabilidadAlumno" required="">
+                                                                    <div class="input-field col s12 m4 26 ">
+                                                                        <input id="ContabilidadAlumno" type="text" class="validate" name="ContabilidadAlumno" required="">
                                                                         <label for="nombre">DNI:</label>
                                                                     </div>
-                                                                    <div class="input-field col s12 m6 l6">
-                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="buscar">Buscar
-                                                                            <i class="mdi-image-edit left"></i>
+                                                                    <div class="input-field col s12 m4 13">
+                                                                        <span id="resultado"></span>
+                                                                    </div>
+                                                                    <div class="input-field col s12 m4 l3">
+                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="buscar" id="buscar">Buscar
+                                                                            <i class="mdi-action-search left"></i>
                                                                         </button>
+<!--                                                                        <input id="buscar" name="buscar" type="button" value="BUSCAR">-->
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="" required="" disabled>
-                                                                        <label for="nombre">Nombres y Apellidos:</label>
+                                                                    <div class="input-field col s6">
+                                                                        <input style="font-weight: bold;" id="AlumnoNombre" type="text" value="" class="validate" name="AlumnoNombre" disabled="" >
+                                                                        <label class="active" for="AlumnoNombre">Nombres</label>
+                                                                    </div>
+                                                                    <div class="input-field col s6">
+                                                                        <input style="font-weight: bold;" id="AlumnoApellidos" type="text" value="" class="validate" name="AlumnoApellidos" disabled="" >
+                                                                        <label class="active" for="AlumnoApellidos">Apellidos</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12 m6 l6">
-                                                                        <input id="seccion" type="text" class="validate" name="" disabled>
-                                                                        <label for="dnim">Seccion:</label>
+                                                                        <input id="seccionA" type="text" class="validate" name="seccionA" disabled>
+                                                                        <label class="active" for="seccionA">Seccion:</label>
                                                                     </div>
                                                                     <div class="input-field col s12 m6 l6">
-                                                                        <input id="año" type="text" class="validate" name="" disabled>
-                                                                        <label for="dnip">Año:</label>
+                                                                        <input id="gradoA" type="text" class="validate" name="gradoA" disabled>
+                                                                        <label class="active" for="gradoA">Grado:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -226,10 +235,35 @@ if (!isset($_SESSION['usuario'])) {
             <?php include 'inc/footer.inc'; ?>
             <!-- END FOOTER -->
 
-
+            
             <!-- ================================================
             Scripts
             ================================================ -->
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $("#ContabilidadAlumno").focus();
+                    $("#buscar").click(function(e){
+                        ;
+                        var url="enter.php";
+                        $.getJSON(url,{_num1:$("#ContabilidadAlumno").val()},function(alumnos){
+                            $.each(alumnos,function(i,alumno){
+                                $("#AlumnoNombre").val(alumno.nombre);
+                                $("#AlumnoApellidos").val(alumno.apellido);
+                                $("#seccionA").val(alumno.aula);
+                                $("#gradoA").val(alumno.grado);
+                                
+                                if(alumno.resultado=="0"){
+                                    $("#resultado").css("color","red");
+                                    $("#resultado").text("codigo no disponible");
+                                }else{
+                                    $("#resultado").css("color","green");
+                                    $("#resultado").text("codigo disponible");
+                                }
+                            })
+                        })
+                    })
+                }) 
+            </script>
 
             <!-- jQuery Library -->
             <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    

@@ -23,6 +23,10 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Usuarios</a>
                         <div class="collapsible-body">
                             <ul>
+                                <li><a class="lia" href="page-crear-usuario.php">Crear Usuario</a>
+                                </li>
+                                <li><a class="lia" href="page-ver-usuarios.php">Ver Usuarios</a>
+                                </li> 
                                 <li><a class="lia" href="page-crear-administrador.php">Crear Administrador</a>
                                 </li>                                        
                                 <li><a class="lia" href="page-ver-administrador.php">Ver Administradores</a>
@@ -314,12 +318,84 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Pago</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <?php
+                                    $userid = $_SESSION['usuario'];
+                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                                    while ($fila = $resulthijos->fetch_assoc()) {
+                                        ?>
+                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <?php
+                                    $userid = $_SESSION['usuario'];
+                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                                    while ($fila = $resulthijos->fetch_assoc()) {
+                                        ?>
+                                        <li><a href="page-registrar-pago.php?id=<?php echo $fila['AlumnoDni'] ?>">Regitrar Pago <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        <li><a href="page-ver-pagos.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Ver Pagos <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <?php
+                                    $userid = $_SESSION['usuario'];
+                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                                    while ($fila = $resulthijos->fetch_assoc()) {
+                                        ?>
+                                        <li><a href="page-ver-comunicados.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>
+                                        
+                                        <li class="divider"></li>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
 
                     <?php } ?>
 
 
                 </ul>
             </li>
+            
             <li class="li-hover"><div class="divider"></div></li>
             <li class="li-hover"><p class="ultra-small margin more-text">MAS</p></li>
 
