@@ -84,6 +84,7 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
+                                                            <a href="page-registar-voucher.php"class="btn">Nuevo Vaucher</a>
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
@@ -132,8 +133,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            <br>
-                                                            <a href="page-registar-voucher.php"class="btn">Nuevo Vaucher</a>
+<!--                                                            <br>
+                                                            <a href="page-registar-voucher.php"class="btn">Nuevo Vaucher</a>-->
                                                         </div>
                                                     </div>
                                                 </div> 

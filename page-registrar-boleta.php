@@ -93,7 +93,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="BoletaCodigo" required="">
-                                                                        <label for="nombre">CODIGO:</label>
+                                                                        <label for="nombre">Nro. de boleta de venta Electronica:</label>
                                                                     </div>
                                                                 </div>
                                                                 

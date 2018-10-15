@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
 
+
 if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
@@ -53,11 +54,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Ver Ingresos</h5>
+                                        <h5 class="breadcrumbs-title">Ver Ingresos-Caja UNSA</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Contabilidad
                                             </li>
-                                            <li class="active blue-text">Ver Ingresos</li>
+                                            <li class="active blue-text">Ver Ingresos-Caja UNSA</li>
                                         </ol>
 
                                     </div>
@@ -72,27 +73,43 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Ver Ingresos</h4>
+                                            <h4 class="header">Ver Ingresos-Caja UNSA</h4>
                                             <p class="caption">
-                                                En este panel usted podra Ver Ingresos registrados almacenados en el sistema y poder gestionarlas.
+                                                En este panel usted podra Ver Ingresos-Caja UNSA de Pago almacenadas en el sistema y poder gestionarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">
-                                                    <h4 class="header">INGRESOS REGISTRADOS:</h4>
+                                                    <h4 class="header">Ver Ingresos-Caja UNSA:</h4>
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
+                                                            <a href="page-registrar-ingresos.php"class="btn">Registrar Ingreso</a>
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>Nro</th>
-                                                                        <th>Nro de Recibo</th>
-                                                                        <th>Monto</th>
-                                                                        <th>Fecha emitida</th>
+                                                                        
+                                                                        <th>IngresosNumRecibo</th>
+                                                                        <th>IngresosFechaEmitida</th>
+                                                                        <th>IngresosMonto</th>
+                                                                        <th>IngresoDescripcion</th>
+                                                                        <th>Configurar</th>
+                                                                        <th>Eliminar</th>
                                                                     </tr>
                                                                 </thead>
+
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        
+                                                                        <th>IngresosNumRecibo</th>
+                                                                        <th>IngresosFechaEmitida</th>
+                                                                        <th>IngresosMonto</th>
+                                                                        <th>IngresoDescripcion</th>
+                                                                        <th>Configurar</th>
+                                                                        <th>Eliminar</th>
+                                                                    </tr>
+                                                                </tfoot>
 
                                                                 <tbody>
                                                                     <?php
@@ -100,19 +117,18 @@ if (!isset($_SESSION['usuario'])) {
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
-                                                                        <td>" . $row['IngresosId'] . "</td>";
-                                                                        echo "<td>" . $row['IngresosNumRecibo'] . "</td>";
-                                                                        echo "<td>" . $row['IngresosMonto'] . "</td>";
-                                                                        echo "<td>" . $row['IngresosFechaEmitida'] . "</td>";
-                                                                        echo "<td><a href=\"page-modificar-ingresos.php?id=" . $row['IngresosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarIngresos.php?id=" . $row['IngresosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        <td>" . $row['IngresosNumRecibo'] . "</td>"
+                                                                                . "<td>" . $row['IngresosFechaEmitida'] . "</td>"
+                                                                                . "<td>" . $row['IngresosMonto'] . "</td>"
+                                                                                . "<td>" . $row['IngresoDescripcion'] . "</td>";
+                                                                                
+                                                                        echo "<td><a href=\"page-configurar-ingreso.php?id=" . $row['IngresosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarIngreso.php?id=" . $row['IngresosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            <br>
-                                                            <a href="page-registrar-ingresos.php"class="btn">Registrar Ingresos</a>
                                                         </div>
                                                     </div>
                                                 </div> 
@@ -129,17 +145,17 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>Nota no se encontrado en la base de datos</p>
+                                <p>Tipo de concepto no encontrado en la base de datos</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-ingresos.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-plan.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal eliminar-->
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ELIMINAR!!!</h4>
-                                <p>¿Desea eliminar esta nota?</p>
+                                <p>¿Desea eliminar este tipo de concepto?</p>
                             </div>
                             <div class="modal-footer">                                
                                 <a href="#!" id="cancelar" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>

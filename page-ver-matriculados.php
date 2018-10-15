@@ -87,7 +87,7 @@ if (!isset($_SESSION['usuario'])) {
                                                             <table id="data-table-row-grouping" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
-                                                                        
+
                                                                         <th>Nombres</th>
                                                                         <th>Apellidos</th>
                                                                         <th>Aula</th>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tfoot>
                                                                     <tr>
-                                                                        
+
                                                                         <th>Nombres</th>
                                                                         <th>Apellidos</th>
                                                                         <th>Aula</th>
@@ -119,7 +119,7 @@ LEFT JOIN alumno ON aulaalumnos.AulaAlumnosAlumno=alumno.AlumnoDni";
                                                                         
                                                                         <td>" . $row['AlumnoNombre'] . "</td>
                                                                         <td>" . $row['AlumnoApellidos'] . "</td>"
-                                                                                . "<td>" . $row['AulaId'] . " " . $row['AulaGrado'] . " años </td>"
+                                                                        . "<td>" . $row['AulaId'] . " " . $row['AulaGrado'] . " años </td>"
                                                                         . "<td>" . $row['AulaAnho'] . "</td>";
                                                                     }
                                                                     ?>
@@ -179,7 +179,7 @@ LEFT JOIN alumno ON aulaalumnos.AulaAlumnosAlumno=alumno.AlumnoDni";
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
             <!-- START FOOTER -->
-    <?php include 'inc/footer.inc'; ?>
+            <?php include 'inc/footer.inc'; ?>
             <!-- END FOOTER -->
 
 
