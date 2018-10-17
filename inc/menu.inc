@@ -55,8 +55,10 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Gestion de Notas</a>
                         <div class="collapsible-body">
                             <ul>
+                                <li><a href="page-ver-grupos.php">Ver Grupos</a>
+                                </li>    
                                 <li><a href="page-crear-nota.php">Ingresar Nota</a>
-                                </li>                                        
+                                </li>
                                 <li><a href="page-ver-notas.php">Ver Notas</a>
                                 </li>
 
@@ -93,9 +95,11 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-balance"></i>Gestion de Curso</a>
                         <div class="collapsible-body">
                             <ul>
+
                                 <li><a href="page-crear-area.php">Crear Areas</a>
                                 </li>
                                 <li><a href="page-ver-areas.php">Ver Areas</a>
+
                                 </li>
                                 <li><a href="page-crear-logro.php">Crear Competencia</a>
                                 </li>                                        
@@ -326,7 +330,7 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Pago</a>
+<!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Pago</a>
                             <div class="collapsible-body">
                                 <ul>
                                     <?php
@@ -349,8 +353,8 @@ if ('1' == $_SESSION['permisos']) {
 
                                 </ul>
                             </div>
-                        </li>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
+                        </li>-->
+<!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
                             <div class="collapsible-body">
                                 <ul>
                                     <?php
@@ -373,8 +377,8 @@ if ('1' == $_SESSION['permisos']) {
 
                                 </ul>
                             </div>
-                        </li>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> </a>
+                        </li>-->
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
                             <div class="collapsible-body">
                                 <ul>
                                     <?php
@@ -383,7 +387,7 @@ if ('1' == $_SESSION['permisos']) {
                                     $resulthijos = $conexion->query($buscar) or die($conexion->error);
                                     while ($fila = $resulthijos->fetch_assoc()) {
                                         ?>
-                                        <li><a href="page-ver-comunicados.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                        <li><a href="page-ver-comunicados.php?id=<?php echo $fila['AlumnoDni'] ?>">Ver Comunicados <?php echo $fila['AlumnoNombre'] ?></a>
                                         </li>
                                         
                                         <li class="divider"></li>
@@ -391,8 +395,7 @@ if ('1' == $_SESSION['permisos']) {
                                     }
                                     ?>
 
-                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
-                                    </li>
+                                    
 
                                 </ul>
                             </div>

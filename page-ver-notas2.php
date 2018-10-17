@@ -5,6 +5,8 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
+    $id = $_GET['id'];
+   
     include 'conexion.php';
     //echo $usuario;
     ?>
@@ -12,12 +14,13 @@ if (!isset($_SESSION['usuario'])) {
     <html lang="es">
 
         <head>
-            <title>Ver Notas</title>
+            <title>Ver Alumnos</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
             <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
-
+            <link href="res/bootstrap3/css/bootstrap.css" rel="stylesheet">
+            <script src="js/jquery-1.10.2.js"></script>
 
             <!-- CORE CSS-->    
             <link href="css/materialize.css" type="text/css" rel="stylesheet">
@@ -53,11 +56,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Ver Notas</h5>
+                                        <h5 class="breadcrumbs-title">Ver Alumnos</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Notas
                                             </li>
-                                            <li class="active blue-text">Ver Notas</li>
+                                            <li class="active blue-text">Ver Ver Alumnos</li>
                                         </ol>
 
                                     </div>
@@ -72,16 +75,38 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Ver Notas</h4>
+                                            <h4 class="header">Ver Ver Alumnos</h4>
                                             <p class="caption">
-                                                En este panel usted podra ver todos las Notas almacenados en el sistema y poder gestionarlas.
+                                                En este panel usted podra ver Ver Alumnos almacenados en el sistema y poder gestionarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">
-                                                    <h4 class="header">Notas:</h4>
+                                                    <h4 class="header">Alumnos:</h4>
                                                     <div class="row">
+
+                                                                <!--<h1>Alumnos <small></small></h1>-->
+                                                        <a href="#" class="btn btn-default"><i class='fa fa-asterisk'></i> Nuevo Alumno</a>
+
+                                                        <a href="#" class="btn btn-default"><i class='fa fa-check'></i> Asistencia</a>
+                                                        <a href="#" class="btn btn-default"><i class='fa fa-smile-o'></i> Comportamiento</a>
+                                                        <a href="page-crear-nota2.php?id=<?php echo $id;?>" class="btn btn-default"><i class='fa fa-tasks'></i> Calificaciones</a>
+                                                        <a href="#" class="btn btn-default"><i class='fa fa-th-large'></i> Bloques</a>
+                                                        <!-- Single button -->
+                                                        
+                                                            <div class="btn-group">
+                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                                <i class='fa fa-th-list'></i> Listas <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="#">Asistencia</a></li>
+                                                                <li><a href="#">Comportamiento</a></li>
+                                                                <li><a href="#">Calificaciones</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <a href="#" class="btn btn-default"><i class='fa fa-download'></i> Descargar</a>
+
 
                                                         <div class="col s12 m12 l12">
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
@@ -89,9 +114,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <tr>
                                                                         <th>Codigo</th>
                                                                         <th>Alumno</th>
-                                                                        <th>Competencia</th>
-                                                                        <th>Año</th>
-                                                                        <th>Calificacion</th>
+                                                                        
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -101,9 +124,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <tr>
                                                                         <th>Codigo</th>
                                                                         <th>Alumno</th>
-                                                                        <th>Competencia</th>
-                                                                        <th>Año</th>
-                                                                        <th>Calificacion</th>
+                                                                        
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -111,35 +132,20 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM nota";
+                                                                    $consultaUser = "SELECT * FROM aulaalumnos WHERE AulaAlumnosId='$id'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
+                                                                        <td>" . $row['AulaAlumnosId'] . "</td>";
 
-                                                                        <td>" . $row['NotaCompetencia'] . "</td>";
-
-
-                                                                        $consultaCat = "SELECT * FROM alumno WHERE AlumnoDni='" . $row['NotaAlumno'] . "'";
+                                                                        $consultaCat = "SELECT * FROM alumno WHERE AlumnoDni='" . $row['AulaAlumnosAlumno'] . "'";
                                                                         $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
                                                                         while ($row2 = $resultado2->fetch_assoc()) {
                                                                             echo "<td>" . $row2['AlumnoNombre'] . "</td>";
                                                                         }
-                                                                        
-                                                                        $consultaCat2 = "SELECT * FROM competencia WHERE CompetenciaId='" . $row['NotaCompetencia'] . "'";
-                                                                        $resultado3 = $conexion->query($consultaCat2) or die($conexion->error);
-                                                                        while ($row3 = $resultado3->fetch_assoc()) {
-                                                                            echo "<td>" . $row3['CompetenciaNombre'] . "</td>";
-                                                                        }
-
-
-                                                                        echo "<td>" . $row['NotaAula'] . "</td>";
-                                                                        echo "<td>" . $row['NotaCalificacion'] . "</td>";
-
-
-
-                                                                        echo "<td><a href=\"page-configurar-nota.php?id=" . $row['NotaCompetencia'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarNota.php?id=" . $row['NotaCompetencia'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
-
+                                       
+                                                                        echo "<td><a href=\"page-configurar-nota.php?id=" . $row['AulaAlumnosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarNota.php?id=" . $row['AulaAlumnosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
@@ -206,7 +212,7 @@ if (!isset($_SESSION['usuario'])) {
             <!-- ================================================
             Scripts
             ================================================ -->
-
+            <script src="res/bootstrap3/js/bootstrap.min.js"></script>
             <!-- jQuery Library -->
             <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>  
 
