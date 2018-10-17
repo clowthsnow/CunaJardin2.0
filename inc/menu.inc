@@ -95,11 +95,13 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-balance"></i>Gestion de Curso</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="page-crear-curso.php">Crear Curso</a>
+
+                                <li><a href="page-crear-area.php">Crear Areas</a>
                                 </li>
-                                <li><a href="page-ver-cursos.php">Ver Curso</a>
+                                <li><a href="page-ver-areas.php">Ver Areas</a>
+
                                 </li>
-                                <li><a href="page-crear-competencia.php">Crear Competencia</a>
+                                <li><a href="page-crear-logro.php">Crear Competencia</a>
                                 </li>                                        
                                 <li><a href="page-ver-competencias.php">Ver competencias</a>
                                 </li>

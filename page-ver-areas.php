@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario'])) {
     <html lang="es">
 
         <head>
-            <title>Ver Cursos</title>
+            <title>Ver Areas</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -53,11 +53,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Ver Cursos</h5>
+                                        <h5 class="breadcrumbs-title">Ver Areas</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Cursos
                                             </li>
-                                            <li class="active blue-text">Ver Cursos</li>
+                                            <li class="active blue-text">Ver Areas</li>
                                         </ol>
 
                                     </div>
@@ -72,15 +72,15 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Ver Cursos</h4>
+                                            <h4 class="header">Ver Areas</h4>
                                             <p class="caption">
-                                                En este panel usted podra ver todos los Cursos almacenados en el sistema y poder gestionarlas.
+                                                En este panel usted podra ver todos las Areas almacenadas en el sistema y poder gestionarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">
-                                                    <h4 class="header">Cursos:</h4>
+                                                    <h4 class="header">Areas:</h4>
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">

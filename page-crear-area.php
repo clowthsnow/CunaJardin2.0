@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario'])) {
     <html lang="es">
 
         <head>
-            <title>Crear Curso</title>
+            <title>Crear Area</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -51,11 +51,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Crear Curso</h5>
+                                        <h5 class="breadcrumbs-title">Crear Area</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Curso
                                             </li>
-                                            <li class="active blue-text" >Crear Curso</li>
+                                            <li class="active blue-text" >Crear Area</li>
 
                                         </ol>
 
@@ -71,16 +71,16 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Creación de Cursos</h4>
+                                            <h4 class="header">Creación de Areas</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevos Cursos con los que cuenta la Cuna.
+                                                En este panel usted podra crear nuevas Areas de estudio con los que cuenta la Cuna.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Nuevo Curso</h4>
+                                                        <h4 class="header2">Nueva Area</h4>
                                                         <div class="row">
                                                             <form id="create" class="col s12" action="control/crearCurso.php" method="POST">
 
@@ -91,7 +91,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="cursonombre" required="">
-                                                                        <label for="nombre">Nombre del Curso:</label>
+                                                                        <label for="nombre">Nombre del Area:</label>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -138,7 +138,7 @@ if (!isset($_SESSION['usuario'])) {
                                 <p>Curso creado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-crear-curso.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-crear-area.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                     </section>

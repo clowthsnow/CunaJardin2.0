@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
     <html lang="es">
 
         <head>
-            <title>Crear Curso</title>
+            <title>Crear Logros</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -53,11 +53,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Crear Competencia</h5>
+                                        <h5 class="breadcrumbs-title">Crear Logros</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Competencia
                                             </li>
-                                            <li class="active blue-text" >Crear Competencia</li>
+                                            <li class="active blue-text" >Crear Logro</li>
 
                                         </ol>
 
@@ -73,16 +73,16 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Creación de Competencia</h4>
+                                            <h4 class="header">Creación de Logros</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevas Competencias con los que cuenta en la Escuela.
+                                                En este panel usted podra crear nuevos Logros de Aprendizaje con los que cuenta cada Area de enseñanza.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Nueva Competencia</h4>
+                                                        <h4 class="header2">Nuevo Logro</h4>
                                                         <div class="row">
                                                             <form id="create" class="col s12" action="control/crearCompetencia.php" method="POST">
 
@@ -92,7 +92,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="col s12 m12 l12">
                                                                         <label>Curso:</label>
                                                                         <select id="disco" class="browser-default" name="CompetenciaCurso" required="">
-                                                                            <option value="" disabled selected>Escoge una Curso</option>
+                                                                            <option value="" disabled selected>Escoge un Area</option>
                                                                             <?php while ($row = $result->fetch_assoc()) { ?>
                                                                                 <option value="<?php echo $row['CursoId']; ?>"><?php echo $row['CursoNombre']; ?></option>
                                                                             <?php }
@@ -110,8 +110,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
 
                                                                 <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="CompetenciaDescripcion" required="">
+                                                                    <div class="input-field col s12" hidden="">
+                                                                        <input id="nombre" type="text" class="validate" name="CompetenciaDescripcion" required="" value="ninguna">
                                                                         <label for="nombre">Descripcion de Competencia:</label>
                                                                     </div>
                                                                 </div>
@@ -157,7 +157,7 @@ if (!isset($_SESSION['usuario'])) {
                                 <p>Competencia creado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-crear-competencia.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-crear-logro.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                     </section>
