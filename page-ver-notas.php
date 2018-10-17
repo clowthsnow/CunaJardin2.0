@@ -115,7 +115,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
-                                                                        <td>" . $row['CompetenciaId'] . "</td>";
+                                                                        <td>" . $row['NotaId'] . "</td>";
 
                                                                         $consultaCat = "SELECT * FROM alumno WHERE AlumnoDni='" . $row['NotaAlumno'] . "'";
                                                                         $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
@@ -126,16 +126,16 @@ if (!isset($_SESSION['usuario'])) {
                                                                         $consultaCat2 = "SELECT * FROM competencia WHERE CompetenciaId='" . $row['NotaCompetencia'] . "'";
                                                                         $resultado3 = $conexion->query($consultaCat2) or die($conexion->error);
                                                                         while ($row3 = $resultado3->fetch_assoc()) {
-                                                                            echo "<td>" . $row3['AlumnoNombre'] . "</td>";
+                                                                            echo "<td>" . $row3['CompetenciaNombre'] . "</td>";
                                                                         }
 
 
-                                                                        echo "<td>" . $row['NotaAnho'] . "</td>";
+                                                                        echo "<td>" . $row['NotaAula'] . "</td>";
                                                                         echo "<td>" . $row['NotaCalificacion'] . "</td>";
 
 
-                                                                        echo "<td><a href=\"page-configurar-nota.php?id=" . $row['CompetenciaId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarNota.php?id=" . $row['CompetenciaId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        echo "<td><a href=\"page-configurar-nota.php?id=" . $row['NotaId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarNota.php?id=" . $row['NotaId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
