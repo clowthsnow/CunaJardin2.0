@@ -9,7 +9,7 @@ $nombre=$_POST['cursonombre'];
 
 
 if (!isset($nombre)) {
-    header("location:../page-crear-curso.php");
+    header("location:../page-crear-area.php");
 }
 
 $insertar="INSERT INTO curso(CursoNombre) VALUES ( '$nombre')";

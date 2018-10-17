@@ -55,11 +55,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Crear Nota</h5>
+                                        <h5 class="breadcrumbs-title">Ingreso de Nota</h5>
                                         <ol class="breadcrumb">
                                             <li class=" grey-text lighten-4">Gestion de Notas
                                             </li>
-                                            <li class="active blue-text" >Crear Nota</li>
+                                            <li class="active blue-text" >Ingreso de Nota</li>
 
                                         </ol>
 
@@ -75,9 +75,9 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Creación de Notas</h4>
+                                            <h4 class="header">Ingreso de Notas</h4>
                                             <p class="caption">
-                                                En este panel usted podra crear nuevas Notas con los que cuenta en la Escuela.
+                                                En este panel usted podra Ingresar nuevas Notas con los que cuenta en la Escuela.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
@@ -106,9 +106,9 @@ if (!isset($_SESSION['usuario'])) {
                                                                 
                                                                 <div class="row">
                                                                     <div class="col s12 m12 l12">
-                                                                        <label>Competencia:</label>
+                                                                        <label>Logro:</label>
                                                                         <select id="disco" class="browser-default" name="NotaCompetencia" required="">
-                                                                            <option value="" disabled selected>Escoge una Competencia</option>
+                                                                            <option value="" disabled selected>Escoge un Logro</option>
                                                                             <?php while ($row = $result2->fetch_assoc()) { ?>
                                                                                 <option value="<?php echo $row['CompetenciaId']; ?>"><?php echo $row['CompetenciaNombre']; ?></option>
                                                                             <?php }
@@ -119,8 +119,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 
                                                                 <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="NotaAnho" required="">
+                                                                    <div class="input-field col s12" hidden="">
+                                                                        <input id="nombre" type="text" class="validate" name="NotaAnho" required="" value="2018-10-10">
                                                                         <label for="nombre">Año:</label>
                                                                     </div>
                                                                 </div>
