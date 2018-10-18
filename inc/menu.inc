@@ -146,8 +146,27 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
-                    
-                    <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Reportes</a>
+                    <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i>Reportes Contables</a>
+                        <div class="collapsible-body">
+                            <ul>
+<!--                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
+                                </li>
+                                <li><a href="page-ver-contabilidad.php">Ver Registro</a>
+                                </li>-->
+                                <li><a href="page-ver-rVouchers.php">Reportes de Vouchers</a>
+                                </li>
+                                <li><a href="page-ver-rBoletas.php">Reportes de Boletas</a>
+                                </li>
+                                <li><a href="page-ver-rIngresos.php">Reportes de Ingresos</a>
+                                </li>
+                                <li><a href="page-ver-rEgresos.php">Reportes de Egresos</a>
+                                </li>
+                                <li><a href="reporteG.php">Reportes Grafico</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i>Reportes de Matricula</a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="page-reporte-alumnos.php">Alumnos General</a>
