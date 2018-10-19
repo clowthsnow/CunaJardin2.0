@@ -136,6 +136,8 @@ if ('1' == $_SESSION['permisos']) {
                                 </li>
                                 <li><a href="page-ver-boletas.php">Gestion de Boletas</a>
                                 </li>
+                                <li><a href="page-import-boletas.php">Importar Bolestas CSV</a>
+                                </li>
                                 <li><a href="page-ver-ingresos.php">Gestion de Ingresos</a>
                                 </li>
                                 <li><a href="page-ver-egresos.php">Gestion de Egresos</a>
@@ -143,7 +145,6 @@ if ('1' == $_SESSION['permisos']) {
                                 <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
                                 </li>
                                 <li><a href="page-ver-tipoConceptos.php">Ver Tipos de Concepto</a>
-                                </li>
                                 </li>
                             </ul>
                         </div>
