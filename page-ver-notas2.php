@@ -77,7 +77,7 @@ if (!isset($_SESSION['usuario'])) {
                                         <div id="roboto">
                                             <h4 class="header">Ver Ver Alumnos</h4>
                                             <p class="caption">
-                                                En este panel usted podra ver Ver Alumnos almacenados en el sistema y poder gestionarlas.
+                                                En este panel usted podra ver Alumnos por grupo almacenados en el sistema y poder gestionarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
@@ -87,15 +87,15 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="row">
 
                                                                 <!--<h1>Alumnos <small></small></h1>-->
-                                                        <a href="#" class="btn btn-default"><i class='fa fa-asterisk'></i> Nuevo Alumno</a>
+<!--                                                        <a href="#" class="btn btn-default"><i class='fa fa-asterisk'></i> Nuevo Alumno</a>
 
                                                         <a href="#" class="btn btn-default"><i class='fa fa-check'></i> Asistencia</a>
                                                         <a href="#" class="btn btn-default"><i class='fa fa-smile-o'></i> Comportamiento</a>
                                                         <a href="page-crear-nota2.php?id=<?php echo $id;?>" class="btn btn-default"><i class='fa fa-tasks'></i> Calificaciones</a>
                                                         <a href="#" class="btn btn-default"><i class='fa fa-th-large'></i> Bloques</a>
-                                                        <!-- Single button -->
+                                                         Single button -->
                                                         
-                                                            <div class="btn-group">
+<!--                                                            <div class="btn-group">
                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                                                 <i class='fa fa-th-list'></i> Listas <span class="caret"></span>
                                                             </button>
@@ -105,7 +105,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <li><a href="#">Calificaciones</a></li>
                                                             </ul>
                                                         </div>
-                                                        <a href="#" class="btn btn-default"><i class='fa fa-download'></i> Descargar</a>
+                                                        <a href="#" class="btn btn-default"><i class='fa fa-download'></i> Descargar</a>-->
 
 
                                                         <div class="col s12 m12 l12">
@@ -115,8 +115,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <th>Codigo</th>
                                                                         <th>Alumno</th>
                                                                         
-                                                                        <th>Configurar</th>
-                                                                        <th>Eliminar</th>
+                                                                        <th>Ingresar Notas</th>
+                                                                        <th>Imprimir</th>
                                                                     </tr>
                                                                 </thead>
 
@@ -125,8 +125,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <th>Codigo</th>
                                                                         <th>Alumno</th>
                                                                         
-                                                                        <th>Configurar</th>
-                                                                        <th>Eliminar</th>
+                                                                        <th>Ingresar Notas</th>
+                                                                        <th>Imprimir</th>
                                                                     </tr>
                                                                 </tfoot>
 
@@ -144,8 +144,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                             echo "<td>" . $row2['AlumnoNombre'] . "</td>";
                                                                         }
                                        
-                                                                        echo "<td><a href=\"page-configurar-nota.php?id=" . $row['AulaAlumnosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarNota.php?id=" . $row['AulaAlumnosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        echo "<td><a href=\"page-ingreso-notas.php?estudiante=" . $row['AulaAlumnosAlumno'] . "\"><span class=\"task-cat cyan\">Registrar Notas</span></a></td>
+                                                                        <td><a href=\"page-imprimir-notas.php?estudiante=" . $row['AulaAlumnosAlumno'] . "\" class=\"\"><span class=\"task-cat green\">Imprimir Notas</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
