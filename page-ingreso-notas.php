@@ -22,6 +22,9 @@ if (!isset($_SESSION['usuario'])) {
             . "WHERE alumno.AlumnoDni='$estudiante'";
     $resultadoAlumno = $conexion->query($consultaAlumno) or die($conexion->error);
     $alumno = $resultadoAlumno->fetch_assoc();
+
+    $contArea = 0;
+    $contLogro = 0;
     ?>
 
 
@@ -58,7 +61,7 @@ if (!isset($_SESSION['usuario'])) {
 
                         <div class="col m8 s8 l8 offset-m2 offset-s2 offset-l2 ">
                             <ul class="collection with-header">
-                                <?php print_r($alumno);?>
+                                <?php // print_r($alumno);  ?>
                                 <table>
 
                                     <tbody>
@@ -76,7 +79,7 @@ if (!isset($_SESSION['usuario'])) {
                                             <td rowspan="2" class="blue lighten-4">NIVEL</td>
                                             <td rowspan="2"> INICIAL CUNA-JARDIN </td>
                                             <td class="blue lighten-4">Grado</td>
-                                            <td><?php echo $alumno['AulaGrado']?> año(s)</td>
+                                            <td><?php echo $alumno['AulaGrado'] ?> año(s)</td>
                                         </tr>
                                         <tr>
                                             <td class="blue lighten-4">Seccion</td>
@@ -88,7 +91,7 @@ if (!isset($_SESSION['usuario'])) {
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="blue lighten-4">APELLIDOS Y NOMBRES</td>
-                                            <td colspan="2"><?php echo strtoupper($alumno['AlumnoApellidos'] . " ". $alumno['AlumnoNombre'])?></td>
+                                            <td colspan="2"><?php echo strtoupper($alumno['AlumnoApellidos'] . " " . $alumno['AlumnoNombre']) ?></td>
                                         </tr>
 
                                     </tbody>
@@ -99,295 +102,170 @@ if (!isset($_SESSION['usuario'])) {
                                 </li>
                             </ul>
                         </div>
-                        <?php
-                    }
-                    ?>
 
-                    <div class="col m6 s6 l6">
-                        <?php
-                        //solo jarras
-                        if (!$kardex['kardexJarra'] == NULL) {
 
-                            $kardexJarra = $kardex['kardexJarra'];
-                            $consultaCategorias = "SELECT "
-                                    . " categorialicor.* FROM kardexjarra "
-                                    . "LEFT JOIN licor ON  kardexjarra.KardexJarraLicor=licor.licorId "
-                                    . "LEFT JOIN categorialicor ON licor.licorCategoria=categorialicor.categoriaLicorId "
-                                    . "WHERE kardexjarra.KardexJarraId='$kardexJarra'"
-                                    . "GROUP BY categoriaLicorId "
-                                    . "";
-                            $resultadoCategorias = $conexion->query($consultaCategorias) or die($conexion->error);
-                            ?>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h5>Jarras</h5></li>
-                                <li class="collection-item">
+                        <div class="col m12 s12 l12">
+
+                            <div class="col m12 s12 l12">
+                                <ul class="collection with-header">
+                                    <?php
+                                    $consultaCategorias = "SELECT "
+                                            . " curso.*, competencia.* FROM curso "
+                                            . "LEFT JOIN competencia ON  curso.CursoId=competencia.CompetenciaCurso "
+                                            . "GROUP BY curso.CursoId ";
+                                    $resultadoCategorias = $conexion->query($consultaCategorias) or die($conexion->error);
+                                    ?>
                                     <table>
-                                        <thead>
+
+                                        <tbody>
                                             <tr>
-                                                <th></th>
-                                                <th class="delg">Aumento</th>
-                                                <th class="delg">Inicio</th>
-                                                <th class="delg">Final</th>
-                                                <th class="delg">Vendido</th>
+                                                <td rowspan="2" class="blue lighten-4"><center>AREA</center> </td>
+                                        <td rowspan="2" class="blue lighten-4"><center>LOGROS DE APRENDIZAJE</center></td>
+                                        <td colspan="2" class=""><center>PERIODO</center></td>
+                                        <td class=""><center>CALIFICACION DEL AREA</center></td>
+                                        </tr>
+                                        <tr>
+                                            <td class=""><center>1</center></td>
+                                        <td class=""><center>2</center></td>
+                                        <td class=""></td>
+
+                                        </tr>
+                                        <?php
+                                        while ($fila = $resultadoCategorias->fetch_assoc()) {
+                                            $contArea++;
+//                                            print_r($fila);
+//                                            echo "<br><br>";
+                                            $cursoID = $fila['CursoId'];
+                                            $consultaLogros = "SELECT "
+                                                    . " * FROM competencia "
+                                                    . "WHERE CompetenciaCurso='$cursoID'";
+                                            $resultadoLogros = $conexion->query($consultaLogros) or die($conexion->error);
+
+
+                                            $numlogros = "SELECT COUNT(*) FROM competencia WHERE CompetenciaCurso='$cursoID'";
+                                            $resultadoNum = $conexion->query($numlogros) or die($conexion->error);
+
+                                            $num = $resultadoNum->fetch_assoc();
+                                            ?>
+
+
+                                            <tr>
+                                                <td data-codigo="<?php echo $cursoID ?>" rowspan="<?php echo $num['COUNT(*)'] + 1 ?>" class="blue lighten-4 " id="<?php echo "area" . $contArea ?>"> <?php echo $fila['CursoNombre'] ?> </td>
+                                                <td ></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td valign="middle" rowspan="<?php echo $num['COUNT(*)'] + 1 ?>" class=" "> <center><input type="text" maxlength="1" required="" class="center-align" style="text-transform:uppercase"></center> </td>
+
                                             </tr>
-                                        </thead>    
-                                        <?php while ($fila = $resultadoCategorias->fetch_assoc()) { ?>
-                                            <thead>
-                                                <tr>
-                                                    <th colspan = "5"><?php echo $fila['categoriaLicorNombre']; ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <?php
-                                                $consultaSelladas = "SELECT kardexjarra.*"
-                                                        . ", licor.licorNombre, licor.licorId, categorialicor.categoriaLicorNombre FROM kardexjarra "
-                                                        . "LEFT JOIN licor ON  kardexjarra.KardexJarraLicor=licor.licorId "
-                                                        . "LEFT JOIN categorialicor ON licor.licorCategoria=categorialicor.categoriaLicorId "
-                                                        . "WHERE kardexjarra.KardexJarraId='$kardexJarra' AND categorialicor.categoriaLicorId='" . $fila['categoriaLicorId'] . "' AND licor.licorEstReg='A'"
-                                                        . " ORDER BY licor.licorNombre";
-                                                //echo $consultaSelladas;
-                                                $resultadoSelladas = $conexion->query($consultaSelladas) or die($conexion->error);
-
-                                                while ($sellada = $resultadoSelladas->fetch_assoc()) {
-                                                    echo "<tr><td data-codigo=\"" . $sellada['licorId'] . "\" id=\"jarra" . $contJarr . "\">" . $sellada['licorNombre'] . "</td><td>" . $sellada['KardexJarraAumento'] . "</td><td>" . $sellada['KardexJarraInicio'] . "</td>"
-                                                    . "<td  style=\"width: 50px;\"><input style=\"width: 50px;\" id=\"finj" . $contJarr . "\" type=\"number\" value=\"" . $sellada['KardexJarraFinal'] . "\"</td><td>" . $sellada['KardexJarraVenta'] . "</td></tr>";
-
-                                                    $contJarr++;
-                                                }
-                                                ?>
-
-                                            </tbody>
                                             <?php
-                                        }
-                                        //print_r($categoria);
-                                        ?>
+                                            while ($filasLogros = $resultadoLogros->fetch_assoc()) {
+                                                $contLogro++;
+//                                                print_r($filasLogros);
+                                                ?>
+                                                <tr>
+                                                    <td data-codigo="<?php echo $filasLogros['CompetenciaId'] ?>" id="<?php echo "logro" . $contLogro ?>"><?php echo $filasLogros['CompetenciaNombre'] ?></td>
+                                                    <td data-periodo="1"><center><input id="<?php echo "notaL1" . $contLogro ?>" type="text" maxlength="1" required="" class="center-align" style="text-transform:uppercase"></center></td>
+                                                <td data-periodo="2"><center><input id="<?php echo "notaL2" . $contLogro ?>" type="text" maxlength="1" required="" class="center-align" style="text-transform:uppercase"></center></td>
+
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
+
+
+
+
+
+
+                                        <?php } ?>
+
+                                        </tbody>
+
 
 
                                     </table>
-                                </li>
-                            </ul>
-                            <?php
-                        }
-                        ?>
-                        
-                            
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12 m6 l6 center" style="padding-bottom: 10px;">
+                        <button class="btn cyan waves-effect waves-light center" id="pr" name="action" onclick="guardar()">Guardar Calificaciones
+                            <i class="mdi-content-save left"></i>
+                        </button>
+                    </div>
+                    <div class="input-field col s12 m6 l6 center " style="padding-bottom: 10px;">
+                        <button class="btn red waves-effect waves-light right center" name=enter"action" onclick="cancelar()">Cancelar
+                            <i class="mdi-content-save left"></i>
+                        </button>
+                    </div>
+                    <!--                    <div class="input-field col s12 m4 l4 " style="padding-bottom: 10px;">
+                                            <button class="btn grey darken-3 waves-effect waves-light right" name=enter"action" onclick="anular()">Anular Kardex
+                                                <i class="mdi-content-save left"></i>
+                                            </button>
+                                        </div>-->
+
+                </div>
+
+
             </div>
-                
+            <!-- jQuery Library -->
+            <script type="text/javascript" src="libreta/js/jquery-3.1.1.min.js"></script>  
 
-            <div class="row">
-                <div class="input-field col s12 m4 l4 center" style="padding-bottom: 10px;">
-                    <button class="btn cyan waves-effect waves-light center" id="pr" name="action" onclick="guardar()">Cuadrar Kardex
-                        <i class="mdi-content-save left"></i>
-                    </button>
-                </div>
-                <div class="input-field col s12 l4 l4 " style="padding-bottom: 10px;">
-                    <button class="btn red waves-effect waves-light right" name=enter"action" onclick="cerrar()">Cerrar Kardex
-                        <i class="mdi-content-save left"></i>
-                    </button>
-                </div>
-                <div class="input-field col s12 m4 l4 " style="padding-bottom: 10px;">
-                    <button class="btn grey darken-3 waves-effect waves-light right" name=enter"action" onclick="anular()">Anular Kardex
-                        <i class="mdi-content-save left"></i>
-                    </button>
-                </div>
-
-            </div>
-
-
-        </div>
-        <!-- jQuery Library -->
-        <script type="text/javascript" src="kardex/js/jquery-3.1.1.min.js"></script>  
-
-        <!--materialize js-->
-        <script type="text/javascript" src="kardex/js/materialize.js"></script>
+            <!--materialize js-->
+            <script type="text/javascript" src="libreta/js/materialize.js"></script>
 
 
 
-        <script>
-                        function guardar() {
-                            //                                $('#resultado').append("Cargando...");
-                            console.log("cargando...");
-                            var selladaTrue = "<?php echo $kardexSellada; ?>";
-                            var jarraTrue = "<?php echo $kardexVaso; ?>";
+            <script>
 
 
-                            if (selladaTrue != 0) {
-                                //console.log("oli es cero");
-                                var selladas =<?php echo $contSell; ?>;
-                                var codSell = "<?php echo $kardex['kardexSellada']; ?>";
-                                var discoteca = "<?php echo $barra['discotecaId'] ?>";
-                                //Para selladas;
-                                for (var i = 0; i < selladas; i++) {
-                                    $templicor = "sellada".concat(i);
-                                    $tempcant = "fin".concat(i);
-                                    $licor = $('#' + $templicor);
-                                    $stock = $('#' + $tempcant);
-                                    $url = "control/anadirCierreSellada.php?licor=" + $licor.data("codigo") + "&fin=" + $stock.val() + "&bd=" + codSell + "&disco=" + discoteca;
-                                    //                                    console.log($url);
-                                    if ($stock.val() >= 0) {
-                                        //                                        console.log('oli');
-                                        $.ajax({
-                                            type: 'GET',
-                                            url: $url,
-                                            async: false,
-
-                                            success: function (respuesta) {
-                                                console.log("sucecs");
-                                                //                                                console.log(respuesta);
-                                                //                                                    location.reload();
-                                                //                                                    if (jarraTrue == 0) {
-                                                //
-                                                //                                                        location.reload();
-                                                //                                                    }
-
-                                            }
-                                        });
-                                    }
-
-
-                                }
-
-                                //                                    if (jarraTrue == 0) {
-                                //                                        //cuadrar();
-                                //                                        location.reload();
-                                //                                    }
-
+                            function cancelar() {
+                                history.back();
                             }
-                            if (jarraTrue != 0) {
-                                //console.log("jarra es cero");
-                                //Para jarras;
-//                                    var jarras =
-//                                    var codJarr = ";
-//                                    for (var i = 0; i < jarras; i++) {
-//                                        $templicor = "jarra".concat(i);
-//                                        $tempcant = "finj".concat(i);
-//                                        $licor = $('#' + $templicor);
-//                                        $stock = $('#' + $tempcant);
-//                                        $url = "control/anadirCierreJarra.php?licor=" + $licor.data("codigo") + "&fin=" + $stock.val() + "&bd=" + codJarr + "&disco=" + discoteca;
-//    //                                    console.log($url);
-//                                        if ($stock.val() >= 0) {
-//                                            //console.log('oli');
-//                                            $.ajax({
-//                                                type: 'GET',
-//                                                url: $url,
-//                                                async: false,
-//
-//                                                success: function (respuesta) {
-//                                                    console.log("sucecs");
-//    //                                                console.log(respuesta);
-//    //                                                    location.reload();
-//                                                }
-//                                            });
-//                                        }
-//
-//
+
+                            function guardar() {
+                                //                                $('#resultado').append("Cargando...");
+                                
+                                var alumno = "<?php echo $estudiante; ?>";
+                                var areas = "<?php echo $contArea; ?>";
+                                var logros = "<?php echo $contLogro; ?>";
+
+                                for (var i = 1; i <= logros; i++) {
+                                    $templogro = "logro".concat(i);
+                                    $tempnota1="notaL1".concat(i);
+                                    $tempnota2="notaL2".concat(i);
+                                    $logro=$('#'+$templogro);
+                                    $nota1=$('#'+$tempnota1);
+                                    $nota2=$('#'+$tempnota2);
+                                    $url="control/anadirNotasLogro.php?alumno="+alumno+"&logro="+$logro.data("codigo")+"&notap1="+$nota1.val()+"&notap2="+$nota2.val();
+                                    console.log($url);
+//                                    if(typeof($nota1.val()) === "undefined"){
+//                                        console.log($nota1.val());
 //                                    }
-                                //Para vaso;
-                                var vasos =<?php echo $contVas; ?>;
-                                var codVas = "<?php echo $kardex['kardexVaso']; ?>";
-                                for (var i = 0; i < vasos; i++) {
-                                    //                                    console.log(oli);
-                                    $templicor = "vaso".concat(i);
-                                    $tempcant = "finv".concat(i);
-                                    $licor = $('#' + $templicor);
-                                    $stock = $('#' + $tempcant);
-                                    $url = "control/anadirCierreVaso.php?licor=" + $licor.data("codigo") + "&fin=" + $stock.val() + "&bd=" + codVas + "&disco=" + discoteca;
-                                    //console.log($url);
-                                    if ($stock.val() >= 0) {
-                                        //console.log('oli');
-                                        $.ajax({
-                                            type: 'GET',
-                                            url: $url,
-                                            async: false,
-
-                                            success: function (respuesta) {
-                                                console.log("sucecs");
-                                                //console.log(respuesta);
-                                                //                                                    location.reload();
-                                            }
-                                        });
-                                    }
-
-
+//                                    if($nota2.val() !==null){
+//                                        console.log($nota2.val())
+//                                    }
                                 }
-                                //cuadrar();
-                                //                                    location.reload();
+
                             }
 
-                            //                                location.reload();
-                            // cuadrar();
-                            console.log("final");
-                            cuadrar();
-                        }
 
 
-                        function cuadrar() {
-                            var kardex = "<?php echo $kardex['kardexId']; ?>";
-                            var descuento = $('#descuento').val();
-                            var visa = $('#visa').val();
-                            var master = $('#master').val();
-                            var dinero = $('#dinero').val();
-                            //console.log(descuento);
-                            $url = "control/calcularCierre.php?kardex=" + kardex + "&visa=" + visa + "&descuento=" + descuento + "&master=" + master + "&dinero=" + dinero;
-                            $.ajax({
-                                type: 'GET',
-                                url: $url,
-                                async: false,
+            </script>
+        </body>
 
-                                success: function (respuesta) {
-                                    console.log(respuesta);
-                                    //console.log(respuesta);
-                                    //console.log(respuesta);
-                                    location.reload();
+    </html>
 
-                                }
-                            });
-                            //                                $.get("control/calcularCierre.php", {kardex: kardex, descuento: descuento, visa: visa, master: master}, function () {
-                            //    //                                                location.reload();
-                            //                                });
-                            //                                location.reload();
-                        }
-
-                        function cerrar() {
-                            var kardex = "<?php echo $kardex['kardexId']; ?>";
-                            $url = "control/cerrarKardexDiario.php?kardex=" + kardex;
-                            $.ajax({
-                                type: 'GET',
-                                url: $url,
-                                async: false,
-
-                                success: function (respuesta) {
-                                    console.log(respuesta);
-                                    //                                                console.log(respuesta);
-                                    location.reload();
-                                }
-                            });
-                        }
-
-                        function anular() {
-                            var kardex = "<?php echo $kardex['kardexId']; ?>";
-                            $url = "control/anularKardexDiario.php?kardex=" + kardex;
-                            $.ajax({
-                                type: 'GET',
-                                url: $url,
-                                async: false,
-
-                                success: function (respuesta) {
-                                    console.log(respuesta);
-                                    //                                                console.log(respuesta);
-                                    location.reload();
-                                }
-                            });
-                        }
-        </script>
-    </body>
-
-</html>
-
-
+    <?php
+}
+?> 
 
 
 
