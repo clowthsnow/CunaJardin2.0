@@ -132,7 +132,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         }
 
 
-                                                                        echo "<td>" . $row['NotaAula'] . "</td>";
+                                                                        echo "<td>" . $row['NotaAnho'] . "</td>";
                                                                         echo "<td>" . $row['NotaCalificacion'] . "</td>";
 
 
