@@ -21,7 +21,7 @@ if (isset($_SESSION['usuario'])) {
             <link href="css/materialize.css" type="text/css" rel="stylesheet" >
             <link href="css/style3.css" type="text/css" rel="stylesheet" >
             <link href="css/page-center.css" type="text/css" rel="stylesheet">
-
+            <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
 
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet">
@@ -29,51 +29,52 @@ if (isset($_SESSION['usuario'])) {
         </head>
 
         <body class="cyan">
-            <!-- Start Page Loading -->
-            <div id="loader-wrapper">
-                <div id="loader"></div>        
-                <div class="loader-section section-left"></div>
-                <div class="loader-section section-right"></div>
-            </div>
-            <!-- End Page Loading -->
+            <h1 style="color:red;">BIENVENIDOS A UNSITO-SOFT</h1>
+            <h5 align="center"style="color:black;">Un Aprendizaje con cariño para el bienestar de su niño</h5>
+            <div class="login-box">
+                
+                <div class="login-box">
+                    <div class="login-logo">
+                        
+                    </div>
+                    <!-- /.login-logo -->
+                    <div class="login-box-body">
+                        <!--<p class="login-box-msg">INICIO DE SESION</p>-->
 
-
-
-            <div id="login-page" class="row">
-                <div class="col s12 z-depth-4 card-panel">
-                    <form class="login-form" action="control/validacionLogin.php" method="POST">
-                        <div class="row">
-                            <div class="input-field col s12 center">
-                                <p class="center login-form-text">Inicio de Sesión</p>
+                        <form action="control/validacionLogin.php" method="post">
+                            <div class="row">
+                                <div class="input-field col s12 center">
+                                    <p class="center login-form-text">Inicio de Sesión</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row margin">
-                            <div class="input-field col s12">
-                                <i class="mdi-social-person-outline prefix"></i>
-                                <input id="username" type="text" name="usuario">
-                                <label for="username" class="center-align">Usuario</label>
+                            <div class="row margin">
+                                <div class="input-field col s12">
+                                    <i class="mdi-social-person-outline prefix"></i>
+                                    <input id="username" type="text" name="usuario">
+                                    <label for="username" class="center-align">Usuario</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row margin">
-                            <div class="input-field col s12">
-                                <i class="mdi-action-lock-outline prefix"></i>
-                                <input id="password" type="password" name="contra">
-                                <label for="password">Contraseña</label>
+                            <div class="row margin">
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-lock-outline prefix"></i>
+                                    <input id="password" type="password" name="contra">
+                                    <label for="password">Contraseña</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light col s12" type="submit" name="action">Ingresar</button>
-                                
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn waves-effect waves-light col s12" type="submit" name="action">Ingresar</button>
+
+                                </div>
                             </div>
-                        </div>
-
-
-                    </form>
+                        </form>
+                    </div>
+                    <!-- /.login-box-body -->
                 </div>
             </div>
-
+            
+            
 
 
             <!-- ================================================

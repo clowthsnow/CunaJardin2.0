@@ -65,7 +65,18 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
+                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="page-ver-grupos2.php">Ver Grupos</a>
+                                </li>    
+                                
+                                <li><a href="page-ver-notas.php">Ver Asistencias</a>
+                                </li>
 
+                            </ul>
+                        </div>
+                    </li>
 
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Gestion de Matricula</a>
                         <div class="collapsible-body">
@@ -164,7 +175,7 @@ if ('1' == $_SESSION['permisos']) {
                                 </li>
                                 <li><a href="page-ver-rEgresos.php">Reportes de Egresos</a>
                                 </li>
-                                <li><a href="reporteG.php">Reportes Grafico</a>
+                                <li><a href="reporteIG.php">Reporte Ingresos y Egresos</a>
                                 </li>
                             </ul>
                         </div>
