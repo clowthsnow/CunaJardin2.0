@@ -22,7 +22,8 @@ if($conexion->query($insertar)==TRUE){
     //echo "Registro exitoso";
         //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
 }else{
-    echo '0';
+    echo 'Registro no satisfactorio, Dni ya ingresado anteriormente';
     //echo "Error, nombre de usuario existente";
 }
+
 $conexion->close();

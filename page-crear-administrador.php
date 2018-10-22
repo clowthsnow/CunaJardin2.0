@@ -1,4 +1,4 @@
-<?php
+    <?php
 SESSION_START();
 include_once 'conexion.php';
 if (!isset($_SESSION['usuario'])) {
@@ -83,24 +83,28 @@ if (!isset($_SESSION['usuario'])) {
                                                         <h4 class="header2">Nuevo Administrador</h4>
                                                         <div class="row">
                                                             <div class="resp"></div>
-                                                            <!--<form id="create" name="formulario" class="col s12" action="control/crearAdministrador.php" method="POST">-->
-                                                            <form id="" method="POST" enctype="multipart/form-data" name="formulario">
-
+                                                            <form id="create" name="formulario" class="col s12" action="control/crearAdministrador.php" method="POST">
+                                                                <!--<form id="" method="POST" enctype="multipart/form-data" name="formulario">-->
+                                                                <div class="row">
+                                                                    <div class="col s12">
+                                                                        <p id="rpta"></p>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="dni" type="text" class="validate" name="dniAdmin" required="">
+                                                                        <input id="dni" type="text" class="validate" name="dniAdmin" required="" minlength="8" maxlength="8" onKeyPress="return num(event)">
                                                                         <label for="dni">DNI:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="nombreAdmin" required="">
+                                                                        <input id="nombre" type="text" class="validate" name="nombreAdmin" required="" onkeypress="return val(event)" minlength="2" maxlength="45">
                                                                         <label for="nombre">Nombre:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="apellido" type="text" class="validate" name="apellidoAdmin" required="">
+                                                                        <input id="apellido" type="text" class="validate" name="apellidoAdmin" required="" onkeypress="return val(event)" minlength="2" maxlength="45">
                                                                         <label for="apellido">Apellido:</label>
                                                                     </div>
                                                                 </div>
@@ -114,28 +118,28 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="email" type="text" class="validate" name="emailAdmin" required="">
+                                                                        <input id="email" type="email" class="validate" name="emailAdmin" required="">
                                                                         <label for="email">Email:</label>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="telefono" type="text" class="validate" name="telefonoAdmin" required="">
+                                                                        <input id="telefono" type="tel" class="validate" name="telefonoAdmin" required="" minlength="9" maxlength="9" onkeypress="return num(event)">
                                                                         <label for="telefono">Telefono:</label>
                                                                     </div>
                                                                 </div>
 
                                                                 <br>
                                                                 <div class="divider"></div>
-                                                                <input type="submit" name="next" class="next right" value="Registrar"/>
-                                                                <!--<div class="row">
+                                                                <!--<input type="submit" name="next" class="next right" value="Registrar"/>-->
+                                                                <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
                                                                             <i class="mdi-image-edit left"></i>
                                                                         </button>
                                                                     </div>
-                                                                </div>-->
+                                                                </div>
 
 
                                                             </form>
@@ -202,7 +206,7 @@ if (!isset($_SESSION['usuario'])) {
             Scripts
             ================================================ -->
             <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-            <script type="text/javascript" src="js/function3.js"></script>
+            <!--<script type="text/javascript" src="js/function3.js"></script>-->
             <!-- jQuery Library -->
             <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    
             <!--materialize js-->
@@ -214,36 +218,53 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                                                                            function val(e) {
+                                                                                tecla = (document.all) ? e.keyCode : e.which;
+                                                                                if (tecla == 8)
+                                                                                    return true;
+                                                                                patron = /[A-Za-z áéíóú]/;
+                                                                                te = String.fromCharCode(tecla);
+                                                                                return patron.test(te);
+                                                                            }
+                                                                            function num(e) {
+                                                                                tecla = (document.all) ? e.keyCode : e.which;
+                                                                                if (tecla == 8)
+                                                                                    return true;
+                                                                                patron = /[0-9]/;
+                                                                                te = String.fromCharCode(tecla);
+                                                                                return patron.test(te);
+                                                                            }
+                                                                            $(document).ready(function () {
+                                                                                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-                $('#modal2').modal();
-                $('#modal1').modal();
-            });
+                                                                                $('#modal2').modal();
+                                                                                $('#modal1').modal();
+                                                                            });
 
-            var frm = $('#create');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (respuesta) {
-                        if (respuesta == 1) {
-                            //$('#modal2').openModal();
-                            //document.location.href = "page-crear-proveedor.php";
+                                                                            var frm = $('#create');
+                                                                            frm.submit(function (ev) {
+                                                                                ev.preventDefault();
+                                                                                $.ajax({
+                                                                                    type: frm.attr('method'),
+                                                                                    url: frm.attr('action'),
+                                                                                    data: frm.serialize(),
+                                                                                    success: function (respuesta) {
+                                                                                        if (respuesta == 1) {
+                                                                                            //$('#modal2').openModal();
+                                                                                            //document.location.href = "page-crear-proveedor.php";
     //                                location.reload();
-                            $('#modal2').openModal();
+                                                                                            $('#modal2').openModal();
 
-                        } else {
+                                                                                        } else {
+                                                                                            $('#rpta').html(respuesta);
+    //                                                                                            $('#rpta').text('oli2');
+    //                                                                                            $('#modal1').openModal();
+                                                                                        }
+                                                                                    }
+                                                                                });
 
-                            $('#modal1').openModal();
-                        }
-                    }
-                });
 
-
-            });
+                                                                            });
             </script>
         </body>
 

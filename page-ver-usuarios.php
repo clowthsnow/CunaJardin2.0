@@ -14,7 +14,8 @@ if (!isset($_SESSION['usuario'])) {
         <head>
             <title>Ver Usuarios</title>
             <!--Let browser know website is optimized for mobile-->
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>s
+            <meta charset="ISO-8859-1">
             <!-- Favicons-->
             <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
 
@@ -86,14 +87,15 @@ if (!isset($_SESSION['usuario'])) {
                                                         <div class="col s12 m12 l12">
                                                             <br>
                                                             <a href="page-crear-usuario.php"class="btn">Registrar Usuario</a>
-                                                            <table id="data-table-simple" class="responsive-table display " cellspacing="0">
+                                                            <table id="data-table-row-grouping" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Usuario</th>
                                                                         <th>Contraseña</th>
+                                                                        <th>Tipo de Usuario</th>
                                                                         <th>Nombres</th>
                                                                         <th>Apellidos</th>
-                                                                        <th>Tipo de Usuario</th>
+                                                                        
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -103,9 +105,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <tr>
                                                                         <th>Usuario</th>
                                                                         <th>Contraseña</th>
+                                                                        <th>Tipo de Usuario</th>
                                                                         <th>Nombres</th>
                                                                         <th>Apellidos</th>
-                                                                        <th>Tipo de Usuario</th>
+                                                                        
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -113,20 +116,21 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM usuario WHERE UsuarioEstReg='A'";
+                                                                    $consultaUser = "SELECT * FROM usuario WHERE UsuarioEstReg='A' AND UsuarioTipoUsuario <> '4'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
                                                                         <td>" . $row['UsuarioId'] . "</td>";
                                                                         echo "<td>" . $row['UsuarioContra'] . "</td>";
-                                                                        echo "<td>" . $row['UsuarioNombre'] . "</td>";
-                                                                        echo "<td>" . $row['UsuarioApellidos'] . "</td>";
-                             
                                                                         $consultaCat = "SELECT * FROM tipousuario WHERE TipoUsuarioId='" . $row['UsuarioTipoUsuario'] . "'";
                                                                         $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
                                                                         while ($row2 = $resultado2->fetch_assoc()) {
                                                                             echo "<td>" . $row2['TipoUsuarioDetalle']."</td>";
                                                                         }
+                                                                        echo "<td>" . $row['UsuarioNombre'] . "</td>";
+                                                                        echo "<td>" . $row['UsuarioApellidos'] . "</td>";
+                             
+                                                                        
                                                   
                                                                         echo "<td><a href=\"page-configurar-usuario.php?id=" . $row['UsuarioId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
                                                                         <td><a href=\"control/eliminarUsuario.php?id=" . $row['UsuarioId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
