@@ -151,7 +151,7 @@ if (!isset($_SESSION['usuario'])) {
                                         $buscarActivoA = "SELECT COUNT(*),notaarea.* FROM notaarea WHERE NotaAreaAlumno='$estudiante' AND NotaAreaCurso='$cursoID'";
                                         $resultadoBuscarActivoA = $conexion->query($buscarActivoA);
                                         $cantidadA = $resultadoBuscarActivoA->fetch_assoc();
-
+                                        print_r($cantidadA);
                                         $cantidad1A = $cantidadA['COUNT(*)'];
                                         $na = "";
                                         if ($cantidad1A == 1) {
@@ -356,7 +356,7 @@ if (!isset($_SESSION['usuario'])) {
 
                                     $url = "control/anadirNotasArea.php?alumno=" + alumno + "&area=" + $area.data("codigo") + "&nota=" + $notaA.val();
                                     
-                                    //                                    
+                                    console.log($url);//                                    
                                     $.ajax({
                                         type: 'GET',
                                         url: $url,
@@ -379,7 +379,7 @@ if (!isset($_SESSION['usuario'])) {
                                 $coment = $('#textarea1').val();
                                 console.log($coment);
                                 $url = "control/anadirNotasDetalle.php?alumno=" + alumno + "&aula=" + aula + "&docente=" + docente +"&comentario="+$coment;
-                                console.log($url);
+//                                console.log($url);
 
 
                                                                     
