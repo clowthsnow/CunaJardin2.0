@@ -23,27 +23,29 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-account-box"></i>Gestion de Usuarios</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a class="lia" href="page-crear-usuario.php">Crear Usuario</a>
-                                </li>
-                                <li><a class="lia" href="page-ver-usuarios.php">Ver Usuarios</a>
-                                </li> 
+
                                 <li><a class="lia" href="page-crear-administrador.php">Crear Administrador</a>
                                 </li>                                        
-                                <li><a class="lia" href="page-ver-administrador.php">Ver Administradores</a>
-                                <li><a href="page-crear-contador.php">Crear Nuevo Contador</a>
+                                <!--                                <li><a class="lia" href="page-ver-administrador.php">Ver Administradores</a>
+                                                                </li>-->
+                                <li><a href="page-crear-contador.php">Crear Contador</a>
                                 </li>                                        
-                                <li><a href="page-ver-contador.php">Ver Contadores</a></li>
+                                <!--                                <li><a href="page-ver-contador.php">Ver Contadores</a></li>-->
+                                <li><a href="page-crear-docente.php">Crear Docente</a>
+                                </li>
+                                <!--                                <li><a href="page-ver-docentes.php">Ver Docente</a>
+                                                                </li>-->
+                                <li><a class="lia" href="page-ver-usuarios.php">Ver Usuarios</a>
+                                </li>
                                 <li><a href="page-crear-padre.php">Crear Nuevo Padre</a>
                                 </li>                                        
-                                <li><a href="page-ver-padres.php">Ver Padres</a> 
+                                <li><a href="page-ver-padres.php">Ver Padres</a> </li>
+
                                 <li><a href="page-datos-alumno_1.php">Crear nuevo Estudiante</a>
                                 </li>
                                 <li><a href="page-ver-Estudiantes.php">Ver Estudiantes</a>
                                 </li>
-                                <li><a href="page-crear-docente.php">Crear Docente</a>
-                                </li>
-                                <li><a href="page-ver-docentes.php">Ver Docente</a>
-                                </li>
+
                                 <li><a href="page-crear-tipoAlumno.php">Crear Tipo Alumno</a>
                                 </li>
                                 <li><a href="page-ver-tipoAlumnos.php">Ver Tipo Alumno</a>
@@ -101,9 +103,9 @@ if ('1' == $_SESSION['permisos']) {
                                 <li><a href="page-ver-areas.php">Ver Areas</a>
 
                                 </li>
-                                <li><a href="page-crear-logro.php">Crear Competencia</a>
+                                <li><a href="page-crear-logro.php">Crear Logro</a>
                                 </li>                                        
-                                <li><a href="page-ver-competencias.php">Ver competencias</a>
+                                <li><a href="page-ver-competencias.php">Ver Logros</a>
                                 </li>
 
 
@@ -128,10 +130,10 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Contabilidad</a>
                         <div class="collapsible-body">
                             <ul>
-<!--                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
-                                </li>
-                                <li><a href="page-ver-contabilidad.php">Ver Registro</a>
-                                </li>-->
+                                <!--                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
+                                                                </li>
+                                                                <li><a href="page-ver-contabilidad.php">Ver Registro</a>
+                                                                </li>-->
                                 <li><a href="page-ver-vouchers.php">Gestion de Voucher</a>
                                 </li>
                                 <li><a href="page-ver-boletas.php">Gestion de Boletas</a>
@@ -151,10 +153,10 @@ if ('1' == $_SESSION['permisos']) {
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i>Reportes Contables</a>
                         <div class="collapsible-body">
                             <ul>
-<!--                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
-                                </li>
-                                <li><a href="page-ver-contabilidad.php">Ver Registro</a>
-                                </li>-->
+                                <!--                                <li><a href="page-crear-contabilidad.php">Crear Registro</a>
+                                                                </li>
+                                                                <li><a href="page-ver-contabilidad.php">Ver Registro</a>
+                                                                </li>-->
                                 <li><a href="page-ver-rVouchers.php">Reportes de Vouchers</a>
                                 </li>
                                 <li><a href="page-ver-rBoletas.php">Reportes de Boletas</a>
@@ -183,7 +185,7 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
-                    
+
                 </ul>
             </li>
             <li class="li-hover"><div class="divider"></div></li>
@@ -322,7 +324,7 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>
-                        
+
                     <?php } ?>
                     <?php if ('4' == $_SESSION['permisos']) { ?>
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Matricula</a>
@@ -349,23 +351,23 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>
-<!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Pago</a>
+        <!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Pago</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <?php
-                                    $userid = $_SESSION['usuario'];
-                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
-                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
-                                    while ($fila = $resulthijos->fetch_assoc()) {
-                                        ?>
-                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
-                                        </li>
-                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <?php
-                                    }
-                                    ?>
+                        <?php
+                        $userid = $_SESSION['usuario'];
+                        $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                        $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                        while ($fila = $resulthijos->fetch_assoc()) {
+                            ?>
+                                            <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                            </li>
+                                            <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+                                            </li>
+                                            <li class="divider"></li>
+                            <?php
+                        }
+                        ?>
 
                                     <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
                                     </li>
@@ -373,23 +375,23 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>-->
-<!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
+        <!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <?php
-                                    $userid = $_SESSION['usuario'];
-                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
-                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
-                                    while ($fila = $resulthijos->fetch_assoc()) {
-                                        ?>
-                                        <li><a href="page-registrar-pago.php?id=<?php echo $fila['AlumnoDni'] ?>">Regitrar Pago <?php echo $fila['AlumnoNombre'] ?></a>
-                                        </li>
-                                        <li><a href="page-ver-pagos.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Ver Pagos <?php echo $fila['AlumnoNombre'] ?></a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <?php
-                                    }
-                                    ?>
+                        <?php
+                        $userid = $_SESSION['usuario'];
+                        $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                        $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                        while ($fila = $resulthijos->fetch_assoc()) {
+                            ?>
+                                            <li><a href="page-registrar-pago.php?id=<?php echo $fila['AlumnoDni'] ?>">Regitrar Pago <?php echo $fila['AlumnoNombre'] ?></a>
+                                            </li>
+                                            <li><a href="page-ver-pagos.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Ver Pagos <?php echo $fila['AlumnoNombre'] ?></a>
+                                            </li>
+                                            <li class="divider"></li>
+                            <?php
+                        }
+                        ?>
 
                                     <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
                                     </li>
@@ -408,13 +410,13 @@ if ('1' == $_SESSION['permisos']) {
                                         ?>
                                         <li><a href="page-ver-comunicados.php?id=<?php echo $fila['AlumnoDni'] ?>">Ver Comunicados <?php echo $fila['AlumnoNombre'] ?></a>
                                         </li>
-                                        
+
                                         <li class="divider"></li>
                                         <?php
                                     }
                                     ?>
 
-                                    
+
 
                                 </ul>
                             </div>
@@ -425,7 +427,7 @@ if ('1' == $_SESSION['permisos']) {
 
                 </ul>
             </li>
-            
+
             <li class="li-hover"><div class="divider"></div></li>
             <li class="li-hover"><p class="ultra-small margin more-text">MAS</p></li>
 

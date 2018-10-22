@@ -152,7 +152,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <label for="nombre">*Nombres:</label>
                                                                         </div>
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="apellidos" type="text" class="validate" name="apellido">
+                                                                            <input id="apellidos" type="text" class="validate" name="apellido" maxlength="4">
                                                                             <label for="apellidos">*Apellidos:</label>
                                                                         </div>
                                                                     </div>
