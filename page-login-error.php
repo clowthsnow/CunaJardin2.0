@@ -19,16 +19,16 @@ if (isset($_SESSION['usuario'])) {
             <!-- CORE CSS-->
 
             <link href="css/materialize.css" type="text/css" rel="stylesheet" >
-            <link href="css/style.css" type="text/css" rel="stylesheet" >
+            <link href="css/style3.css" type="text/css" rel="stylesheet" >
             <link href="css/page-center.css" type="text/css" rel="stylesheet">
 
-            <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+            <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->s
 
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet">
 
         </head>
 
-        <body class="cyan">
+        <body >
             <!-- Start Page Loading -->
             <div id="loader-wrapper">
                 <div id="loader"></div>        
