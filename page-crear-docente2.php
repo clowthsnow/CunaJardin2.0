@@ -94,9 +94,9 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <ul id="progress">
                                                                     <li class="activo">Principal</li>
                                                                     <li>Datos Generales del Docente</li>
-                                                                    <li>Datos de Atencion al niño</li>
-                                                                    <li>Datos Familiares</li>
-                                                                    <li>Vivienda</li>
+                                                                    <li>Datos de Vivienda</li>
+                                                                    <li>Datos de Trabajo</li>
+                                                                    <li>Otros Datos</li>
                                                                 </ul>
 
                                                                 <fieldset>
