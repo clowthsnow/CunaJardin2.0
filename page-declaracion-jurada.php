@@ -135,18 +135,18 @@ if (!isset($_SESSION['usuario'])) {
                                                         <br>
                                                         <div class="divider"></div>
                                                         <div class="row">
-                                                            <div class="input-field col s12 m4 l4">
-                                                                <!--                                                                <button class="btn cyan waves-effect waves-light right" > Aceptar y Continuar
+<!--                                                            <div class="input-field col s12 m4 l4">
+                                                                                                                                <button class="btn cyan waves-effect waves-light right" > Aceptar y Continuar
                                                                                                                                     <i class="mdi-image-edit left"></i>
-                                                                                                                                </button>-->
+                                                                                                                                </button>
                                                                 <a href="page-imprimir-registro.php?usuario=<?php echo $usuario;?>" target="_blank" class="btn cyan waves-effect waves-light">Imprimir ficha</a>
 
                                                             </div>
                                                             <div class="input-field col s12 m4 l4">
                                                                 <a href="page-imprimir-declaracion.php?usuario=<?php echo $usuario;?>" target="_blank" class="btn cyan waves-effect waves-light">Imprimir declaracion</a>
 
-                                                            </div>
-                                                            <div class="input-field col s12 m4 l4">
+                                                            </div>-->
+                                                            <div class="input-field col s12 m12 l12">
                                                                 <button class="btn cyan waves-effect waves-light right" type="submit" name="action"> Aceptar y Continuar
                                                                     <i class="mdi-image-edit left"></i>
                                                                 </button>

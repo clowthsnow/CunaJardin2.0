@@ -105,10 +105,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="col s12 l12 m12">
                                                                         <div class="file-field input-field ">
-                                                                            <input class="file-path validate col s9 right" type="text" />
+                                                                            <input class="file-path validate col s9 right" type="text" required="" />
                                                                             <div class="btn">
                                                                                 <span>*Archivo</span>
-                                                                                <input type="file" name="foto"/>
+                                                                                <input type="file" name="foto" required=""/>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -117,7 +117,7 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
+                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Guardar
                                                                             <i class="mdi-image-edit left"></i>
                                                                         </button>
                                                                     </div>

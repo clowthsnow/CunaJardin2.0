@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     $id = $_GET['id'];
     if (!isset($id)) {
-        header("location:page-ver-docente.php");
+        header("location:page-ver-usuarios.php");
     }
     $buscar = "SELECT * FROM docente WHERE DocenteDni='$id'";
     $resultado = $conexion->query($buscar);

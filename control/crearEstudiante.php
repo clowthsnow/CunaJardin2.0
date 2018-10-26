@@ -51,17 +51,17 @@ if (isset($_POST['registrarEstudiante'])) {
     $luz = $_POST['vivluz'];
     $servicios = $_POST['vivserv'];
 
-    /*var_dump($_FILES);
+    /* var_dump($_FILES);
 
-    echo "<br>";
-    var_dump($_POST);
-     
+      echo "<br>";
+      var_dump($_POST);
+
      */
     if (!isset($nombre) || !isset($dni) || !isset($sexo) || !isset($apellido) || !isset($edad) || !isset($parto)) {
         header("location:../page-datos-alumno.php");
     } else {
         if (strlen($nombre) > 20) {
-            
+
             echo "<script>alert('el nombre es muy largo')</script>";
             //echo "<p class='error'>*El nombre es muy largo </p>";
         } else {
@@ -101,28 +101,7 @@ if (isset($_POST['registrarEstudiante'])) {
                                                         if (!is_numeric($personas)) {
                                                             echo "<p class='error'>*El campo numero de personas debe ser numerico</p>";
                                                         } else {
-                                                            $insertaralumno = "INSERT INTO alumno ( AlumnoDni,AlumnoNombre,AlumnoApellidos,AlumnoEdad,AlumnoTutorIdMadre,AlumnoTipoAlumno,AlumnoFoto,AlumnoFechaNacimiento,AlumnoTutorIdPadre,AlumnoSexo,AlumnoLugarNacimiento,AlumnoDomicilio,AlumnoSituacionPromovido,AlumnoControlMedico,AlumnoParto,AlumnoPeso,AlumnoTalla,AlumnoDifucaltades,AlumnoLactanciaTipo,AlumnoTemores,AlumnoTemoresDetalles,AlumnoLimitacionFisica,AlumnoLimitacionFisicaDet,AlumnoDificultadControl,AlumnoDificultadControlDet,AlumnoAlergias,AlumnoAlergiasDet,AlumnoVacunas,AlumnoCodigoUgel,AlumnoDeclaracionJurada,AlumnoSiagie) "
-                                                                    . "VALUES ('$dni','$nombre','$apellido','$edad','$dnim','$tipoAlumno','$nombreImagen','$nacimientoF','$dnip','$sexo','$lugarNac','$direccion','$escolaridad','$controlmed','$parto','$peso','$talla','$dificultad','$lactancia','$temores','$temordet','$limitacionf','$limitacionfdet','$dificultadsen','$dificultadsendet','$alergias','$alergiasdet','$vacunas','00000','0','---')";
-//
-                                                            if ($conexion->query($insertaralumno) == TRUE) {
-
-                                                                $insertarVivienda = "INSERT INTO vivienda (ViviendaAlumno,ViviendaTipo,ViviendaMaterial,ViviendaHabitaciones,ViviendaPersonas,ViviendaAguaTipo,ViviendaLuz,ViviendaSsHh)"
-                                                                        . "VALUES ('$dni','$vtipo','$vmat','$habitaciones','$personas','$agua','$luz','$servicios')";
-                                                                if ($conexion->query($insertarVivienda) == TRUE) {
-                                                                    echo '1';
-                                                                    header("location:../page-declaracion-jurada.php?usuario=$dni&padre=$dnim");
-                                                                }
-//    echo '2';
-                                                                //echo "Registro exitoso";
-                                                                //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
-                                                            } else {
-                                                                echo '0';
-                                                                //echo "Error, nombre de usuario existente";
-                                                                echo "<script type='text/javascript'>";
-                                                                echo "window.history.back(-1)";
-                                                                echo "</script>";
-                                                            }
-                                                            $conexion->close();
+                                                            
                                                         }
                                                     }
                                                 }
@@ -137,13 +116,34 @@ if (isset($_POST['registrarEstudiante'])) {
             }
         }
     }
+
+
+    $insertaralumno = "INSERT INTO alumno ( AlumnoDni,AlumnoNombre,AlumnoApellidos,AlumnoEdad,AlumnoTutorIdMadre,AlumnoTipoAlumno,AlumnoFoto,AlumnoFechaNacimiento,AlumnoTutorIdPadre,AlumnoSexo,AlumnoLugarNacimiento,AlumnoDomicilio,AlumnoSituacionPromovido,AlumnoControlMedico,AlumnoParto,AlumnoPeso,AlumnoTalla,AlumnoDifucaltades,AlumnoLactanciaTipo,AlumnoTemores,AlumnoTemoresDetalles,AlumnoLimitacionFisica,AlumnoLimitacionFisicaDet,AlumnoDificultadControl,AlumnoDificultadControlDet,AlumnoAlergias,AlumnoAlergiasDet,AlumnoVacunas,AlumnoCodigoUgel,AlumnoDeclaracionJurada,AlumnoSiagie) "
+            . "VALUES ('$dni','$nombre','$apellido','$edad','$dnim','$tipoAlumno','$nombreImagen','$nacimientoF','$dnip','$sexo','$lugarNac','$direccion','$escolaridad','$controlmed','$parto','$peso','$talla','$dificultad','$lactancia','$temores','$temordet','$limitacionf','$limitacionfdet','$dificultadsen','$dificultadsendet','$alergias','$alergiasdet','$vacunas','00000','0','---')";
+//
+    if ($conexion->query($insertaralumno) == TRUE) {
+
+        $insertarVivienda = "INSERT INTO vivienda (ViviendaAlumno,ViviendaTipo,ViviendaMaterial,ViviendaHabitaciones,ViviendaPersonas,ViviendaAguaTipo,ViviendaLuz,ViviendaSsHh)"
+                . "VALUES ('$dni','$vtipo','$vmat','$habitaciones','$personas','$agua','$luz','$servicios')";
+        if ($conexion->query($insertarVivienda) == TRUE) {
+            echo '1';
+            header("location:../page-declaracion-jurada.php?usuario=$dni&padre=$dnim");
+        }
+//    echo '2';
+        //echo "Registro exitoso";
+        //header("location:../page-asignar-permisos-user.php?usuario=$user"."&nombre=$nombre"."&apellidos=$apellidos");
+    } else {
+        echo '0';
+        //echo "Error, nombre de usuario existente";
+        echo "<script type='text/javascript'>";
+        echo "window.history.back(-1)";
+        echo "</script>";
+    }
+    $conexion->close();
 }
-
-
 ?>
 
 
 
 
 
-    
