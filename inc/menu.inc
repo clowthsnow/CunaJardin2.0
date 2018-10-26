@@ -31,7 +31,7 @@ if ('1' == $_SESSION['permisos']) {
                                 <li><a href="page-crear-contador.php">Crear Contador</a>
                                 </li>                                        
                                 <!--                                <li><a href="page-ver-contador.php">Ver Contadores</a></li>-->
-                                <li><a href="page-crear-docente.php">Crear Docente</a>
+                                <li><a href="page-crear-docente2.php">Crear Docente</a>
                                 </li>
                                 <!--                                <li><a href="page-ver-docentes.php">Ver Docente</a>
                                                                 </li>-->
