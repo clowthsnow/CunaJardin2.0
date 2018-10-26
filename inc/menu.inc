@@ -153,6 +153,8 @@ if ('1' == $_SESSION['permisos']) {
                                 </li>
                                 <li><a href="page-ver-ingresos.php">Gestion de Ingresos</a>
                                 </li>
+                                <li><a href="page-import-ingresos.php">Importar Ingresos CSV</a>
+                                </li>
                                 <li><a href="page-ver-egresos.php">Gestion de Egresos</a>
                                 </li>
                                 <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>

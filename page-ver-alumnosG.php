@@ -133,9 +133,14 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </tr>";
                                                                             }
                                                                         } else {
-                                                                            echo "<td>Sin Asignar</td>";
-                                                                            echo "<td><a href=\"asistencia.php?estudiante=" . $row['AulaAlumnosAlumno'] . "&team_id=" . $id . "\"><span class=\"task-cat cyan\">Registrar Asistencia</span></a></td>
-                                                                        </tr>";
+                                                                            echo "<td>";
+                                                                            echo "<input type='checkbox' name='vehicle1' value='Bike'> I have a bike<br>";
+                                                                            echo "<input type='checkbox' name='asistio' value='asistio'>Asistio";
+                                                                            echo "<input type='checkbox' name='inasistio' value='inasistio'>Inasistio";
+                                                                            echo "<input type='checkbox' name='tardanza' value='tardanza'>Tardanza";
+                                                                            echo "</td>";
+//                                                                            echo "<td><a href=\"asistencia.php?estudiante=" . $row['AulaAlumnosAlumno'] . "&team_id=" . $id . "\"><span class=\"task-cat cyan\">Registrar Asistencia</span></a></td>
+//                                                                        </tr>";
                                                                         }
 //                                                                        echo "<td><a href=\"asistencia.php?estudiante=" . $row['AulaAlumnosAlumno'] . "&team_id=" . $id . "\"><span class=\"task-cat cyan\">Registrar Asistencia</span></a></td>
 //                                                                        </tr>";
