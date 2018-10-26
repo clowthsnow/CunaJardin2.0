@@ -59,10 +59,10 @@ if ('1' == $_SESSION['permisos']) {
                             <ul>
                                 <li><a href="page-ver-grupos.php">Ver Grupos</a>
                                 </li>    
-                                <li><a href="page-crear-nota.php">Ingresar Nota</a>
+<!--                                <li><a href="page-crear-nota.php">Ingresar Nota</a>
                                 </li>
                                 <li><a href="page-ver-notas.php">Ver Notas</a>
-                                </li>
+                                </li>-->
 
                             </ul>
                         </div>

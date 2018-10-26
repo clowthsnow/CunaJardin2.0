@@ -29,7 +29,7 @@ if (!isset($_SESSION['usuario'])) {
 
         </head>
 
-        <body onload="focus();">
+        <body>
 
             <!-- START MAIN -->
             <div id="main">
@@ -82,40 +82,44 @@ if (!isset($_SESSION['usuario'])) {
                                                         <h4 class="header2">Nuevo Contador</h4>
                                                         <div class="row">
                                                             <form id="create" class="col s12" action="control/crearContador.php" method="POST">
+                                                                <div class="row">
+                                                                    <div class="col s12">
+                                                                        <p id="rpta"></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="dni" type="text" class="validate" name="dniConta" required="" minlength="8" maxlength="8" onKeyPress="return num(event)">
+                                                                        <label for="dni">DNI: *</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="nombre" type="text" class="validate" name="nombreConta" required="" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                        <label for="nombre">Nombre: *</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="apellido" type="text" class="validate" name="apellidoConta" required="" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                        <label for="apellido">Apellido: *</label>
+                                                                    </div>
+                                                                </div>
 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="dni" type="text" class="validate" name="dniConta" required="">
-                                                                        <label for="dni">DNI:</label>
+                                                                        <input id="email" type="email" class="validate" name="emailConta" required="">
+                                                                        <label for="email">Email: *</label>
                                                                     </div>
                                                                 </div>
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="nombreConta" required="">
-                                                                        <label for="nombre">Nombre:</label>
+                                                                        <input id="telefono" type="text" class="validate" name="telefonoConta" required="" minlength="9" maxlength="9" onkeypress="return num(event)">
+                                                                        <label for="telefono">Telefono: *</label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="apellido" type="text" class="validate" name="apellidoConta" required="">
-                                                                        <label for="apellido">Apellido:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="email" type="text" class="validate" name="emailConta" required="">
-                                                                        <label for="email">Email:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="telefono" type="text" class="validate" name="telefonoConta" required="">
-                                                                        <label for="telefono">Telefono:</label>
-                                                                    </div>
-                                                                </div>
-                                                                
+
                                                                 <br>
                                                                 <div class="divider"></div>
                                                                 <div class="row">
@@ -200,36 +204,52 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                                                                            function val(e) {
+                                                                                tecla = (document.all) ? e.keyCode : e.which;
+                                                                                if (tecla == 8)
+                                                                                    return true;
+                                                                                patron = /[A-Za-z áéíóú]/;
+                                                                                te = String.fromCharCode(tecla);
+                                                                                return patron.test(te);
+                                                                            }
+                                                                            function num(e) {
+                                                                                tecla = (document.all) ? e.keyCode : e.which;
+                                                                                if (tecla == 8)
+                                                                                    return true;
+                                                                                patron = /[0-9]/;
+                                                                                te = String.fromCharCode(tecla);
+                                                                                return patron.test(te);
+                                                                            }
+                                                                            $(document).ready(function () {
+                                                                                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-                $('#modal2').modal();
-                $('#modal1').modal();
-            });
+                                                                                $('#modal2').modal();
+                                                                                $('#modal1').modal();
+                                                                            });
 
-            var frm = $('#create');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (respuesta) {
-                        if (respuesta == 1) {
-                            //$('#modal2').openModal();
-                            //document.location.href = "page-crear-proveedor.php";
-    //                                location.reload();
-                            $('#modal2').openModal();
+                                                                            var frm = $('#create');
+                                                                            frm.submit(function (ev) {
+                                                                                ev.preventDefault();
+                                                                                $.ajax({
+                                                                                    type: frm.attr('method'),
+                                                                                    url: frm.attr('action'),
+                                                                                    data: frm.serialize(),
+                                                                                    success: function (respuesta) {
+                                                                                        if (respuesta == 1) {
+                                                                                            //$('#modal2').openModal();
+                                                                                            //document.location.href = "page-crear-proveedor.php";
+                                                                                            //                                location.reload();
+                                                                                            $('#modal2').openModal();
 
-                        } else {
+                                                                                        } else {
 
-                            $('#modal1').openModal();
-                        }
-                    }
-                });
+                                                                                            $('#rpta').html(respuesta);
+                                                                                        }
+                                                                                    }
+                                                                                });
 
 
-            });
+                                                                            });
             </script>
         </body>
 

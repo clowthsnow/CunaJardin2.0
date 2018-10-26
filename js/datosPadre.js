@@ -19,7 +19,7 @@ $(document).on('keyup','#dnip',function(){
     if(valorBusqueda!=""){
         obtener_registros(valorBusqueda)
     }else{
-        obtener_registros();
+//        obtener_registros();
     }
 });
 

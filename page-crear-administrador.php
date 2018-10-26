@@ -1,4 +1,4 @@
-    <?php
+<?php
 SESSION_START();
 include_once 'conexion.php';
 if (!isset($_SESSION['usuario'])) {
@@ -30,7 +30,7 @@ if (!isset($_SESSION['usuario'])) {
 
         </head>
 
-        <body onload="focus();">
+        <body>
 
             <!-- START MAIN -->
             <div id="main">
@@ -93,19 +93,19 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="dni" type="text" class="validate" name="dniAdmin" required="" minlength="8" maxlength="8" onKeyPress="return num(event)">
-                                                                        <label for="dni">DNI:</label>
+                                                                        <label for="dni">DNI: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="nombreAdmin" required="" onkeypress="return val(event)" minlength="2" maxlength="45">
-                                                                        <label for="nombre">Nombre:</label>
+                                                                        <input id="nombre" type="text" class="validate" name="nombreAdmin" required="" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                        <label for="nombre">Nombre: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="apellido" type="text" class="validate" name="apellidoAdmin" required="" onkeypress="return val(event)" minlength="2" maxlength="45">
-                                                                        <label for="apellido">Apellido:</label>
+                                                                        <input id="apellido" type="text" class="validate" name="apellidoAdmin" required="" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                        <label for="apellido">Apellido: *</label>
                                                                     </div>
                                                                 </div>
 
@@ -119,14 +119,14 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="email" type="email" class="validate" name="emailAdmin" required="">
-                                                                        <label for="email">Email:</label>
+                                                                        <label for="email">Email: *</label>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="telefono" type="tel" class="validate" name="telefonoAdmin" required="" minlength="9" maxlength="9" onkeypress="return num(event)">
-                                                                        <label for="telefono">Telefono:</label>
+                                                                        <label for="telefono">Telefono: *</label>
                                                                     </div>
                                                                 </div>
 
@@ -252,13 +252,13 @@ if (!isset($_SESSION['usuario'])) {
                                                                                         if (respuesta == 1) {
                                                                                             //$('#modal2').openModal();
                                                                                             //document.location.href = "page-crear-proveedor.php";
-    //                                location.reload();
+                                                                                            //                                location.reload();
                                                                                             $('#modal2').openModal();
 
                                                                                         } else {
                                                                                             $('#rpta').html(respuesta);
-    //                                                                                            $('#rpta').text('oli2');
-    //                                                                                            $('#modal1').openModal();
+                                                                                            //                                                                                            $('#rpta').text('oli2');
+                                                                                            //                                                                                            $('#modal1').openModal();
                                                                                         }
                                                                                     }
                                                                                 });
