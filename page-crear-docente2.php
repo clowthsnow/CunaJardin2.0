@@ -304,10 +304,19 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <br>
                                                                     <h4 class="header2">Curriculo:</h4>
 
-                                                                    <div class="row">
+<!--                                                                    <div class="row">
                                                                         <div class="input-field col s12">
                                                                             <input id="curr" type="file" class="validate" name="docentecurr" required="">
                                                                             <label for="curr">*Curriculum:</label>
+                                                                        </div>
+                                                                    </div>-->
+                                                                    <div class="row">
+                                                                        <div class="file-field input-field col s12 m12 l12">
+                                                                            <input class="file-path validate" type="text" />
+                                                                            <div class="btn">
+                                                                                <span>*Curriculum</span>
+                                                                                <input type="file" name="docentecurr"/>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
