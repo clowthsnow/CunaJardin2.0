@@ -111,7 +111,7 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM padre WHERE PadreEstReg='A'";
+                                                                    $consultaUser = "SELECT * FROM padre WHERE PadreEstReg<>'*'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>

@@ -121,7 +121,7 @@ if (!isset($_SESSION['usuario'])) {
                                                         <div class="row">
                                                             <div class="resp"></div>
 
-                                <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
+                                        <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
 
                                                             <form id="formulario" action="control/crearEstudiante.php" method="POST" enctype="multipart/form-data" name="formulario">
                                                             <!--<form id="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" name="formulario">-->
@@ -186,7 +186,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <h4 class="header2">Datos Generales del niño:</h4>
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="dni" type="number" class="validate" name="dni" required="" maxlength="8" minlength="8" onkeypress="return num(event);">
+                                                                            <input id="dni" type="text" class="validate" name="dni" required="" maxlength="8" minlength="8" onkeypress="return num(event);">
                                                                             <label for="dni">*DNI:</label>
                                                                         </div>
                                                                         <div class="col s12 m6 l6">
@@ -210,6 +210,21 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <input id="nacimiento" type="text" class="validate" name="nacimiento" required="">
                                                                             <label for="nacimiento">*Lugar de Nacimiento:</label>
                                                                         </div>
+
+                                                                        <label class="active">Lugar de Nacimiento: *</label>
+                                                                        <select id="operador" class="browser-default" name="nacimiento" required="">
+                                                                            <option value="" disabled selected>Departamento :</option>
+                                                                            <?php
+                                                                            $provincias = "SELECT * FROM regions";
+                                                                            $resProvincias = $conexion->query($provincias);
+                                                                            while ($filaprov = $resProvincias->fetch_assoc()) {
+                                                                                echo " <option value=\"" . $filaprov['id'] . "\"";
+                                                                                echo " >" . $filaprov['name'] . "</option>";
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+
+
                                                                         <div class="input-field col s12 m12 l12">
                                                                             <input id="direccion" type="text" class="validate" name="direccion" required="">
                                                                             <label for="direccion">*Direccion:</label>
@@ -463,7 +478,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </div>
                                                                     </div>
 
-                                <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
+                                        <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
                                                                 </fieldset>
                                                                 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
                                                                 <script type="text/javascript" src="js/function.js"></script>
@@ -574,33 +589,33 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 function llenarInput() {
                                                                                     $('#foto').val($('#validF').val());
                                                                                 }
-                                                                                
-                                                                                function calcularfecha(){
-                                                                                    var fechaA=new Date();
-                                                                                    var fechaI=$('#fecha').val();
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    var anioA=fechaA.getUTCFullYear();
-                                                                                    var mesA=fechaA.getUTCMonth()+1;
-                                                                                    var anioI=fechaI.slice(0,4);
-                                                                                    var mesI=fechaI.slice(5,7);
-                                                                                    
+
+                                                                                function calcularfecha() {
+                                                                                    var fechaA = new Date();
+                                                                                    var fechaI = $('#fecha').val();
+
+
+
+                                                                                    var anioA = fechaA.getUTCFullYear();
+                                                                                    var mesA = fechaA.getUTCMonth() + 1;
+                                                                                    var anioI = fechaI.slice(0, 4);
+                                                                                    var mesI = fechaI.slice(5, 7);
+
                                                                                     console.log(anioA);
-                                                                                    console.log(anioI );
+                                                                                    console.log(anioI);
                                                                                     console.log(mesA);
                                                                                     console.log(mesI);
-                                                                                    
-                                                                                    var anioE=anioA-anioI;
+
+                                                                                    var anioE = anioA - anioI;
                                                                                     var mesE;
-                                                                                    if(mesI>mesA){
+                                                                                    if (mesI > mesA) {
                                                                                         anioE--;
-                                                                                        mesE=12-(mesI-mesA);
-                                                                                    }else{
-                                                                                        mesE=mesA-mesI;
+                                                                                        mesE = 12 - (mesI - mesA);
+                                                                                    } else {
+                                                                                        mesE = mesA - mesI;
                                                                                     }
-                                                                                    console.log(anioE+" "+mesE);
-                                                                                    $('#edad').val(anioE+" año(s) "+mesE+" mes(es)");
+                                                                                    console.log(anioE + " " + mesE);
+                                                                                    $('#edad').val(anioE + " año(s) " + mesE + " mes(es)");
                                                                                 }
             </script>
         </body>
