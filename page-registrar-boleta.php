@@ -5,12 +5,24 @@ if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
 } else {
+    include 'conexion.php';
+    if (isset($_GET['voucher'])) {
+        $id = $_GET['voucher'];
+        $buscar3 = "SELECT * FROM contabilidad WHERE ContabilidadId='$id'";
+        $resultado3 = $conexion->query($buscar3);
+//    if ($resultado3->num_rows === 0) {
+//        header("location:page-registrar-boleta.php");
+//    }
+        $provBD = $resultado3->fetch_assoc();
+    }
+
+
     date_default_timezone_set('America/Lima');
     $fecha = new DateTime();
-    include 'conexion.php';
+//    include 'conexion.php';
     $buscar = "SELECT * FROM alumno";
     $result = $conexion->query($buscar);
-    
+
     $buscar2 = "SELECT * FROM tipoconcepto";
     $result2 = $conexion->query($buscar2);
     ?>
@@ -33,6 +45,10 @@ if (!isset($_SESSION['usuario'])) {
 
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 
         </head>
@@ -96,7 +112,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label for="nombre">Nro. de boleta de venta Electronica:</label>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="fecha" type="text" class="datepicker" name="BoletaFechaCanje" required="" value="<?php echo $fecha->format('Y-m-d'); ?>">
@@ -111,14 +127,23 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="BoletaMonto" required="">
+                                                                        <button data-toggle="modal" data-target="#listaVoucher" type="button" class="btn btn-sm btn-primary">Agregar Voucher</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="nombre" type="text" class="validate" name="BoletaMonto" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadMonto'];} else {
+    
+                                                                        }{} ?>">
                                                                         <label for="nombre">Monto:</label>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="BoletaDescripcion" required="">
+                                                                        <input id="nombre" type="text" class="validate" name="BoletaDescripcion" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadDescripcion '];} else {
+    
+                                                                        }{} ?>">
                                                                         <label for="nombre">Descripcion:</label>
                                                                     </div>
                                                                 </div>
@@ -134,6 +159,38 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
 
                                                             </form>
+                                                        </div>
+                                                        <div id="resultados" class='col-md-12'></div><!-- Carga los datos ajax -->
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="listaVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Listado de Voucher</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form class="form-horizontal">
+                                                                            <div class="form-group">
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="text" class="form-control" id="q" placeholder="Buscar productos" onkeyup="load(1)">
+                                                                                </div>
+                                                                                <button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
+                                                                            </div>
+                                                                        </form>
+                                                                        <div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->
+                                                                        <div class="outer_div" ></div><!-- Datos ajax Final -->
+
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -191,7 +248,89 @@ if (!isset($_SESSION['usuario'])) {
             <?php include 'inc/footer.inc'; ?>
             <!-- END FOOTER -->
 
+            <script>
+                $(document).ready(function () {
+                    load(1);
+                });
 
+                function load(page) {
+                    var q = $("#q").val();
+                    $("#loader").fadeIn('slow');
+                    $.ajax({
+                        url: './ajax/productos_cotizacion.php?action=ajax&page=' + page + '&q=' + q,
+                        beforeSend: function (objeto) {
+                            $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+                        },
+                        success: function (data) {
+                            $(".outer_div").html(data).fadeIn('slow');
+                            $('#loader').html('');
+
+                        }
+                    })
+                }
+            </script>
+            <script>
+                function agregar(id)
+                {
+                    var precio_venta = document.getElementById('precio_venta_' + id).value;
+                    var cantidad = document.getElementById('cantidad_' + id).value;
+                    //Inicia validacion
+                    if (isNaN(cantidad))
+                    {
+                        alert('Esto no es un numero');
+                        document.getElementById('cantidad_' + id).focus();
+                        return false;
+                    }
+                    if (isNaN(precio_venta))
+                    {
+                        alert('Esto no es un numero');
+                        document.getElementById('precio_venta_' + id).focus();
+                        return false;
+                    }
+                    //Fin validacion
+
+                    $.ajax({
+                        type: "POST",
+                        url: "./ajax/agregar_cotizador.php",
+                        data: "id=" + id + "&precio_venta=" + precio_venta + "&cantidad=" + cantidad,
+                        beforeSend: function (objeto) {
+                            $("#resultados").html("Mensaje: Cargando...");
+                        },
+                        success: function (datos) {
+                            $("#resultados").html(datos);
+                        }
+                    });
+                }
+
+                function eliminar(id)
+                {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "./ajax/agregar_cotizador.php",
+                        data: "id=" + id,
+                        beforeSend: function (objeto) {
+                            $("#resultados").html("Mensaje: Cargando...");
+                        },
+                        success: function (datos) {
+                            $("#resultados").html(datos);
+                        }
+                    });
+
+                }
+
+                $("#datos_cotizacion").submit(function () {
+                    var atencion = $("#atencion").val();
+                    var tel1 = $("#tel1").val();
+                    var empresa = $("#empresa").val();
+                    var tel2 = $("#tel2").val();
+                    var email = $("#email").val();
+                    var condiciones = $("#condiciones").val();
+                    var validez = $("#validez").val();
+                    var entrega = $("#entrega").val();
+                    VentanaCentrada('./pdf/documentos/cotizacion_pdf.php?atencion=' + atencion + '&tel1=' + tel1 + '&empresa=' + empresa + '&tel2=' + tel2 + '&email=' + email + '&condiciones=' + condiciones + '&validez=' + validez + '&entrega=' + entrega, 'Cotizacion', '', '1024', '768', 'true');
+                });
+            </script>
             <!-- ================================================
             Scripts
             ================================================ -->
@@ -207,36 +346,36 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-            $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                $(document).ready(function () {
+                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-                $('#modal2').modal();
-                $('#modal1').modal();
-            });
-
-            var frm = $('#create');
-            frm.submit(function (ev) {
-                ev.preventDefault();
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (respuesta) {
-                        if (respuesta == 1) {
-                            //$('#modal2').openModal();
-                            //document.location.href = "page-crear-proveedor.php";
-                            //                                location.reload();
-                            $('#modal2').openModal();
-
-                        } else {
-
-                            $('#modal1').openModal();
-                        }
-                    }
+                    $('#modal2').modal();
+                    $('#modal1').modal();
                 });
 
+                var frm = $('#create');
+                frm.submit(function (ev) {
+                    ev.preventDefault();
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: frm.serialize(),
+                        success: function (respuesta) {
+                            if (respuesta == 1) {
+                                //$('#modal2').openModal();
+                                //document.location.href = "page-crear-proveedor.php";
+                                //                                location.reload();
+                                $('#modal2').openModal();
 
-            });
+                            } else {
+
+                                $('#modal1').openModal();
+                            }
+                        }
+                    });
+
+
+                });
             </script>
         </body>
 
