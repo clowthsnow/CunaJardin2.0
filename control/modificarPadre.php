@@ -28,7 +28,7 @@ if (!isset($id) || !isset($PadreNombre) || !isset($PadreApellidos) || !isset($Pa
 $actualiza="UPDATE padre SET PadreNombre='$PadreNombre', PadreApellidos='$PadreApellidos', PadreCorreo='$PadreCorreo',PadreTelefono='$PadreTelefono',PadreCelular='$PadreCelular',PadreCelularOperador='$PadreCelularOperador',"
         . "PadreFechaNac='$PadreFechaNac',PadreEdad='$PadreEdad',PadreEstCivil='$PadreEstCivil',PadreEstCivilEspecifique='$PadreEstCivilEspecifique',PadreViveCon='$PadreViveCon',"
         . "PadreProcedenciaLugar='$PadreProcedenciaLugar',PadreGradoInstruccion='$PadreGradoInstruccion',PadreOcupacionTipo='$PadreOcupacionTipo',PadreOcupacionRubro='$PadreOcupacionRubro',"
-        . "PadreDireccionTrabajo='$PadreDireccionTrabajo',PadreCentroTrabajo='$PadreCentroTrabajo' WHERE PadreDni='$id'";
+        . "PadreDireccionTrabajo='$PadreDireccionTrabajo',PadreCentroTrabajo='$PadreCentroTrabajo', PadreEstReg='A' WHERE PadreDni='$id'";
 if($conexion->query($actualiza) === TRUE){
     echo '1';
 }else{

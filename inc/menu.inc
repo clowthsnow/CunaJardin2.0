@@ -37,7 +37,7 @@ if ('1' == $_SESSION['permisos']) {
                                                                 </li>-->
                                 <li><a class="lia" href="page-ver-usuarios.php">Ver Usuarios</a>
                                 </li>
-                                <li><a href="page-crear-padre.php">Crear Nuevo Padre</a>
+                                <li><a href="page-crear-padreAdmi.php">Crear Nuevo Padre</a>
                                 </li>                                        
                                 <li><a href="page-ver-padres.php">Ver Padres</a> </li>
 
@@ -59,10 +59,10 @@ if ('1' == $_SESSION['permisos']) {
                             <ul>
                                 <li><a href="page-ver-grupos.php">Ver Grupos</a>
                                 </li>    
-<!--                                <li><a href="page-crear-nota.php">Ingresar Nota</a>
-                                </li>
-                                <li><a href="page-ver-notas.php">Ver Notas</a>
-                                </li>-->
+                                <!--                                <li><a href="page-crear-nota.php">Ingresar Nota</a>
+                                                                </li>
+                                                                <li><a href="page-ver-notas.php">Ver Notas</a>
+                                                                </li>-->
 
                             </ul>
                         </div>
@@ -72,7 +72,7 @@ if ('1' == $_SESSION['permisos']) {
                             <ul>
                                 <li><a href="page-ver-grupos2.php">Ver Grupos</a>
                                 </li>    
-                                
+
                                 <li><a href="page-ver-notas.php">Ver Asistencias</a>
                                 </li>
 
@@ -247,7 +247,10 @@ if ('1' == $_SESSION['permisos']) {
             </li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <?php if ('2' == $_SESSION['permisos']) { ?>
+                    <?php
+                    if ('2' == $_SESSION['permisos']) {
+                        ?>
+
 
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Gestion de Notas</a>
                             <div class="collapsible-body">
@@ -340,7 +343,18 @@ if ('1' == $_SESSION['permisos']) {
                         </li>
 
                     <?php } ?>
-                    <?php if ('4' == $_SESSION['permisos']) { ?>
+                    <?php if ('4' == $_SESSION['permisos']) { 
+                        
+                        $dni = $_SESSION['usuario'];
+                        $buscarPadres = "SELECT * FROM padre WHERE PadreDni='$dni'";
+                        $resultado = $conexion->query($buscarPadres) or die($conexion->error);
+                        $row = $resultado->fetch_assoc();
+                        if($row['PadreEstReg']=="I"){
+//                            header("location:../page-configurar-padre.php?id=$dni");
+                            header("location:page-terminar-registro-padre.php?id=$dni");
+                        }
+                        
+                        ?>
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Matricula</a>
                             <div class="collapsible-body">
                                 <ul>
@@ -374,11 +388,11 @@ if ('1' == $_SESSION['permisos']) {
                         $resulthijos = $conexion->query($buscar) or die($conexion->error);
                         while ($fila = $resulthijos->fetch_assoc()) {
                             ?>
-                                            <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
-                                            </li>
-                                            <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
-                                            </li>
-                                            <li class="divider"></li>
+                                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                                        </li>
+                                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+                                                        </li>
+                                                        <li class="divider"></li>
                             <?php
                         }
                         ?>
@@ -398,11 +412,11 @@ if ('1' == $_SESSION['permisos']) {
                         $resulthijos = $conexion->query($buscar) or die($conexion->error);
                         while ($fila = $resulthijos->fetch_assoc()) {
                             ?>
-                                            <li><a href="page-registrar-pago.php?id=<?php echo $fila['AlumnoDni'] ?>">Regitrar Pago <?php echo $fila['AlumnoNombre'] ?></a>
-                                            </li>
-                                            <li><a href="page-ver-pagos.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Ver Pagos <?php echo $fila['AlumnoNombre'] ?></a>
-                                            </li>
-                                            <li class="divider"></li>
+                                                        <li><a href="page-registrar-pago.php?id=<?php echo $fila['AlumnoDni'] ?>">Regitrar Pago <?php echo $fila['AlumnoNombre'] ?></a>
+                                                        </li>
+                                                        <li><a href="page-ver-pagos.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Ver Pagos <?php echo $fila['AlumnoNombre'] ?></a>
+                                                        </li>
+                                                        <li class="divider"></li>
                             <?php
                         }
                         ?>

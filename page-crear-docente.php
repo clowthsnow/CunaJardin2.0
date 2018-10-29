@@ -349,36 +349,36 @@ if (!isset($_SESSION['usuario'])) {
 
             <script>
                 
-//            $(document).ready(function () {
-//                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-//
-//                $('#modal2').modal();
-//                $('#modal1').modal();
-//            });
-//
-//            var frm = $('#create');
-//            frm.submit(function (ev) {
-//                ev.preventDefault();
-//                $.ajax({
-//                    type: frm.attr('method'),
-//                    url: frm.attr('action'),
-//                    data: frm.serialize(),
-//                    success: function (respuesta) {
-//                        if (respuesta == 1) {
-//                            //$('#modal2').openModal();
-//                            //document.location.href = "page-crear-proveedor.php";
-//    //                                location.reload();
-//                            $('#modal2').openModal();
-//
-//                        } else {
-//
-//                            $('#modal1').openModal();
-//                        }
-//                    }
-//                });
-//
-//
-//            });
+            $(document).ready(function () {
+                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+
+                $('#modal2').modal();
+                $('#modal1').modal();
+            });
+
+            var frm = $('#create');
+            frm.submit(function (ev) {
+                ev.preventDefault();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (respuesta) {
+                        if (respuesta == 1) {
+                            //$('#modal2').openModal();
+                            //document.location.href = "page-crear-proveedor.php";
+    //                                location.reload();
+                            $('#modal2').openModal();
+
+                        } else {
+
+                            $('#modal1').openModal();
+                        }
+                    }
+                });
+
+
+            });
 
             </script>
         </body>
