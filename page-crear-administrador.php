@@ -222,7 +222,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 tecla = (document.all) ? e.keyCode : e.which;
                                                                                 if (tecla == 8)
                                                                                     return true;
-                                                                                patron = /[A-Za-z áéíóú]/;
+                                                                                patron = /[A-Za-z áéíóúñ]/;
                                                                                 te = String.fromCharCode(tecla);
                                                                                 return patron.test(te);
                                                                             }
