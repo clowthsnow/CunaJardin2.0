@@ -1,4 +1,5 @@
 <?php
+session_start();
 SESSION_START();
 
 if (!isset($_SESSION['usuario'])) {
@@ -45,9 +46,10 @@ if (!isset($_SESSION['usuario'])) {
 
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" >
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+<!--            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
 
 
@@ -108,6 +110,29 @@ if (!isset($_SESSION['usuario'])) {
                                                             <form id="create" class="col s12" action="control/registrarBoleta.php" method="POST">
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
+                                                                        <!--<button data-toggle="modal" data-target="#listaVoucher" type="button" class="btn btn-sm btn-primary">Agregar Voucher</button>-->
+                                                                        <a class="waves-effect waves-light btn modal-trigger" href="#listaVoucher">Agregar Voucher</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="nombre" type="text" class="validate" name="BoletaMonto" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadMonto'];} else {
+    
+                                                                        }{} ?>">
+                                                                        <label for="nombre">Monto:</label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
+                                                                        <input id="nombre" type="text" class="validate" name="BoletaDescripcion" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadDescripcion'];} else {
+    
+                                                                        }{} ?>">
+                                                                        <label for="nombre">Descripcion:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="BoletaCodigo" required="">
                                                                         <label for="nombre">Nro. de boleta de venta Electronica:</label>
                                                                     </div>
@@ -125,28 +150,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label for="fecha" class="active">Fecha de Pago:</label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <button data-toggle="modal" data-target="#listaVoucher" type="button" class="btn btn-sm btn-primary">Agregar Voucher</button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="BoletaMonto" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadMonto'];} else {
-    
-                                                                        }{} ?>">
-                                                                        <label for="nombre">Monto:</label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="BoletaDescripcion" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadDescripcion '];} else {
-    
-                                                                        }{} ?>">
-                                                                        <label for="nombre">Descripcion:</label>
-                                                                    </div>
-                                                                </div>
+                                                                
                                                                 <br>
                                                                 <div class="divider"></div>
                                                                 <div class="row">
@@ -161,7 +165,7 @@ if (!isset($_SESSION['usuario'])) {
                                                             </form>
                                                         </div>
                                                         <div id="resultados" class='col-md-12'></div><!-- Carga los datos ajax -->
-                                                        <!-- Modal -->
+<!--                                                         Modal 
                                                         <div class="modal fade" id="listaVoucher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
@@ -180,8 +184,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>
                                                                             </div>
                                                                         </form>
-                                                                        <div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div><!-- Carga gif animado -->
-                                                                        <div class="outer_div" ></div><!-- Datos ajax Final -->
+                                                                        <div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div> Carga gif animado 
+                                                                        <div class="outer_div" ></div> Datos ajax Final 
 
 
                                                                     </div>
@@ -190,6 +194,28 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                        </div>-->
+                                                        <div id="listaVoucher" class="modal">
+                                                            <div class="modal-content">
+                                                              <h4>Listado de Voucherr</h4>
+                                                              <p>A bunch of text</p>
+                                                              <form class="form-horizontal">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" class="form-control" id="q" placeholder="Buscar productos" onkeyup="load(1)">
+                                                                    </div>
+                                                                    <!--<button type="button" class="btn btn-default" onclick="load(1)"><span class='glyphicon glyphicon-search'></span> Buscar</button>-->
+                                                                    <button class="btn waves-effect waves-light" type="button" onclick="load(1)">Buscar
+                                                                        <i class="material-icons right">send</i>
+                                                                    </button>
+                                                               </div>
+                                                              </form>
+                                                              <!--<div id="loader" style="position: absolute;	text-align: center;	top: 55px;	width: 100%;display:none;"></div>--> 
+                                                              <div class="outer_div" ></div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -255,87 +281,28 @@ if (!isset($_SESSION['usuario'])) {
 
                 function load(page) {
                     var q = $("#q").val();
-                    $("#loader").fadeIn('slow');
+                    
+//                    $("#loader").fadeIn('slow');
                     $.ajax({
                         url: './ajax/productos_cotizacion.php?action=ajax&page=' + page + '&q=' + q,
-                        beforeSend: function (objeto) {
-                            $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
-                        },
+//                        beforeSend: function (objeto) {
+//                            $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+//                        },
                         success: function (data) {
                             $(".outer_div").html(data).fadeIn('slow');
-                            $('#loader').html('');
+//                            $('#loader').html('');
 
                         }
                     })
                 }
             </script>
-            <script>
-                function agregar(id)
-                {
-                    var precio_venta = document.getElementById('precio_venta_' + id).value;
-                    var cantidad = document.getElementById('cantidad_' + id).value;
-                    //Inicia validacion
-                    if (isNaN(cantidad))
-                    {
-                        alert('Esto no es un numero');
-                        document.getElementById('cantidad_' + id).focus();
-                        return false;
-                    }
-                    if (isNaN(precio_venta))
-                    {
-                        alert('Esto no es un numero');
-                        document.getElementById('precio_venta_' + id).focus();
-                        return false;
-                    }
-                    //Fin validacion
-
-                    $.ajax({
-                        type: "POST",
-                        url: "./ajax/agregar_cotizador.php",
-                        data: "id=" + id + "&precio_venta=" + precio_venta + "&cantidad=" + cantidad,
-                        beforeSend: function (objeto) {
-                            $("#resultados").html("Mensaje: Cargando...");
-                        },
-                        success: function (datos) {
-                            $("#resultados").html(datos);
-                        }
-                    });
-                }
-
-                function eliminar(id)
-                {
-
-                    $.ajax({
-                        type: "GET",
-                        url: "./ajax/agregar_cotizador.php",
-                        data: "id=" + id,
-                        beforeSend: function (objeto) {
-                            $("#resultados").html("Mensaje: Cargando...");
-                        },
-                        success: function (datos) {
-                            $("#resultados").html(datos);
-                        }
-                    });
-
-                }
-
-                $("#datos_cotizacion").submit(function () {
-                    var atencion = $("#atencion").val();
-                    var tel1 = $("#tel1").val();
-                    var empresa = $("#empresa").val();
-                    var tel2 = $("#tel2").val();
-                    var email = $("#email").val();
-                    var condiciones = $("#condiciones").val();
-                    var validez = $("#validez").val();
-                    var entrega = $("#entrega").val();
-                    VentanaCentrada('./pdf/documentos/cotizacion_pdf.php?atencion=' + atencion + '&tel1=' + tel1 + '&empresa=' + empresa + '&tel2=' + tel2 + '&email=' + email + '&condiciones=' + condiciones + '&validez=' + validez + '&entrega=' + entrega, 'Cotizacion', '', '1024', '768', 'true');
-                });
-            </script>
+           
             <!-- ================================================
             Scripts
             ================================================ -->
 
             <!-- jQuery Library -->
+            
             <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    
             <!--materialize js-->
             <script type="text/javascript" src="js/materialize.js"></script>

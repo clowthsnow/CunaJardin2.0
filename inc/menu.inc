@@ -65,7 +65,7 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
+<!--                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="page-ver-grupos2.php">Ver Grupos</a>
@@ -76,7 +76,7 @@ if ('1' == $_SESSION['permisos']) {
 
                             </ul>
                         </div>
-                    </li>
+                    </li>-->
 
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Gestion de Matricula</a>
                         <div class="collapsible-body">
