@@ -16,6 +16,8 @@ if (!isset($_SESSION['usuario'])) {
         <head>
             <title>Datos Estudiante</title>
             <!--Let browser know website is optimized for mobile-->
+
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
             <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
@@ -121,7 +123,7 @@ if (!isset($_SESSION['usuario'])) {
                                                         <div class="row">
                                                             <div class="resp"></div>
 
-                                        <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
+                                                        <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
 
                                                             <form id="formulario" action="control/crearEstudiante.php" method="POST" enctype="multipart/form-data" name="formulario">
                                                             <!--<form id="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" name="formulario">-->
@@ -206,28 +208,53 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
 
                                                                     <div class="row">
-                                                                        <div class="input-field col s12 m12 l12">
-                                                                            <input id="nacimiento" type="text" class="validate" name="nacimiento" required="">
-                                                                            <label for="nacimiento">*Lugar de Nacimiento:</label>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <!--<input id="nacimiento" type="text" class="validate" name="nacimiento" required="">-->
+                                                                            <!--<label for="nacimiento">*Lugar de Nacimiento:</label>-->
+
+
+                                                                            <label class="active">Lugar de Nacimiento: *</label>
+                                                                            <select id="region" class="browser-default" name="nacimiento" required="" onchange="buscarProv()">
+                                                                                <option value="" disabled selected>Departamento :*</option>
+                                                                                <?php
+                                                                                $provincias = "SELECT * FROM regions";
+                                                                                $resProvincias = $conexion->query($provincias);
+                                                                                while ($filaprov = $resProvincias->fetch_assoc()) {
+                                                                                    echo " <option value=\"" . $filaprov['id'] . "\"";
+                                                                                    echo " >" . $filaprov['name'] . "</option>";
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <!--<input id="nacimiento" type="text" class="validate" name="nacimiento" required="">-->
+                                                                            <!--<label for="nacimiento">*Lugar de Nacimiento:</label>-->
+
+
+                                                                            <label class="active">Lugar de Nacimiento: *</label>
+                                                                            <select id="provincia" class="browser-default" name="nacimientoP" required="" onchange="buscarDist()">
+                                                                                <option value="" disabled selected>Provincia :*</option>
+
+                                                                            </select>
                                                                         </div>
 
-                                                                        <label class="active">Lugar de Nacimiento: *</label>
-                                                                        <select id="operador" class="browser-default" name="nacimiento" required="">
-                                                                            <option value="" disabled selected>Departamento :</option>
-                                                                            <?php
-                                                                            $provincias = "SELECT * FROM regions";
-                                                                            $resProvincias = $conexion->query($provincias);
-                                                                            while ($filaprov = $resProvincias->fetch_assoc()) {
-                                                                                echo " <option value=\"" . $filaprov['id'] . "\"";
-                                                                                echo " >" . $filaprov['name'] . "</option>";
-                                                                            }
-                                                                            ?>
-                                                                        </select>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <!--<input id="nacimiento" type="text" class="validate" name="nacimiento" required="">-->
+                                                                            <!--<label for="nacimiento">*Lugar de Nacimiento:</label>-->
 
 
+                                                                            <label class="active">Lugar de Nacimiento: *</label>
+                                                                            <select id="distrito" class="browser-default" name="nacimientoC" required="" >
+                                                                                <option value="" disabled selected>Distrito :*</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
                                                                         <div class="input-field col s12 m12 l12">
                                                                             <input id="direccion" type="text" class="validate" name="direccion" required="">
-                                                                            <label for="direccion">*Direccion:</label>
+                                                                            <label for="direccion">Direccion: *</label>
                                                                         </div>
 
                                                                         <div class="input-field col s12 m12 l12">
@@ -478,7 +505,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </div>
                                                                     </div>
 
-                                        <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
+                                                        <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
                                                                 </fieldset>
                                                                 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
                                                                 <script type="text/javascript" src="js/function.js"></script>
@@ -570,6 +597,39 @@ if (!isset($_SESSION['usuario'])) {
                                                                                     patron = /[0-9]/;
                                                                                     te = String.fromCharCode(tecla);
                                                                                     return patron.test(te);
+                                                                                }
+
+                                                                                function buscarProv() {
+                                                                                    var region = $("#region").val();
+
+                                                                                    var url = "control/buscarDepa.php?region=" + region;
+                                                                                    console.log(url);
+                                                                                    $.ajax({
+
+                                                                                        url: url,
+
+                                                                                        success: function (respuesta) {
+                                                                                            $("#provincia").html(respuesta);
+
+                                                                                        }
+                                                                                    });
+                                                                                }
+
+
+                                                                                function buscarDist() {
+                                                                                    var provincia = $("#provincia").val();
+
+                                                                                    var url = "control/buscarDist.php?provincia=" + provincia;
+                                                                                    console.log(url);
+                                                                                    $.ajax({
+
+                                                                                        url: url,
+
+                                                                                        success: function (respuesta) {
+                                                                                            $("#distrito").html(respuesta);
+
+                                                                                        }
+                                                                                    });
                                                                                 }
                                                                                 var dni = $("#dni").text();
                                                                                 $(document).ready(function () {
