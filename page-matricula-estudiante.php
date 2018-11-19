@@ -19,8 +19,12 @@ if (!isset($_SESSION['usuario'])) {
     $nacimiento = new DateTime($sugerido);
 
     $sug = ($fecha->diff($nacimiento)->y);
-
-
+    $meses=$fecha->format('m');
+//    echo $meses;
+    if($meses>4){
+        $sug--;
+    }
+    
     $buscarAula = "SELECT * FROM aula WHERE AulaEstReg='A' AND AulaGrado='$sug'";
     $resultAula = $conexion->query($buscarAula);
 //    var_dump($resultAula);

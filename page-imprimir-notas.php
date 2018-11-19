@@ -206,8 +206,8 @@ if (!isset($_SESSION['usuario'])) {
                                             ?>
                                             <tr>
                                                 <td data-codigo="<?php echo $filasLogros['CompetenciaId'] ?>" id="<?php echo "logro" . $contLogro ?>"><?php echo $filasLogros['CompetenciaNombre'] ?></td>
-                                                <td data-periodo="1"><center><?php echo $n1; ?></center></td>
-                                            <td data-periodo="2"><center><?php echo $n2; ?></center></td>
+                                                <td data-periodo="1"><center><?php echo strtoupper($n1); ?></center></td>
+                                            <td data-periodo="2"><center><?php echo strtoupper($n2); ?></center></td>
 
                                             </tr>
                                             <?php
@@ -297,11 +297,11 @@ if (!isset($_SESSION['usuario'])) {
 
             <script>
 
-                              function imprimir() {
-                                  $('#butn').hide();
-                                  window.print();
+                        function imprimir() {
+                            $('#butn').hide();
+                            window.print();
 
-                              }
+                        }
 
             </script>
         </body>

@@ -9,15 +9,15 @@ if (!isset($_SESSION['usuario'])) {
     include_once 'control/crearEstudiante.php';
     date_default_timezone_set('America/Lima');
     $fecha = new DateTime();
-    
-    
     ?>
     <!DOCTYPE html>
     <html lang="es">
 
         <head>
-           <title>Datos Estudiante</title>
+            <title>Datos Estudiante</title>
             <!--Let browser know website is optimized for mobile-->
+
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
             <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
@@ -31,7 +31,7 @@ if (!isset($_SESSION['usuario'])) {
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
             <script src="js/peticion.js"></script>
             <script src="js/datosPadre.js"></script>
-            
+
             <script src="js/modal.js"></script>
 
 
@@ -43,21 +43,21 @@ if (!isset($_SESSION['usuario'])) {
                     border: 1px solid #000;
                 }
                 th, td {
-                   width: 25%;
-                   text-align: left;
-                   vertical-align: top;
-                   border: 1px solid #000;
-                   border-collapse: collapse;
-                   padding: 0.3em;
-                   caption-side: bottom;
+                    width: 25%;
+                    text-align: left;
+                    vertical-align: top;
+                    border: 1px solid #000;
+                    border-collapse: collapse;
+                    padding: 0.3em;
+                    caption-side: bottom;
                 }
                 caption {
-                   padding: 0.3em;
-                   color: #fff;
+                    padding: 0.3em;
+                    color: #fff;
                     background: #000;
                 }
                 th {
-                   background: #eee;
+                    background: #eee;
                 }
             </style>
 
@@ -115,18 +115,18 @@ if (!isset($_SESSION['usuario'])) {
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
-                                                
+
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
                                                         <h4 class="header2">Estudiante:</h4>
                                                         <div class="row">
                                                             <div class="resp"></div>
-                                                            
-                                                            <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
-                                                            
+
+                                                        <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
+
                                                             <form id="formulario" action="control/crearEstudiante.php" method="POST" enctype="multipart/form-data" name="formulario">
-                                                            <!--<form id="formulario" action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data" name="formulario">-->
+                                                            <!--<form id="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" name="formulario">-->
                                                                 <ul id="progress">
                                                                     <li class="activo">Principal</li>
                                                                     <li>Datos Generales del niño</li>
@@ -134,43 +134,47 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <li>Datos Familiares</li>
                                                                     <li>Vivienda</li>
                                                                 </ul>
-                                                                
+
                                                                 <fieldset>
                                                                     <h4 class="header2">Datos de Matricula:</h4>
                                                                     <div class="row">
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <input id="foto" hidden="" readonly="" type="text" class="validate" name="nombre" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                            <label for="nombre" hidden="">foto: *</label>
+                                                                        </div>
                                                                         <div class="file-field input-field col s12 m12 l12">
-                                                                            <input class="file-path validate" type="text" />
+                                                                            <input id="validF" class="file-path validate" type="text"  required="" onchange="llenarInput()" style="padding-left: 3%;"/>
                                                                             <div class="btn">
-                                                                                <span>*Foto</span>
-                                                                                <input type="file" name="foto"/>
+                                                                                <span>Foto: *</span>
+                                                                                <input type="file" name="foto" required="" />
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="nombre" type="text" class="validate" name="nombre">
-                                                                            <label for="nombre">*Nombres:</label>
+                                                                            <input id="nombre" type="text" class="validate" name="nombre" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                            <label for="nombre">Nombres: *</label>
                                                                         </div>
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="apellidos" type="text" class="validate" name="apellido">
-                                                                            <label for="apellidos">*Apellidos:</label>
+                                                                            <input id="apellidos" type="text" class="validate" name="apellido" onkeypress="return val(event)" minlength="2" maxlength="45" style="text-transform: capitalize;">
+                                                                            <label for="apellidos">Apellidos: *</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
 
                                                                         <div class="input-field col s6 m6 l6">
-                                                                            <input id="fecha" type="text" class="datepicker" name="fechaNac"  value="<?php echo $fecha->format('Y-m-d'); ?>">
-                                                                            <label for="fecha" class="active">*Fecha de Nacimiento:</label>
+                                                                            <input id="fecha" type="text" class="datepicker" name="fechaNac"  value="<?php echo $fecha->format('Y-m-d'); ?>" onchange="calcularfecha()">
+                                                                            <label for="fecha" class="active">Fecha de Nacimiento: *</label>
                                                                         </div>
                                                                         <div class="col s12 m6 l6">
                                                                             <label>Tipo:</label>
                                                                             <select id="tipoa" class="browser-default" name="tipoA">
-                                                                                <option value="" disabled selected>*Escoge el tipo de alumno:</option>
+                                                                                <option value="" disabled selected>Escoge el tipo de alumno: *</option>
                                                                                 <?php
                                                                                 $btipoa = "SELECT * FROM tipoalumno WHERE TipoAlumnoEstReg='A'";
                                                                                 $resTipo = $conexion->query($btipoa);
                                                                                 while ($fila = $resTipo->fetch_assoc()) {
-                                                                                    echo " <option value=\"".$fila['TipoAlumnoId']."\" >".$fila['TipoAlumnoDetalle']."</option>";
+                                                                                    echo " <option value=\"" . $fila['TipoAlumnoId'] . "\" >" . $fila['TipoAlumnoDetalle'] . "</option>";
                                                                                 }
                                                                                 ?>
                                                                             </select>
@@ -184,7 +188,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <h4 class="header2">Datos Generales del niño:</h4>
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="dni" type="number" class="validate" name="dni" required="" maxlength="8">
+                                                                            <input id="dni" type="text" class="validate" name="dni" required="" maxlength="8" minlength="8" onkeypress="return num(event);">
                                                                             <label for="dni">*DNI:</label>
                                                                         </div>
                                                                         <div class="col s12 m6 l6">
@@ -198,19 +202,59 @@ if (!isset($_SESSION['usuario'])) {
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="edad" type="text" class="validate" name="edad" required="" placeholder=" A años B meses">
+                                                                            <input id="edad" type="text" class="validate" name="edad" required="" placeholder=" A años B meses" readonly="">
                                                                             <label for="edad" class="active">*Edad:</label>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="row">
-                                                                        <div class="input-field col s12 m12 l12">
-                                                                            <input id="nacimiento" type="text" class="validate" name="nacimiento" required="">
-                                                                            <label for="nacimiento">*Lugar de Nacimiento:</label>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <!--<input id="nacimiento" type="text" class="validate" name="nacimiento" required="">-->
+                                                                            <!--<label for="nacimiento">*Lugar de Nacimiento:</label>-->
+
+
+                                                                            <label class="active">Lugar de Nacimiento: *</label>
+                                                                            <select id="region" class="browser-default" name="nacimiento" required="" onchange="buscarProv()">
+                                                                                <option value="" disabled selected>Departamento :*</option>
+                                                                                <?php
+                                                                                $provincias = "SELECT * FROM regions";
+                                                                                $resProvincias = $conexion->query($provincias);
+                                                                                while ($filaprov = $resProvincias->fetch_assoc()) {
+                                                                                    echo " <option value=\"" . $filaprov['id'] . "\"";
+                                                                                    echo " >" . $filaprov['name'] . "</option>";
+                                                                                }
+                                                                                ?>
+                                                                            </select>
                                                                         </div>
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <!--<input id="nacimiento" type="text" class="validate" name="nacimiento" required="">-->
+                                                                            <!--<label for="nacimiento">*Lugar de Nacimiento:</label>-->
+
+
+                                                                            <label class="active">Lugar de Nacimiento: *</label>
+                                                                            <select id="provincia" class="browser-default" name="nacimientoP" required="" onchange="buscarDist()">
+                                                                                <option value="" disabled selected>Provincia :*</option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="input-field col s12 m6 l6">
+                                                                            <!--<input id="nacimiento" type="text" class="validate" name="nacimiento" required="">-->
+                                                                            <!--<label for="nacimiento">*Lugar de Nacimiento:</label>-->
+
+
+                                                                            <label class="active">Lugar de Nacimiento: *</label>
+                                                                            <select id="distrito" class="browser-default" name="nacimientoC" required="" >
+                                                                                <option value="" disabled selected>Distrito :*</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
                                                                         <div class="input-field col s12 m12 l12">
                                                                             <input id="direccion" type="text" class="validate" name="direccion" required="">
-                                                                            <label for="direccion">*Direccion:</label>
+                                                                            <label for="direccion">Direccion: *</label>
                                                                         </div>
 
                                                                         <div class="input-field col s12 m12 l12">
@@ -218,7 +262,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <label for="escolaridad">Situacion de Escolaridad Promovido:</label>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="button" name="prev" class="prev acao" value="Anteror"/>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anterior"/>
                                                                     <input type="button" name="next2" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 <fieldset>
@@ -250,11 +294,11 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
                                                                             <input id="peso" type="text" class="validate" name="peso" required="">
-                                                                            <label for="peso" >*Peso:</label>
+                                                                            <label for="peso" >*Peso: (gramos)</label>
                                                                         </div>
                                                                         <div class="input-field col s12 m6 l6">
                                                                             <input id="talla" type="text" class="validate" name="talla" required="">
-                                                                            <label for="talla">*Talla:</label>
+                                                                            <label for="talla">*Talla: (centimetros)</label>
                                                                         </div>
 
                                                                         <div class="input-field col s12 m12 l12">
@@ -344,27 +388,27 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <label for="alergiadet">Especifique:</label>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="button" name="prev" class="prev acao" value="Anteror"/>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anterior"/>
                                                                     <input type="button" name="next3" class="next right" value="Proximo"/>
                                                                 </fieldset>
-                                                                
+
                                                                 <fieldset>
                                                                     <div class="divider"></div>
                                                                     <br>
                                                                     <h4 class="header2">Datos de la Madre:</h4>
                                                                     <div class="row">
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="dnim" type="text" class="validate" name="dnim" required="" maxlength="8" placeholder="Buscar...">
+                                                                            <input id="dnim" type="text" class="validate" name="dnim" required="" minlength="8" maxlength="8" placeholder="Buscar..." onkeypress="return num(event);">
                                                                             <label for="dnim">*DNI de la Madre:</label>
                                                                         </div>
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="dnip" type="text" class="validate" name="dnip" required="" maxlength="8" placeholder="Buscar...">
+                                                                            <input id="dnip" type="text" class="validate" name="dnip" required="" minlength="8" maxlength="8" placeholder="Buscar..." onkeypress="return num(event);">
                                                                             <label for="dnip">*DNI del Padre:</label>
                                                                         </div>
                                                                     </div>
-                                                                    
+
                                                                     <div class="row">
-                                                                        
+
                                                                         <section id="tabla_resultado" class="input-field col s12 m6 l6">
 
                                                                         </section>
@@ -372,7 +416,7 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                         </section>
                                                                     </div>
-                                                                    <input type="button" name="prev" class="prev acao" value="Anteror"/>
+                                                                    <input type="button" name="prev" class="prev acao" value="Anterior"/>
                                                                     <input type="button" name="next4" class="next right" value="Proximo"/>
                                                                 </fieldset>
                                                                 <fieldset>
@@ -411,7 +455,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </div>
 
                                                                         <div class="input-field col s12 m6 l6">
-                                                                            <input id="vivpers" type="number" class="validate" name="vivpers" required="" maxlength="2">
+                                                                            <input id="vivpers" type="number" class="validate" name="vivpers" required="" maxlength="2" minlength="1" onkeypress="return num(event)">
                                                                             <label for="vivpers">*Numero de Personas:</label>
                                                                         </div>
                                                                     </div>
@@ -452,20 +496,20 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                     <input type="button" name="prev" class="prev acao" value="Anterior"/>
                                                                     <!--<input type="submit" name="next" class="next right" value="Registrar"/>-->
-                                                                    
+
                                                                     <div class="row">
                                                                         <div class="input-field col s12">
                                                                             <button class="next right" type="submit" name="registrarEstudiante">Registrar
-                                                                                
+
                                                                             </button>
                                                                         </div>
                                                                     </div>
-                                                                    
-                                                                    <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
+
+                                                        <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
                                                                 </fieldset>
                                                                 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
                                                                 <script type="text/javascript" src="js/function.js"></script>
-                                                                
+
                                                             </form>
                                                         </div>
                                                     </div>
@@ -538,33 +582,101 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-                var dni = $("#dni").text();
-                $(document).ready(function () {
-                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                                                                                function val(e) {
+                                                                                    tecla = (document.all) ? e.keyCode : e.which;
+                                                                                    if (tecla == 8)
+                                                                                        return true;
+                                                                                    patron = /[A-Za-z áéíóú]/;
+                                                                                    te = String.fromCharCode(tecla);
+                                                                                    return patron.test(te);
+                                                                                }
+                                                                                function num(e) {
+                                                                                    tecla = (document.all) ? e.keyCode : e.which;
+                                                                                    if (tecla == 8)
+                                                                                        return true;
+                                                                                    patron = /[0-9]/;
+                                                                                    te = String.fromCharCode(tecla);
+                                                                                    return patron.test(te);
+                                                                                }
 
-                    $('#modal2').modal();
-                    $('#modal1').modal();
-                });
-                //                var frm = $('#create');
-                //                frm.submit(function (ev) {
-                ////                    ev.preventDefault();
-                //                    $.ajax({
-                //                        type: frm.attr('method'),
-                //                        url: frm.attr('action'),
-                //                        data: frm.serialize(),
-                //                        success: function (respuesta) {
-                //                            console.log(respuesta);
-                //                            
-                //                                //$('#modal2').openModal();
-                //                                document.location.href = "page-declaracion-jurada.php?alumno="+dni;
-                //                                //                                location.reload();
-                ////                                $('#modal2').openModal();
-                //
-                //                        }
-                //                    });
+                                                                                function buscarProv() {
+                                                                                    var region = $("#region").val();
+
+                                                                                    var url = "control/buscarDepa.php?region=" + region;
+                                                                                    console.log(url);
+                                                                                    $.ajax({
+
+                                                                                        url: url,
+
+                                                                                        success: function (respuesta) {
+                                                                                            $("#provincia").html(respuesta);
+
+                                                                                        }
+                                                                                    });
+                                                                                }
 
 
-                //                });
+                                                                                function buscarDist() {
+                                                                                    var provincia = $("#provincia").val();
+
+                                                                                    var url = "control/buscarDist.php?provincia=" + provincia;
+                                                                                    console.log(url);
+                                                                                    $.ajax({
+
+                                                                                        url: url,
+
+                                                                                        success: function (respuesta) {
+                                                                                            $("#distrito").html(respuesta);
+
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                                var dni = $("#dni").text();
+                                                                                $(document).ready(function () {
+                                                                                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+
+                                                                                    $('#modal2').modal();
+                                                                                    $('#modal1').modal();
+                                                                                    //                                                                                    $('input:file').change(function () {
+                                                                                    //
+                                                                                    //                                                                                        // If a file is selected set the text input value as the filename
+                                                                                    //                                                                                        if ($(this).get(0).files.length !== 0) {
+                                                                                    //                                                                                            $(this).next('#foto').val($(this).get(0).files[0].name);
+                                                                                    //                                                                                        }
+                                                                                    //
+                                                                                    //                                                                                    });
+                                                                                });
+                                                                                function llenarInput() {
+                                                                                    $('#foto').val($('#validF').val());
+                                                                                }
+
+                                                                                function calcularfecha() {
+                                                                                    var fechaA = new Date();
+                                                                                    var fechaI = $('#fecha').val();
+
+
+
+                                                                                    var anioA = fechaA.getUTCFullYear();
+                                                                                    var mesA = fechaA.getUTCMonth() + 1;
+                                                                                    var anioI = fechaI.slice(0, 4);
+                                                                                    var mesI = fechaI.slice(5, 7);
+
+                                                                                    console.log(anioA);
+                                                                                    console.log(anioI);
+                                                                                    console.log(mesA);
+                                                                                    console.log(mesI);
+
+                                                                                    var anioE = anioA - anioI;
+                                                                                    var mesE;
+                                                                                    if (mesI > mesA) {
+                                                                                        anioE--;
+                                                                                        mesE = 12 - (mesI - mesA);
+                                                                                    } else {
+                                                                                        mesE = mesA - mesI;
+                                                                                    }
+                                                                                    console.log(anioE + " " + mesE);
+                                                                                    $('#edad').val(anioE + " año(s) " + mesE + " mes(es)");
+                                                                                }
             </script>
         </body>
 

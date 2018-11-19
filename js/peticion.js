@@ -19,7 +19,7 @@ $(document).on('keyup','#dnim',function(){
     if(valorBusqueda!=""){
         obtener_padre(valorBusqueda)
     }else{
-        obtener_padre();
+//        obtener_padre();
     }
 });
 

@@ -19,6 +19,7 @@ if (!isset($_SESSION['usuario'])) {
             <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
 
 
+
             <!-- CORE CSS-->    
             <link href="css/materialize.css" type="text/css" rel="stylesheet">
             <link href="css/style.css" type="text/css" rel="stylesheet" >
@@ -85,16 +86,16 @@ if (!isset($_SESSION['usuario'])) {
 
                                                         <div class="col s12 m12 l12">
                                                             <br>
-                                                            <a href="page-crear-usuario.php"class="btn">Registrar Usuario</a>
-                                                            <table id="data-table-simple" class="responsive-table display " cellspacing="0">
+                                                            <table id="data-table-row-grouping" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Usuario</th>
                                                                         <th>Contraseña</th>
+                                                                        <th>Tipo de Usuario</th>
                                                                         <th>Nombres</th>
                                                                         <th>Apellidos</th>
-                                                                        <th>Tipo de Usuario</th>
-                                                                        <th>Configurar</th>
+
+                                                                        <th>Modificar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
                                                                 </thead>
@@ -103,39 +104,58 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <tr>
                                                                         <th>Usuario</th>
                                                                         <th>Contraseña</th>
+                                                                        <th>Tipo de Usuario</th>
                                                                         <th>Nombres</th>
                                                                         <th>Apellidos</th>
-                                                                        <th>Tipo de Usuario</th>
-                                                                        <th>Configurar</th>
+
+                                                                        <th>Modificar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
                                                                 </tfoot>
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM usuario WHERE UsuarioEstReg='A'";
+                                                                    $consultaUser = "SELECT * FROM usuario WHERE UsuarioEstReg='A' AND UsuarioTipoUsuario <> '4'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
                                                                         <td>" . $row['UsuarioId'] . "</td>";
                                                                         echo "<td>" . $row['UsuarioContra'] . "</td>";
-                                                                        echo "<td>" . $row['UsuarioNombre'] . "</td>";
-                                                                        echo "<td>" . $row['UsuarioApellidos'] . "</td>";
-                             
                                                                         $consultaCat = "SELECT * FROM tipousuario WHERE TipoUsuarioId='" . $row['UsuarioTipoUsuario'] . "'";
                                                                         $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
                                                                         while ($row2 = $resultado2->fetch_assoc()) {
-                                                                            echo "<td>" . $row2['TipoUsuarioDetalle']."</td>";
+                                                                            echo "<td>" . $row2['TipoUsuarioDetalle'] . "</td>";
+                                                                            $permiso=$row2['TipoUsuarioId'];
                                                                         }
-                                                  
-                                                                        echo "<td><a href=\"page-configurar-usuario.php?id=" . $row['UsuarioId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarUsuario.php?id=" . $row['UsuarioId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        echo "<td>" . $row['UsuarioNombre'] . "</td>";
+                                                                        echo "<td>" . $row['UsuarioApellidos'] . "</td>";
+
+                                                                        switch ($permiso) {
+                                                                            case 1:
+                                                                                echo "<td><a href=\"page-configurar-administrador.php?id=" . $row['UsuarioId'] . "\"><span class=\"task-cat cyan\">Modificar</span></a></td>
+                                                                        <td><a href=\"control/eliminarAdministrador.php?id=" . $row['UsuarioId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
+                                                                                break;
+                                                                             case 2:
+                                                                                echo "<td><a href=\"page-configurar-docente.php?id=" . $row['UsuarioId'] . "\"><span class=\"task-cat cyan\">Modificar</span></a></td>
+                                                                        <td><a href=\"control/eliminarDocente.php?id=" . $row['UsuarioId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        </tr>";
+                                                                                break;
+                                                                             case 3:
+                                                                                echo "<td><a href=\"page-configurar-contador.php?id=" . $row['UsuarioId'] . "\"><span class=\"task-cat cyan\">Modificar</span></a></td>
+                                                                        <td><a href=\"control/eliminarContador.php?id=" . $row['UsuarioId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        </tr>";
+                                                                                break;
+                                                                        }
+
+//                                                                        echo "<td><a href=\"page-configurar-usuario.php?id=" . $row['UsuarioId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+//                                                                        <td><a href=\"control/eliminarUsuario.php?id=" . $row['UsuarioId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+//                                                                        </tr>";
                                                                     }
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div> 
