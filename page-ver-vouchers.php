@@ -90,12 +90,11 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <thead>
                                                                     <tr>
                                                                         
-                                                                        
-                                                                        <th>Alumno</th>
-                                                                        <th>Numero de Recibo</th>
+                                                                        <th>Nro</th>
+                                                                        <th>Apellidos y nombre</th>
+                                                                        <th>DNI</th>
                                                                         <th>Monto</th>
-                                                                        <th>Concepto</th>
-                                                                        <th>Descripcion</th>
+                                                                        
                                                                         <th>Fecha</th>
                                                                         <th>modificar</th>
                                                                         <th>eliminar</th>
@@ -123,21 +122,22 @@ if (!isset($_SESSION['usuario'])) {
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>";
-//                                                                        echo "<td>" . $row['ContabilidadId'] . "</td>";
+                                                                        echo "<td>" . $row['ContabilidadId'] . "</td>";
                                                                         $consultaCat = "SELECT * FROM alumno WHERE AlumnoDni='" . $row['ContabilidadAlumno'] . "'";
                                                                         $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
                                                                         while ($row2 = $resultado2->fetch_assoc()) {
+                                                                            echo "<td>" . $row2['AlumnoNombre'] ." ".$row2['AlumnoNombre']. "</td>";
                                                                             echo "<td>" . $row2['AlumnoDni'] . "</td>";
                                                                         }
-                                                                        echo "<td>" . $row['ContabilidadNumeroRecibo'] . "</td>";
+//                                                                        echo "<td>" . $row['ContabilidadNumeroRecibo'] . "</td>";
                                                                         echo "<td>" . $row['ContabilidadMonto'] . "</td>";
                                                                                 
-                                                                        $consultaCat2 = "SELECT * FROM tipoconcepto WHERE TipoConceptoId='" . $row['ContabilidadConcepto'] . "'";
-                                                                        $resultado3 = $conexion->query($consultaCat2) or die($conexion->error);
-                                                                        while ($row3 = $resultado3->fetch_assoc()) {
-                                                                            echo "<td>" . $row3['TipoConceptoDetalle'] . "</td>";
-                                                                        }
-                                                                        echo "<td>" . $row['ContabilidadDescripcion'] . "</td>";
+//                                                                        $consultaCat2 = "SELECT * FROM tipoconcepto WHERE TipoConceptoId='" . $row['ContabilidadConcepto'] . "'";
+//                                                                        $resultado3 = $conexion->query($consultaCat2) or die($conexion->error);
+//                                                                        while ($row3 = $resultado3->fetch_assoc()) {
+//                                                                            echo "<td>" . $row3['TipoConceptoDetalle'] . "</td>";
+//                                                                        }
+//                                                                        echo "<td>" . $row['ContabilidadDescripcion'] . "</td>";
                                                                         echo "<td>" . $row['ContabilidadFecha'] . "</td>";
                                                                         
                                                                         echo "<td><a href=\"page-configurar-vouchers.php?id=" . $row['ContabilidadId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
