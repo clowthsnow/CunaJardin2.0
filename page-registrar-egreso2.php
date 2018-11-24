@@ -39,17 +39,13 @@ if (isset($_SESSION['monto'])) {
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Registro de Egresos</title>
         <!-- Latest compiled and minified CSS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        
     </head>
     <body>
         <div class="container">
@@ -57,7 +53,7 @@ if (isset($_SESSION['monto'])) {
                 <div class="col-md-12">
                     <h2><span class="glyphicon glyphicon-edit"></span> EGRESOS 2018 CUNA JARDIN UNSA</h2>
                     <hr>
-                    <form action="modelo.php" method="post" class="form-horizontal" role="form" id="datos_cotizacion">
+                    
                         <div class="form-group row">
                             <label for="atencion" class="col-md-1 control-label">FECHA:</label>
                             <div class="col-md-3">
@@ -69,7 +65,7 @@ if (isset($_SESSION['monto'])) {
                             </div>
                             <label for="tel2" class="col-md-1 control-label">Nro DE EXPEDIENTE:</label>
                             <div class="col-md-2">
-                                <input type="text" class="form-control" id="numExpediente" placeholder="Numero de Expediente" name="numExpediente" value="<?php echo $numExpediente; ?>">
+                                <input type="text" class="form-control" id="item_num_expediente" placeholder="Numero de Expediente" name="item_num_expediente" class='item_num_expediente'>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -118,7 +114,7 @@ if (isset($_SESSION['monto'])) {
                         </div>
                         <input type="submit" name="operacion" value="agregar">
 
-                    </form>
+                    
 
                 </div>
                 <br><br>
@@ -154,8 +150,11 @@ if (isset($_SESSION['monto'])) {
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/VentanaCentrada.js"></script>
+    
     <script>
+        var item_num_expediente=document.getElementById("item_num_expediente").value;
+//        alert("hola");
+//        alert(item_num_expediente);
         $(document).ready(function () {
             var count = 1;
             $('#add').click(function () {
@@ -177,11 +176,19 @@ if (isset($_SESSION['monto'])) {
             });
 
             $('#save').click(function () {
+                var item_num_expediente=document.getElementById("item_num_expediente").value;
+                var fecha=document.getElementById("fecha").value;
+                var numOficio=document.getElementById("numOficio").value;
+                var concepto=document.getElementById("concepto").value;
+                var fechaPago=document.getElementById("fechaPago").value;
+                var monto=document.getElementById("monto").value;
                 var item_comprobante = [];
                 var item_fecha = [];
                 var item_razonSocial = [];
                 var item_concepto = [];
                 var item_importe = [];
+                
+               
                 $('.item_comprobante').each(function () {
                     item_comprobante.push($(this).text());
                 });
@@ -200,7 +207,7 @@ if (isset($_SESSION['monto'])) {
                 $.ajax({
                     url: "insert.php",
                     method: "POST",
-                    data: {item_comprobante: item_comprobante, item_fecha: item_fecha, item_razonSocial: item_razonSocial, item_concepto: item_concepto,item_importe: item_importe},
+                    data: {item_num_expediente,fecha,numOficio,concepto,fechaPago,monto, item_comprobante: item_comprobante, item_fecha: item_fecha, item_razonSocial: item_razonSocial, item_concepto: item_concepto,item_importe: item_importe},
                     success: function (data) {
                         alert(data);
                         $("td[contentEditable='true']").text("");
@@ -208,23 +215,23 @@ if (isset($_SESSION['monto'])) {
                         {
                             $('tr#' + i + '').remove();
                         }
-                        fetch_item_data();
+                        
                     }
                 });
             });
 
-            function fetch_item_data()
-            {
-                $.ajax({
-                    url: "fetch.php",
-                    method: "POST",
-                    success: function (data)
-                    {
-                        $('#inserted_item_data').html(data);
-                    }
-                })
-            }
-            fetch_item_data();
+//            function fetch_item_data()
+//            {
+//                $.ajax({
+//                    url: "fetch.php",
+//                    method: "POST",
+//                    success: function (data)
+//                    {
+//                        $('#inserted_item_data').html(data);
+//                    }
+//                })
+//            }
+//            fetch_item_data();
 
         });
     </script>
