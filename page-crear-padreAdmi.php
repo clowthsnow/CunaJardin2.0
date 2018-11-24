@@ -107,11 +107,11 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="divider"></div>
 
                                                                 <div class="row">
-                                                                    <div class="input-field col s12 m6 l6">
+<!--                                                                    <div class="input-field col s12 m6 l6">
                                                                         <button class="btn cyan waves-effect waves-light right" type="reset" name="action">Limpiar
                                                                             <i class="mdi-action-delete left"></i>
                                                                         </button>
-                                                                    </div>
+                                                                    </div>-->
                                                                     <div class="input-field col s12 m6 l6">
                                                                         <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
                                                                             <i class="mdi-image-edit left"></i>

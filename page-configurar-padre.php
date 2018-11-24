@@ -83,7 +83,7 @@ if (!isset($_SESSION['usuario'])) {
                                         <div id="roboto">
                                             <h4 class="header">Configuracion de Padre</h4>
                                             <p class="caption">
-                                                En este panel usted podra hacer la configuracion del Padre, como cambiar nombre y categoria.
+                                                En este panel usted podra hacer la modificacion de los datos del Padre.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="row">
@@ -99,71 +99,90 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreNombre" required="" value="<?php echo $provBD['PadreNombre']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreNombre" required="" value="<?php echo $provBD['PadreNombre']; ?>" minlength="2" maxlength="50" onkeypress="return val(event)">
                                                                         <label class="active" for="nombre">Nombre:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreApellidos" required="" value="<?php echo $provBD['PadreApellidos']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreApellidos" required="" value="<?php echo $provBD['PadreApellidos']; ?>" minlength="2" maxlength="50" onkeypress="return val(event)">
                                                                         <label class="active" for="nombre">Apellidos:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreCorreo" required="" value="<?php echo $provBD['PadreCorreo']; ?>">
+                                                                        <input id="nombre" type="email" class="validate" name="PadreCorreo" required="" value="<?php echo $provBD['PadreCorreo']; ?>">
                                                                         <label class="active" for="nombre">Correo:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreTelefono" required="" value="<?php echo $provBD['PadreTelefono']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreTelefono" required="" value="<?php echo $provBD['PadreTelefono']; ?>" minlength="9" maxlength="9" onkeypress="return num(event)">
                                                                         <label class="active" for="nombre">Telefono:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreCelular" required="" value="<?php echo $provBD['PadreCelular']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreCelular" required="" value="<?php echo $provBD['PadreCelular']; ?>" minlength="9" maxlength="9" onkeypress="return num(event)">
                                                                         <label class="active" for="nombre">Celular:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreCelularOperador" required="" value="<?php echo $provBD['PadreCelularOperador']; ?>">
-                                                                        <label class="active" for="nombre">Operador:</label>
+                                                                        <label class="active">Operador: *</label>
+                                                                        <select id="operador" class="browser-default" name="PadreCelularOperador" required="">
+                                                                            <option value="" disabled selected>*Escoge el operador:</option>
+                                                                            <option value="Claro" >Claro</option>
+                                                                            <option value="Movistar" >Movistar</option>
+                                                                            <option value="Entel" >Entel</option>
+                                                                            <option value="Bitel" >Bitel</option>
+                                                                            <option value="Movistar" >Otro</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreFechaNac" required="" value="<?php echo $provBD['PadreFechaNac']; ?>">
-                                                                        <label class="active" for="nombre">Fecha de Nacimiento:</label>
+                                                                        <input id="fecha" type="text" class="validate datepicker" name="PadreFechaNac" required="" value="<?php echo $provBD['PadreFechaNac']; ?>" onchange="calcularfecha()">
+                                                                        <label class="active" for="nombre">Fecha de Nacimiento: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreEdad" required="" value="<?php echo $provBD['PadreEdad']; ?>">
-                                                                        <label class="active" for="nombre">Edad:</label>
+                                                                        <input id="edad" type="text" class="validate" name="PadreEdad" required="" value="<?php echo $provBD['PadreEdad']; ?>" readonly="">
+                                                                        <label class="active" for="nombre">Edad: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreEstCivil" required="" value="<?php echo $provBD['PadreEstCivil']; ?>">
-                                                                        <label class="active" for="nombre">Estado Civil:</label>
+                                                                        <label class="active">Estado Civil: *</label>
+                                                                        <select id="operador" class="browser-default" name="PadreEstCivil" required="">
+                                                                            <option value="" disabled selected>*Escoge su Estado Civil:</option>
+                                                                            <option value="1" >Soltero(a)</option>
+                                                                            <option value="2" >Casado(a)</option>
+                                                                            <option value="3" >Viudo(a)</option>
+                                                                            <option value="4" >Divorciado(a)</option>
+                                                                            <option value="5" >Conviviente</option>
+                                                                            <option value="6" >Otro</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreEstCivilEspecifique" required="" value="<?php echo $provBD['PadreEstCivilEspecifique']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreEstCivilEspecifique" value="<?php echo $provBD['PadreEstCivilEspecifique']; ?>">
                                                                         <label class="active" for="nombre">E.Civil Especifique:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreViveCon" required="" value="<?php echo $provBD['PadreViveCon']; ?>">
-                                                                        <label class="active" for="nombre">Padre vive con:</label>
+                                                                        <label class="active">Padre vive con: *</label>
+                                                                        <select id="operador" class="browser-default" name="PadreViveCon" required="">
+                                                                            <option value="" disabled selected>*Escoge :</option>
+                                                                            <option value="Si" >Si</option>
+                                                                            <option value="No" >No</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -175,7 +194,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreGradoInstruccion" required="" value="<?php echo $provBD['PadreGradoInstruccion']; ?>">
-                                                                        <label class="active" for="nombre">Grdo de Instruccion:</label>
+                                                                        <label class="active" for="nombre">Grado de Instruccion:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -202,21 +221,20 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <label class="active" for="nombre">Centro de Trabajo:</label>
                                                                     </div>
                                                                 </div>
-                                                          
-                                                                
-                                                                </div>
-                                                                <br>
-                                                                <div class="divider"></div>
-                                                                <div class="row">
-                                                                    <div class="input-field col s12">
-                                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Guardar Cambios
-                                                                            <i class="mdi-content-save left"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
 
-                                                            </form>
+
                                                         </div>
+                                                        <br>
+                                                        <div class="divider"></div>
+                                                        <div class="row">
+                                                            <div class="input-field col s12">
+                                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Guardar Cambios
+                                                                    <i class="mdi-content-save left"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -224,8 +242,9 @@ if (!isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
+
                         <!--end container-->
                         <!--modal correcto-->
                         <div id="modal1" class="modal">
@@ -234,7 +253,14 @@ if (!isset($_SESSION['usuario'])) {
                                 <p>Padre modificado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-padres.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <?php if ('1' == $_SESSION['permisos']) { ?>
+                                    <a href="page-ver-padres.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+
+                                <?php } else { ?>
+
+                                    <a href="index.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+
+                                <?php } ?>
                             </div>
                         </div>
                         <!--modal error-->
@@ -268,7 +294,7 @@ if (!isset($_SESSION['usuario'])) {
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
             <!-- START FOOTER -->
-    <?php include 'inc/footer.inc'; ?>
+            <?php include 'inc/footer.inc'; ?>
             <!-- END FOOTER -->
 
 
@@ -288,32 +314,79 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-                $(document).ready(function () {
-                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-                    
-                    $('#modal1').modal();
-                    $('#modal2').modal();
-                });
-                var frm = $('#configurar');
 
-                frm.submit(function (ev) {
-                    ev.preventDefault();
-                    $.ajax({
-                        type: frm.attr('method'),
-                        url: frm.attr('action'),
-                        data: frm.serialize(),
-                        success: function (respuesta) {
-                            if (respuesta == 1) {
-                                $('#modal1').openModal();
-                            } else {
-
-                                $('#modal2').openModal();
-                            }
-                        }
-                    });
+                                                                            function val(e) {
+                                                                                tecla = (document.all) ? e.keyCode : e.which;
+                                                                                if (tecla == 8)
+                                                                                    return true;
+                                                                                patron = /[A-Za-z áéíóú]/;
+                                                                                te = String.fromCharCode(tecla);
+                                                                                return patron.test(te);
+                                                                            }
+                                                                            function num(e) {
+                                                                                tecla = (document.all) ? e.keyCode : e.which;
+                                                                                if (tecla == 8)
+                                                                                    return true;
+                                                                                patron = /[0-9]/;
+                                                                                te = String.fromCharCode(tecla);
+                                                                                return patron.test(te);
+                                                                            }
 
 
-                });
+                                                                            function calcularfecha() {
+                                                                                var fechaA = new Date();
+                                                                                var fechaI = $('#fecha').val();
+
+
+
+                                                                                var anioA = fechaA.getUTCFullYear();
+                                                                                var mesA = fechaA.getUTCMonth() + 1;
+                                                                                var anioI = fechaI.slice(0, 4);
+                                                                                var mesI = fechaI.slice(5, 7);
+
+                                                                                console.log(anioA);
+                                                                                console.log(anioI);
+                                                                                console.log(mesA);
+                                                                                console.log(mesI);
+
+                                                                                var anioE = anioA - anioI;
+                                                                                var mesE;
+                                                                                if (mesI > mesA) {
+                                                                                    anioE--;
+                                                                                    mesE = 12 - (mesI - mesA);
+                                                                                } else {
+                                                                                    mesE = mesA - mesI;
+                                                                                }
+                                                                                console.log(anioE + " " + mesE);
+                                                                                $('#edad').val(anioE + " año(s) " + mesE + " mes(es)");
+                                                                            }
+
+                                                                            $(document).ready(function () {
+                                                                                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+
+                                                                                $('#modal1').modal();
+                                                                                $('#modal2').modal();
+                                                                            });
+                                                                            var frm = $('#configurar');
+
+                                                                            frm.submit(function (ev) {
+                                                                                ev.preventDefault();
+                                                                                $.ajax({
+                                                                                    type: frm.attr('method'),
+                                                                                    url: frm.attr('action'),
+                                                                                    data: frm.serialize(),
+                                                                                    success: function (respuesta) {
+                                                                                        if (respuesta == 1) {
+                                                                                            $('#modal1').openModal();
+                                                                                        } else {
+
+                                                                                            $('#modal2').openModal();
+                                                                                        }
+                                                                                    }
+                                                                                });
+
+
+                                                                            });
             </script>
 
         </body>

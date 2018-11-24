@@ -95,8 +95,8 @@ $(function () {
                     success: function (respuesta) {
                         console.log(respuesta);
 
-                        //$('#modal2').openModal();
-                        document.location.href = "page-declaracion-jurada.php?alumno=" + dni;
+                        $('#modal2').openModal();
+//                        document.location.href = "page-declaracion-jurada.php?alumno=" + dni;
                         //                                location.reload();
                         //                                $('#modal2').openModal();
 

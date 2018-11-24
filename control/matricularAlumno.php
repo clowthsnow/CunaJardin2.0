@@ -6,14 +6,15 @@ include '../conexion.php';
 
 $alumno = $_POST['id'];
 $aula=$_POST['aula'];
-
+$fecha = new DateTime();
+$anio = $fecha->format('Y');
 
 if (  !isset($alumno) || !isset($aula)) {
     header("location:../page-matricula-estudiante.php");
 }
 
 
-$insertar="INSERT INTO aulaalumnos( AulaAlumnosId,AulaAlumnosAlumno) VALUES ('$aula','$alumno')";
+$insertar="INSERT INTO aulaalumnos( AulaAlumnosId,AulaAlumnosAlumno,AulaAlumnosAnio) VALUES ('$aula','$alumno','$anio')";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';

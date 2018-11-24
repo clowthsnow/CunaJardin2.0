@@ -6,6 +6,10 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
+    
+    date_default_timezone_set('America/Lima');
+    $fecha = new DateTime();
+    $anio = $fecha->format('Y');
     $buscarDoc = "SELECT * FROM docente where DocenteEstReg='A'";
     $resultDoc = $conexion->query($buscarDoc);
     ?>
@@ -105,8 +109,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
 
-                                                                        <input id="anho" type="text" class="validate" name="anhoaula" required="">
-                                                                        <label for="anho">Anho: </label>
+                                                                        <input hidden="" id="anho" type="text" class="validate" name="anhoaula" required="" value="<?php echo $anio?>">
+                                                                        <label for="anho" hidden="">Anho: </label>
                                                                     </div>
                                                                 </div>
                                                                 

@@ -80,7 +80,7 @@ if (!isset($_SESSION['usuario'])) {
                                             <div class="divider"></div>
                                             <div class="container">
 
-                                                <a href="page-crear-aula.php" align="right" class="btn cyan waves-effect waves-light right"><i class="mdi-action-search left"></i> Nuevo Grupo</a>
+<!--                                                <a href="page-crear-aula.php" align="right" class="btn cyan waves-effect waves-light right"><i class="mdi-action-search left"></i> Nuevo Grupo</a>-->
 
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">

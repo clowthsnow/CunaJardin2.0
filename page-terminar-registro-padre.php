@@ -124,7 +124,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreCelular" required="" value="<?php echo $provBD['PadreCelular']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreCelular" required="" value="<?php echo $provBD['PadreCelular']; ?>" minlength="9" maxlength="9" onkeypress="return num(event)">
                                                                         <label class="active" for="nombre">Celular: *</label>
                                                                     </div>
                                                                 </div>
@@ -148,14 +148,14 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="fecha" type="text" class="validate datepicker" name="PadreFechaNac" required="" value="<?php echo $provBD['PadreFechaNac']; ?>">
+                                                                        <input id="fecha" type="text" class="validate datepicker" name="PadreFechaNac" required="" value="<?php echo $provBD['PadreFechaNac']; ?>" onchange="calcularfecha()">
                                                                         <label class="active" for="nombre">Fecha de Nacimiento: *</label>
                                                                     </div>
 
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="edad" type="text" class="validate" name="PadreEdad" required="" value="<?php echo $provBD['PadreEdad']; ?>" onchange="calcularfecha()">
+                                                                        <input id="edad" type="text" class="validate" name="PadreEdad" required="" value="<?php echo $provBD['PadreEdad']; ?>" readonly="">
                                                                         <label class="active" for="nombre">Edad: *</label>
                                                                     </div>
                                                                 </div>
@@ -178,7 +178,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
-                                                                        <input id="nombre" type="text" class="validate" name="PadreEstCivilEspecifique" required="" value="<?php echo $provBD['PadreEstCivilEspecifique']; ?>">
+                                                                        <input id="nombre" type="text" class="validate" name="PadreEstCivilEspecifique" value="<?php echo $provBD['PadreEstCivilEspecifique']; ?>">
                                                                         <label class="active" for="nombre">E.Civil Especifique:</label>
                                                                     </div>
                                                                 </div>
@@ -204,7 +204,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreGradoInstruccion" required="" value="<?php echo $provBD['PadreGradoInstruccion']; ?>">
-                                                                        <label class="active" for="nombre">Grdo de Instruccion:</label>
+                                                                        <label class="active" for="nombre">Grado de Instruccion:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -268,7 +268,7 @@ if (!isset($_SESSION['usuario'])) {
                         <p>Padre modificado correctamente.</p>
                     </div>
                     <div class="modal-footer">
-                        <a href="page-ver-padres.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                        <a href="index.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                     </div>
                 </div>
                 <!--modal error-->
