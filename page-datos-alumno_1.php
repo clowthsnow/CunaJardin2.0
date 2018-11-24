@@ -123,7 +123,7 @@ if (!isset($_SESSION['usuario'])) {
                                                         <div class="row">
                                                             <div class="resp"></div>
 
-                                                        <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
+                                                                <!--<div class="ok"><p>Su solicitud ha sido enviada</p></div>-->
 
                                                             <form id="formulario" action="control/crearEstudiante.php" method="POST" enctype="multipart/form-data" name="formulario">
                                                             <!--<form id="formulario" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" name="formulario">-->
@@ -143,7 +143,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                             <label for="nombre" hidden="">foto: *</label>
                                                                         </div>
                                                                         <div class="file-field input-field col s12 m12 l12">
-                                                                            <input id="validF" class="file-path validate" type="text"  required="" onchange="llenarInput()" style="padding-left: 3%;"/>
+                                                                            <input id="validF" class="file-path validate" type="text"  required="" onchange="llenarInput()" style="padding-left: 3%; width: 72% !important;"/>
                                                                             <div class="btn">
                                                                                 <span>Foto: *</span>
                                                                                 <input type="file" name="foto" required="" />
@@ -505,7 +505,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         </div>
                                                                     </div>
 
-                                                        <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
+                                                                <!--<input type="submit" name="next" class="next" value="Proximo"/>-->
                                                                 </fieldset>
                                                                 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
                                                                 <script type="text/javascript" src="js/function.js"></script>
@@ -526,7 +526,7 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>Turno no creado correctamente.</p>
+                                <p>Alumno no creado correctamente.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
@@ -536,10 +536,10 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="green-text">EXITO!!!</h4>
-                                <p>Turno creado correctamente.</p>
+                                <p>Alumno registrado correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-crear-turno.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-datos-alumno_1.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                     </section>

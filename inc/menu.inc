@@ -43,7 +43,7 @@ if ('1' == $_SESSION['permisos']) {
 
                                 <li><a href="page-datos-alumno_1.php">Crear nuevo Estudiante</a>
                                 </li>
-                                <li><a href="page-ver-Estudiantes.php">Ver Estudiantes</a>
+                                <li><a href="page-ver-Estudiantes-1.php">Ver Estudiantes</a>
                                 </li>
 
                                 <li><a href="page-crear-tipoAlumno.php">Crear Tipo Alumno</a>
@@ -67,7 +67,7 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
-                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
+    <!--                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="page-ver-grupos2.php">Ver Grupos</a>
@@ -78,12 +78,12 @@ if ('1' == $_SESSION['permisos']) {
 
                             </ul>
                         </div>
-                    </li>
+                    </li>-->
 
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Gestion de Matricula</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="page-matricula-estudiante.php">Gestionar Matricula</a>
+                                <li><a href="page-ver-Estudiantes.php">Gestionar Matricula</a>
                                 </li>                                        
                                 <li><a href="page-ver-matriculados.php">Ver Matriculados</a>
                                 </li>
@@ -255,10 +255,12 @@ if ('1' == $_SESSION['permisos']) {
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Gestion de Notas</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-crear-nota.php">Ingresar Nota</a>
-                                    </li>                                        
-                                    <li><a href="page-ver-notas.php">Ver Notas</a>
-                                    </li>
+                                    <!--                                    <li><a href="page-crear-nota.php">Ingresar Nota</a>
+                                                                        </li>                                        
+                                                                        <li><a href="page-ver-notas.php">Ver Notas</a>
+                                                                        </li>-->
+                                    <li><a href="page-ver-grupos.php">Ver Grupos</a>
+                                    </li>   
 
                                 </ul>
                             </div>
@@ -343,19 +345,22 @@ if ('1' == $_SESSION['permisos']) {
                         </li>
 
                     <?php } ?>
-                    <?php if ('4' == $_SESSION['permisos']) { 
-                        
+                    <?php
+                    if ('4' == $_SESSION['permisos']) {
+
                         $dni = $_SESSION['usuario'];
                         $buscarPadres = "SELECT * FROM padre WHERE PadreDni='$dni'";
                         $resultado = $conexion->query($buscarPadres) or die($conexion->error);
                         $row = $resultado->fetch_assoc();
-                        if($row['PadreEstReg']=="I"){
+                        if ($row['PadreEstReg'] == "I") {
 //                            header("location:../page-configurar-padre.php?id=$dni");
                             header("location:page-terminar-registro-padre.php?id=$dni");
+//                            print_r($row32165487);
                         }
-                        
                         ?>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Matricula</a>
+                        <li class="bold"><a href="page-configurar-padre.php?id=<?php echo $dni ?>" class=" waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Mis Datos</a>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Mi(s) Hijo(s)</a>
                             <div class="collapsible-body">
                                 <ul>
                                     <?php
@@ -364,69 +369,47 @@ if ('1' == $_SESSION['permisos']) {
                                     $resulthijos = $conexion->query($buscar) or die($conexion->error);
                                     while ($fila = $resulthijos->fetch_assoc()) {
                                         ?>
-                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
+                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>"><?php echo $fila['AlumnoNombre'] . " " . $fila['AlumnoApellidos'] ?></a>
                                         </li>
-                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+            <!--                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+                                        </li>-->
+                                        <li class="divider"></li>
+                                        <?php
+                                    }
+                                    ?>
+
+                                    <li><a href="page-datos-alumno_1.php">Ingresar Nuevo Hijo</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Matricular</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <?php
+                                    $userid = $_SESSION['usuario'];
+                                    $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
+                                    $resulthijos = $conexion->query($buscar) or die($conexion->error);
+                                    while ($fila = $resulthijos->fetch_assoc()) {
+                                        ?>
+            <!--                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>"><?php echo $fila['AlumnoNombre'] . " " . $fila['AlumnoApellidos'] ?></a>
+                                            </li>-->
+            <!--                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
+                                            </li>
+                                        -->
+                                        <li><a href="page-declaracion-jurada.php?usuario=<?php echo $fila['AlumnoDni'] ?>&padre=<?php echo $dni ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
                                         </li>
                                         <li class="divider"></li>
                                         <?php
                                     }
                                     ?>
 
-                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
-                                    </li>
+
 
                                 </ul>
                             </div>
                         </li>
-        <!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i> Gestion de Pago</a>
-                            <div class="collapsible-body">
-                                <ul>
-                        <?php
-                        $userid = $_SESSION['usuario'];
-                        $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
-                        $resulthijos = $conexion->query($buscar) or die($conexion->error);
-                        while ($fila = $resulthijos->fetch_assoc()) {
-                            ?>
-                                                        <li><a href="page-configurar-estudiante.php?id=<?php echo $fila['AlumnoDni'] ?>">Configurar <?php echo $fila['AlumnoNombre'] ?></a>
-                                                        </li>
-                                                        <li><a href="page-matricula-estudiante.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Matricular a <?php echo $fila['AlumnoNombre'] ?></a>
-                                                        </li>
-                                                        <li class="divider"></li>
-                            <?php
-                        }
-                        ?>
-
-                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </li>-->
-        <!--                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
-                            <div class="collapsible-body">
-                                <ul>
-                        <?php
-                        $userid = $_SESSION['usuario'];
-                        $buscar = "SELECT * FROM alumno WHERE alumno.AlumnoTutorIdMadre='$userid'";
-                        $resulthijos = $conexion->query($buscar) or die($conexion->error);
-                        while ($fila = $resulthijos->fetch_assoc()) {
-                            ?>
-                                                        <li><a href="page-registrar-pago.php?id=<?php echo $fila['AlumnoDni'] ?>">Regitrar Pago <?php echo $fila['AlumnoNombre'] ?></a>
-                                                        </li>
-                                                        <li><a href="page-ver-pagos.php?usuario=<?php echo $fila['AlumnoDni'] ?>">Ver Pagos <?php echo $fila['AlumnoNombre'] ?></a>
-                                                        </li>
-                                                        <li class="divider"></li>
-                            <?php
-                        }
-                        ?>
-
-                                    <li><a href="page-datos-alumno.php">Ingresar Nuevo Hijo</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </li>-->
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
                             <div class="collapsible-body">
                                 <ul>

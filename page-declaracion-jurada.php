@@ -10,19 +10,34 @@ if (!isset($_SESSION['usuario'])) {
     include 'conexion.php';
     $usuario = $_GET['usuario'];
     $padre = $_GET['padre'];
-
+    $anio = $fecha->format('Y');
+    $matriculado = 1;
     if (!isset($usuario) || !isset($padre)) {
-//        header("location:page-datos-alumno.php");
+//        header("location:page-datos-alumno_1.php");
     }
     //echo $usuario;
+
+    $buscarA = "SELECT * FROM alumno WHERE AlumnoDni='$usuario'";
+    $resultadoA = $conexion->query($buscarA);
+    $provBDA = $resultadoA->fetch_assoc();
 
     $buscapadre = "SELECT * FROM padre WHERE PadreDni='$padre'";
     $resultado = $conexion->query($buscapadre);
     if ($resultado->num_rows === 0) {
-        header("location:page-datos-alumno.php");
+        header("location:page-datos-alumno_1.php");
     }
     $provBD = $resultado->fetch_assoc();
 //    print_r($provBD);
+
+    $buscarAlumnoMatriculad = "SELECT * FROM aulaalumnos WHERE AulaAlumnosAlumno='$usuario' AND AulaAlumnosAnio='$anio'";
+    $resultadoMat = $conexion->query($buscarAlumnoMatriculad);
+    if ($resultadoMat->num_rows === 1) {
+        $matriculado = 0;
+    } else {
+        if ($provBDA['AlumnoDeclaracionJurada'] == '1') {
+            header("location:page-subir-documentos.php?usuario=$usuario");
+        }
+    }
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -39,6 +54,12 @@ if (!isset($_SESSION['usuario'])) {
             <link href="css/materialize.css" type="text/css" rel="stylesheet">
             <link href="css/style.css" type="text/css" rel="stylesheet" >
             <link href="css/estilos.css" type="text/css" rel="stylesheet" >
+
+
+            <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
+            <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+            <link href="js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+
 
 
             <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->    
@@ -97,64 +118,107 @@ if (!isset($_SESSION['usuario'])) {
                                                 <!-- Form with validation -->
                                                 <div class="col offset-l2 s12 m12 l8">
                                                     <div class="card-panel">
-                                                        <h4 class="header2">Declaracion del Padre de Familia</h4>
-                                                        <div class="row">
-                                                            <form id="permisos" class="col s12" action="control/aceptarDeclaracion.php" method="POST">
-                                                                <input type="text" name="usuario" hidden="true" value="<?php echo $usuario; ?>">
-                                                                <div class="row">
-                                                                    <div class="col s12">
-                                                                        <p>
+                                                        <?php if ($matriculado === 1) { ?>
+                                                            <h4 class="header2">Declaracion del Padre de Familia</h4>
+                                                            <div class="row">
+                                                                <form id="permisos" class="col s12" action="control/aceptarDeclaracion.php" method="POST">
+                                                                    <input type="text" name="usuario" hidden="true" value="<?php echo $usuario; ?>">
+                                                                    <div class="row">
+                                                                        <div class="col s12">
+                                                                            <p>
 
-                                                                            Yo, <?php echo $provBD['PadreNombre'] . " " . $provBD['PadreApellidos']; ?> identificado (a) con DNI N° <?php echo $padre; ?> 
-                                                                            suscribo el presente documento, de acuerdo a lo establecido en el articulo 3° de la ley n° 26459  de los Centros Educativos
-                                                                            Privados, concordante con el articul 5° del Decreto Legislativo n° 882 Ley de la Promocion de la Inversion en la Educacion, 
-                                                                            con el articulo 5° inciso d) y el articulo 6° inciso e) del Decreto supremo n°011-998-ED y el articulo 3° del Decreto Supremo n° 005-2002-ED.
-                                                                            <br>
-                                                                            <br><b>Declaro conocer la informacion relacionada con el Costo del Servicio Educativo</b>, que sustenta la Educacion 
-                                                                            en la Cuna Jardin UNSA y por lo tanto, sus fines y obejitvos establecidos en el Reglamentos Interno de la Institucion; por lo 
-                                                                            que expreso mi comportamiento de observar y respetar el Reglamento.
-                                                                            <br>
-                                                                        <p style='margin-left: 2em'>1. <b>Asumo el Compromiso de cumplir con el pago de pensiones de enseñanza dentro de los primeros 3 ultimos dias correspondientes al mes</b>, 
-                                                                            por que reconozco que el Presupuesto de la Operacion e Inversion de la I.E.I. se financia con las pensiones de enseñanza que a su vez solventan el pago de remuneraciones 
-                                                                            del personal docente, administrativo y de mantenimiento.</p>
-                                                                        <p style='margin-left: 2em'>2. Declaro conocer que en caso de incumplimiento del pago de pensiones de la Institucion Educativa Cuna Jardin UNSA, a no ser por causa justificada 
-                                                                            , <b>no se le ratificara la matricula del estudiante para el año siguiente</b>. Asimismo no se entregara ninguna documentacion del niño (a) hasta el pago de las pensiones faltantes.</p>
-                                                                        <p style='margin-left: 2em'>3. Declaro conocer que el Informe del Progreso del Niño sera Entregrado a los Padres de Familia o Apoderados que se encuentren al dia con el pago de las pensiones 
-                                                                            de enseñanza.</p>
-                                                                        <p style='margin-left: 2em'>4. Los niños que ocasionen daños a los bienes, mobiliario u objetos, los padres deberan reponer o reparar o cambiar segun sea el daño.</p>
-                                                                        <p style='margin-left: 2em'></p>
-                                                                        <p style='margin-left: 2em'></p>
-                                                                        <p style='margin-left: 2em'></p>
-                                                                        <p style='margin-left: 2em'></p>
-                                                                        <b>En base a estos fundamentos</b> y como Padre de Familia acepto libremente las clausulas anteriores, las nomas internas de la institucion Educativa Inicial y en la ciudad de Arequipa a fecha <?php echo $fecha->format('Y-m-d'); ?>
-                                                                        </p> 
+                                                                                Yo, <?php echo $provBD['PadreNombre'] . " " . $provBD['PadreApellidos']; ?> identificado (a) con DNI N° <?php echo $padre; ?> 
+                                                                                suscribo el presente documento, de acuerdo a lo establecido en el articulo 3° de la ley n° 26459  de los Centros Educativos
+                                                                                Privados, concordante con el articul 5° del Decreto Legislativo n° 882 Ley de la Promocion de la Inversion en la Educacion, 
+                                                                                con el articulo 5° inciso d) y el articulo 6° inciso e) del Decreto supremo n°011-998-ED y el articulo 3° del Decreto Supremo n° 005-2002-ED.
+                                                                                <br>
+                                                                                <br><b>Declaro conocer la informacion relacionada con el Costo del Servicio Educativo</b>, que sustenta la Educacion 
+                                                                                en la Cuna Jardin UNSA y por lo tanto, sus fines y obejitvos establecidos en el Reglamentos Interno de la Institucion; por lo 
+                                                                                que expreso mi comportamiento de observar y respetar el Reglamento.
+                                                                                <br>
+                                                                            <p style='margin-left: 2em'>1. <b>Asumo el Compromiso de cumplir con el pago de pensiones de enseñanza dentro de los primeros 3 ultimos dias correspondientes al mes</b>, 
+                                                                                por que reconozco que el Presupuesto de la Operacion e Inversion de la I.E.I. se financia con las pensiones de enseñanza que a su vez solventan el pago de remuneraciones 
+                                                                                del personal docente, administrativo y de mantenimiento.</p>
+                                                                            <p style='margin-left: 2em'>2. Declaro conocer que en caso de incumplimiento del pago de pensiones de la Institucion Educativa Cuna Jardin UNSA, a no ser por causa justificada 
+                                                                                , <b>no se le ratificara la matricula del estudiante para el año siguiente</b>. Asimismo no se entregara ninguna documentacion del niño (a) hasta el pago de las pensiones faltantes.</p>
+                                                                            <p style='margin-left: 2em'>3. Declaro conocer que el Informe del Progreso del Niño sera Entregrado a los Padres de Familia o Apoderados que se encuentren al dia con el pago de las pensiones 
+                                                                                de enseñanza.</p>
+                                                                            <p style='margin-left: 2em'>4. Los niños que ocasionen daños a los bienes, mobiliario u objetos, los padres deberan reponer o reparar o cambiar segun sea el daño.</p>
+                                                                            <p style='margin-left: 2em'></p>
+                                                                            <p style='margin-left: 2em'></p>
+                                                                            <p style='margin-left: 2em'></p>
+                                                                            <p style='margin-left: 2em'></p>
+                                                                            <b>En base a estos fundamentos</b> y como Padre de Familia acepto libremente las clausulas anteriores, las nomas internas de la institucion Educativa Inicial y en la ciudad de Arequipa a fecha <?php echo $fecha->format('Y-m-d'); ?>
+                                                                            </p> 
+                                                                        </div>
                                                                     </div>
+
+
+                                                                    <br>
+                                                                    <div class="divider"></div>
+                                                                    <div class="row">
+
+                                                                        <div class="input-field col s12 m12 l12">
+                                                                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action"> Aceptar y Continuar
+                                                                                <i class="mdi-image-edit left"></i>
+                                                                            </button>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </form>
+
+                                                            </div>
+                                                        <?php } else { ?>
+                                                            <h4 class="header2">El Alumno ya se encuentra matriculado</h4>
+                                                            <div class="row">
+                                                                <div class="col s12 m12 l12">
+                                                                    <a href="page-imprimir-declaracion.php?usuario=<?php echo $usuario ?>" class="waves-effect waves-green btn">Imprimir Declaracion Jurada</a>
                                                                 </div>
+                                                            </div> 
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col s12 m12 l12">
+                                                                    <p> Historial</p>
+                                                                    <table id="data-table-simple" class="responsive-table display " cellspacing="0">
 
-                                                        </div>
-                                                        <br>
-                                                        <div class="divider"></div>
-                                                        <div class="row">
-<!--                                                            <div class="input-field col s12 m4 l4">
-                                                                                                                                <button class="btn cyan waves-effect waves-light right" > Aceptar y Continuar
-                                                                                                                                    <i class="mdi-image-edit left"></i>
-                                                                                                                                </button>
-                                                                <a href="page-imprimir-registro.php?usuario=<?php echo $usuario;?>" target="_blank" class="btn cyan waves-effect waves-light">Imprimir ficha</a>
+                                                                        <thead>
+                                                                            <tr>                                                                    
+                                                                                <th>Nombre</th>                                                                        
+                                                                                <th>Grado</th>
+                                                                                <th>Año</th>
+                                                                            </tr>
+                                                                        </thead>
 
+                                                                        <tfoot>
+                                                                            <tr>
+                                                                                <th>Nombre</th>                                                                        
+                                                                                <th>Grado</th>
+                                                                                <th>Año</th>
+                                                                            </tr>
+                                                                        </tfoot>
+
+                                                                        <tbody>
+                                                                            <?php
+                                                                            $buscarAlumnoMatriculas = "SELECT aulaalumnos.*, aula.* FROM aulaalumnos "
+                                                                                    . "LEFT JOIN aula ON aulaalumnos.AulaAlumnosId=aula.AulaId "
+                                                                                    . "WHERE AulaAlumnosAlumno='$usuario'";
+                                                                            $resultadoMats = $conexion->query($buscarAlumnoMatriculas) or die($conexion->error);
+
+                                                                            while ($row = $resultadoMats->fetch_assoc()) {
+
+//                                                                            print_r($row);
+                                                                                echo "<tr>
+                                                                        <td>" . $provBDA['AlumnoNombre'] . " " . $provBDA['AlumnoApellidos'] . "</td>
+                                                                        <td>" . $row['AulaGrado'] . " años" . "</td>
+                                                                            <td>" . $row['AulaAlumnosAnio'] . "</td>";
+                                                                            }
+                                                                            ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                            <div class="input-field col s12 m4 l4">
-                                                                <a href="page-imprimir-declaracion.php?usuario=<?php echo $usuario;?>" target="_blank" class="btn cyan waves-effect waves-light">Imprimir declaracion</a>
-
-                                                            </div>-->
-                                                            <div class="input-field col s12 m12 l12">
-                                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action"> Aceptar y Continuar
-                                                                    <i class="mdi-image-edit left"></i>
-                                                                </button>
-                                                            </div>
-
-                                                        </div>
-
-                                                        </form>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,82 +226,75 @@ if (!isset($_SESSION['usuario'])) {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        <!--end container-->
+                        <!--modal correcto-->
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                                <h4 class="green-text">EXITO!!!</h4>
+                                <p>Usuario y privilegios registrados correctamente</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="page-crear-usuario.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                            </div>
+                        </div>
+                        <!--modal error-->
+                        <div id="modal2" class="modal">
+                            <div class="modal-content">
+                                <h4 class="red-text">ERROR!!!</h4>
+                                <p>Escoja un sistema para poder asignarle los permisos necesarios al usuario</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END CONTENT -->
+
+                    <!-- //////////////////////////////////////////////////////////////////////////// -->
+                    <!-- START RIGHT SIDEBAR NAV-->
+                    <aside id="right-sidebar-nav">
+
+                    </aside>
+                    <!-- LEFT RIGHT SIDEBAR NAV-->
 
                 </div>
-                <!--end container-->
-                <!--modal correcto-->
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                        <h4 class="green-text">EXITO!!!</h4>
-                        <p>Usuario y privilegios registrados correctamente</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="page-crear-usuario.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
-                    </div>
-                </div>
-                <!--modal error-->
-                <div id="modal2" class="modal">
-                    <div class="modal-content">
-                        <h4 class="red-text">ERROR!!!</h4>
-                        <p>Escoja un sistema para poder asignarle los permisos necesarios al usuario</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
-                    </div>
-                </div>
-            </section>
-            <!-- END CONTENT -->
+                <!-- END WRAPPER -->
+
+            </div>
+            <!-- END MAIN -->
+
+
 
             <!-- //////////////////////////////////////////////////////////////////////////// -->
-            <!-- START RIGHT SIDEBAR NAV-->
-            <aside id="right-sidebar-nav">
 
-            </aside>
-            <!-- LEFT RIGHT SIDEBAR NAV-->
-
-        </div>
-        <!-- END WRAPPER -->
-
-    </div>
-    <!-- END MAIN -->
+            <!-- START FOOTER -->
+            <?php include 'inc/footer.inc'; ?>
+            <!-- END FOOTER -->
 
 
+            <!-- ================================================
+            Scripts
+            ================================================ -->
 
-    <!-- //////////////////////////////////////////////////////////////////////////// -->
+            <!-- jQuery Library -->
+            <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>  
 
-    <!-- START FOOTER -->
-    <?php include 'inc/footer.inc'; ?>
-    <!-- END FOOTER -->
+            <!--materialize js-->
+            <script type="text/javascript" src="js/materialize.js"></script>
+            <!--scrollbar-->
+            <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+            <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+
+            <script type="text/javascript" src="js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="js/plugins/data-tables/data-tables-inventario.js"></script>
+
+            <script type="text/javascript" src="js/plugins.js"></script>
 
 
-    <!-- ================================================
-    Scripts
-    ================================================ -->
-
-    <!-- jQuery Library -->
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>  
-
-    <!--materialize js-->
-    <script type="text/javascript" src="js/materialize.js"></script>
-    <!--scrollbar-->
-    <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="js/plugins.js"></script>
-
-    <script>
-        $(document).ready(function () {
-        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-
-        $('#modal1').modal();
-        $('#modal2').modal();
-        });
-        var frm = $('#permisos');
-        });
-    </script>
-
-    </body>
+        </body>
 
     </html>
     <?php

@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
-    $buscar = "SELECT * FROM aula";
+    $buscar = "SELECT * FROM aula WHERE AulaEstReg='A'";
     $result = $conexion->query($buscar);
  
     date_default_timezone_set('America/Lima');
@@ -97,7 +97,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <select id="disco" class="browser-default" name="ComunicadoAula" required="">
                                                                             <option value="" disabled selected>Escoge una Aula</option>
                                                                             <?php while ($row = $result->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $row['AulaId']; ?>"><?php echo $row['AulaId']."-". $row['AulaGrado']; ?></option>
+                                                                                <option value="<?php echo $row['AulaId']; ?>"><?php echo $row['AulaId']."-". $row['AulaGrado']." año(s)"; ?></option>
                                                                             <?php }
                                                                             ?>
 

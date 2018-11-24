@@ -177,6 +177,7 @@ $html = '<p>  Yo,' . $padres['PadreNombre'] . ' ' . $padres['PadreApellidos'] . 
 //$pdf->Cell(0, 10, '         4.6. Limitaciones Fisicas: '.$foo['AlumnoLimitacionFisica'].' '.$foo['AlumnoLimitacionFisicaDet'], 0, 1);
 //$pdf->Cell(0, 10, '         4.7. Dificultades Sensiorales: '.$foo['AlumnoDificultadControl'].' '.$foo['AlumnoDificultadControlDet'], 0, 1);
 //$pdf->Cell(0, 10, '         4.8. Alergias: '.$foo['AlumnoAlergias'].' '.$foo['AlumnoAlergiasDet'], 0, 1);
+$html = utf8_decode($html);
 $pdf->WriteHTML($html);
 $pdf->Output();
 ?>

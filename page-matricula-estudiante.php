@@ -164,7 +164,7 @@ if (!isset($_SESSION['usuario'])) {
                                 <p>Matricula registrada correctamente.</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-estudiantes.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-matricula-exitosa.php?usuario=<?php echo $usuario; ?>" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                     </section>

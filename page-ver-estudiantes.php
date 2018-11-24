@@ -127,7 +127,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         $consultaMatri = "SELECT * FROM aulaalumnos WHERE AulaAlumnosAlumno='$DNIA'";
                                                                         $resultado2 = $conexion->query($consultaMatri);
                                                                         if ($resultado2->num_rows === 0) {
-                                                                            echo "<td><a href=\"page-matricula-estudiante.php?usuario=" . $row['AlumnoDni'] . "\"><span class=\"task-cat green\">Matricular</span></a></td>";
+                                                                            echo "<td><a href=\"page-declaracion-jurada.php?usuario=" . $row['AlumnoDni'] . "&padre=".$row['AlumnoTutorIdMadre']."\"><span class=\"task-cat green\">Matricular</span></a></td>";
                                                                         } else {
                                                                             echo "<td><span class=\"task-cat cyan\">Matriculado</span></a></td>";
                                                                         }
