@@ -67,6 +67,11 @@ if ('1' == $_SESSION['permisos']) {
                             </ul>
                         </div>
                     </li>
+    <!--                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="page-ver-grupos2.php">Ver Grupos</a>
+                                </li>    
 
     <!--                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
 
@@ -270,13 +275,9 @@ if ('1' == $_SESSION['permisos']) {
                             </div>
                         </li> <?php } ?>
                     <?php if ('3' == $_SESSION['permisos']) { ?>
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Contabilidad</a>
+                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Tipo de Concepto</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-crear-contabilidad.php">Crear Registro</a>
-                                    </li>
-                                    <li><a href="page-ver-contabilidad.php">Ver Registro</a>
-                                    </li>
                                     <li><a href="page-crear-tipoConcepto.php">Crear Tipo de Concepto</a>
                                     </li>
                                     <li><a href="page-ver-tipoConceptos.php">Ver Tipos de Concepto</a>
@@ -287,9 +288,7 @@ if ('1' == $_SESSION['permisos']) {
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Vouchers</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-registar-voucher.php">Registar Voucher</a>
-                                    </li>
-                                    <li><a href="page-ver-vouchers.php">Ver Vouchers</a>
+                                    <li><a href="page-ver-vouchers.php">Gestion de Voucher</a>
                                     </li>
                                 </ul>
                             </div>
@@ -297,9 +296,9 @@ if ('1' == $_SESSION['permisos']) {
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Boletas</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-registrar-boleta.php">Registrar Boleta</a>
+                                    <li><a href="page-ver-boletas.php">Gestion de Boletas</a>
                                     </li>
-                                    <li><a href="page-ver-boletas.php">Ver Boletas</a>
+                                    <li><a href="page-import-boletas.php">Importar Bolestas CSV</a>
                                     </li>
                                 </ul>
                             </div>
@@ -307,9 +306,9 @@ if ('1' == $_SESSION['permisos']) {
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Ingresos</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-registrar-ingresos.php">Registrar R. de Ingresos</a>
+                                    <li><a href="page-ver-ingresos.php">Gestion de Ingresos</a>
                                     </li>
-                                    <li><a href="page-ver-ingresos.php">Ver Recibo de Ingresos</a>
+                                    <li><a href="page-import-ingresos.php">Importar Ingresos CSV</a>
                                     </li>
                                 </ul>
                             </div>
@@ -317,9 +316,7 @@ if ('1' == $_SESSION['permisos']) {
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Gestion de Egresos</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-registrar-egresos.php">Registrar R. de Egresos</a>
-                                    </li>
-                                    <li><a href="page-ver-egresos.php">Ver Recibo de Egresos</a>
+                                    <li><a href="page-ver-egresos.php">Gestion de Egresos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -327,9 +324,15 @@ if ('1' == $_SESSION['permisos']) {
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-credit-card"></i> Reportes </a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li><a href="page-crear-contabilidad.php">Registrar R. de Egresos</a>
+                                    <li><a href="page-ver-rVouchers.php">Reportes de Vouchers</a>
                                     </li>
-                                    <li><a href="page-ver-contabilidad.php">Ver Recibo de Egresos</a>
+                                    <li><a href="page-ver-rBoletas.php">Reportes de Boletas</a>
+                                    </li>
+                                    <li><a href="page-ver-rIngresos.php">Reportes de Ingresos</a>
+                                    </li>
+                                    <li><a href="page-ver-rEgresos.php">Reportes de Egresos</a>
+                                    </li>
+                                    <li><a href="reporteIG.php">Reporte Ingresos y Egresos</a>
                                     </li>
                                 </ul>
                             </div>
@@ -401,6 +404,8 @@ if ('1' == $_SESSION['permisos']) {
                                 </ul>
                             </div>
                         </li>
+        
+        
                         <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Comunicados</a>
                             <div class="collapsible-body">
                                 <ul>

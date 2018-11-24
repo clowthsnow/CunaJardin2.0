@@ -85,7 +85,7 @@ if (!isset($_SESSION['usuario'])) {
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
-                                                            <a href="page-registrar-egresos.php"class="btn">Registrar Egreso</a>
+                                                            <a href="page-registrar-egreso2.php"class="btn">Registrar Egreso</a>
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
