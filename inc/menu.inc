@@ -70,7 +70,7 @@ if ('1' == $_SESSION['permisos']) {
 
     <!--                    <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-assignment"></i>Asistencia</a>
 
-
+-->
                     <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-exit-to-app"></i>Gestion de Matricula</a>
                         <div class="collapsible-body">
                             <ul>
