@@ -33,14 +33,14 @@ $(function () {
         if (array[0].value == '' || array[1].value == '' || array[2].value == '' || array[3].value == '' || array[4].value == '') {
             $('.resp').html('<div class="errors"><p>Complete los datos de la primera etapa para poder ir a la 2da etapa</p></div>');
         } else {
-            $('.resp').html(array[3].value);
+            $('.resp').html('');
             next($(this));
         }
     });
 
     $('input[name=next2]').click(function () {
         var array = formulario.serializeArray();
-        if ( array[5].value == '' || array[6].value == '' || array[7].value == '' || array[8].value == '' || array[9].value == '') {
+        if ( array[5].value == '' || array[6].value == '' || array[7].value == '' || array[8].value == '' || array[9].value == '' || array[10].value == '' || array[11].value == '') {
             $('.resp').html('<div class="errors"><p>Informe todos los datos del estudiante para poder continuar</p></div>');
         } else {
             $('.resp').html('');
@@ -49,8 +49,9 @@ $(function () {
     });
     $('input[name=next3]').click(function () {
         var array = formulario.serializeArray();
-        if ( array[11].value == '' || array[12].value == '' || array[13].value == '' || array[14].value == '' || array[16].value == '' || array[17].value == '' || array[18].value == '' || array[20].value == '' || array[22].value == '' || array[24].value == '') {
+        if ( array[13].value == '' || array[14].value == '' || array[15].value == '' || array[16].value == '' || array[18].value == '' || array[19].value == '' || array[20].value == '' || array[22].value == '' || array[24].value == '' || array[26].value == '') {
             $('.resp').html('<div class="errors"><p>Informe todos los datos del estudiante para poder continuar</p></div>');
+//        $('.resp').html(array[11].value);
         } else {
             $('.resp').html('');
             next($(this));
@@ -60,7 +61,7 @@ $(function () {
 
     $('input[name=next4]').click(function () {
         var array = formulario.serializeArray();
-        if (array[26].value == '' || array[27].value == '') {
+        if (array[28].value == '' || array[29].value == '') {
             $('.resp').html('<div class="errors"><p>Compete el DNI de los padres para ir a la siguiente etapa</p></div>');
         } else {
             $('.resp').html('');
@@ -70,7 +71,7 @@ $(function () {
 
     $('input[type=submit]').click(function (evento) {
         var array = formulario.serializeArray();
-        if (array[27].value == '' || array[28].value == '' || array[29].value == '' || array[30].value == '' || array[31].value == '' || array[32].value == '' || array[33].value == '') {
+        if (array[30].value == '' || array[31].value == '' || array[32].value == '' || array[33].value == '' || array[34].value == '' || array[35].value == '' || array[36].value == '') {
             $('.resp').html('<div class="errors"><p>Informe todos los detalle para finalizar con exito</p></div>');
         } else {
 //           $.ajax({
@@ -85,17 +86,21 @@ $(function () {
 //                  $('.resp').html(valor);
 //              }
 //           });
-            var frm = $('#formulario');
-            frm.submit(function (ev) {
-                ev.preventDefault();
+//            var frm = $('#formulario');
+//            frm.submit(function (ev) {
+//                ev.preventDefault();
                 $.ajax({
                     type: frm.attr('method'),
                     url: frm.attr('action'),
                     data: frm.serialize(),
                     success: function (respuesta) {
                         console.log(respuesta);
-
-                        $('#modal2').openModal();
+                        if(respuesta === '1'){
+                            $('#modal2').openModal();
+                        }else{
+                            $('#modal1').openModal();
+                        }
+                        
 //                        document.location.href = "page-declaracion-jurada.php?alumno=" + dni;
                         //                                location.reload();
                         //                                $('#modal2').openModal();
@@ -104,7 +109,7 @@ $(function () {
                 });
 
 
-            });
+//            });
         }
         evento.preventDefault();
     });

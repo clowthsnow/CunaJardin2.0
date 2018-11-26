@@ -6,7 +6,6 @@ if (!isset($_SESSION['usuario'])) {
     header("location:index.php");
 } else {
     include 'conexion.php';
-    include_once 'control/crearEstudiante.php';
     date_default_timezone_set('America/Lima');
     $fecha = new DateTime();
     ?>
