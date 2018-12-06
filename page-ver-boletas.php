@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
 
+
 if (!isset($_SESSION['usuario'])) {
     //si no hay sesion activa 
     header("location:index.php");
@@ -74,40 +75,82 @@ if (!isset($_SESSION['usuario'])) {
                                         <div id="roboto">
                                             <h4 class="header">Ver Boletas</h4>
                                             <p class="caption">
-                                                En este panel usted podra Ver Boletas registrados almacenados en el sistema y poder gestionarlas.
+                                                En este panel usted podra Ver Boletas de Pago almacenadas en el sistema y poder gestionarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">
-                                                    <h4 class="header">Boletas REGISTRADOS:</h4>
+                                                    <h4 class="header">Ver Boletas:</h4>
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
-                                                            <br>
-                                                            <a href="page-registrar-boleta.php"class="btn">Registrar Boleta</a>
+                                                            <a href="page-registrar-boleta.php"class="btn">Registrar Boletas</a>
                                                             <table id="data-table-simple" class="responsive-table display " cellspacing="0">
                                                                 <thead>
                                                                     <tr>
+                                                                        
                                                                         <th>Nro</th>
-                                                                        <th>Codigo</th>
+                                                                        <th>Fecha</th>
+                                                                        <th>Nro Voucher</th>
+                                                                        <th>Boleta de Venta</th>
+                                                                        <th>Concepto a pagar</th>
+                                                                        <th>Mes</th>
+                                                                        <th>Nombre del niño</th>
                                                                         <th>Monto</th>
-                                                                        <th>Fecha de canje</th>
-                                                                        <th>Fecha de pago</th>
+                                                                        <th>modificar</th>
+                                                                        <th>eliminar</th>
                                                                     </tr>
                                                                 </thead>
+
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        
+                                                                       
+                                                                        <th>Nro</th>
+                                                                        <th>Fecha</th>
+                                                                        <th>Nro Voucher</th>
+                                                                        <th>Boleta de Venta</th>
+                                                                        <th>Concepto a pagar</th>
+                                                                        <th>Mes</th>
+                                                                        <th>Nombre del niño</th>
+                                                                        <th>Monto</th>
+                                                                        <th>modificar</th>
+                                                                        <th>eliminar</th>
+                                                                    </tr>
+                                                                </tfoot>
 
                                                                 <tbody>
                                                                     <?php
                                                                     $consultaUser = "SELECT * FROM boleta WHERE BoletaEstReg='A'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
-                                                                        echo "<tr>
-                                                                        <td>" . $row['BoletaId'] . "</td>";
-                                                                        echo "<td>" . $row['BoletaCodigo'] . "</td>";
-                                                                        echo "<td>" . $row['BoletaMonto'] . "</td>";
+                                                                        echo "<tr>";
+                                                                        echo "<td>" . $row['BoletaId'] . "</td>";
                                                                         echo "<td>" . $row['BoletaFechaCanje'] . "</td>";
+//                                                                        $consultaCat = "SELECT * FROM contabilidad WHERE ContabilidadNumeroRecibo='" . $row['ContabilidadAlumno'] . "'";
+//                                                                        $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
+//                                                                        while ($row2 = $resultado2->fetch_assoc()) {
+//                                                                            echo "<td>" . $row2['AlumnoNombre'] ." ".$row2['AlumnoNombre']. "</td>";
+//                                                                            echo "<td>" . $row2['AlumnoDni'] . "</td>";
+//                                                                        }
+//                                                                        echo "<td>" . $row['ContabilidadNumeroRecibo'] . "</td>";
+                                                                        echo "<td>" . $row['BoletaVoucher'] . "</td>";
+                                                                        echo "<td>" . $row['BoletaCodigo'] . "</td>";
+                                                                        echo "<td>" . $row['BoletaDescripcion'] . "</td>";
                                                                         echo "<td>" . $row['BoletaFechaPago'] . "</td>";
+                                                                                
+                                                                        $consultaCat = "SELECT * FROM contabilidad WHERE ContabilidadNumeroRecibo='" . $row['BoletaVoucher'] . "'";
+                                                                        $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
+                                                                        while ($row2 = $resultado2->fetch_assoc()) {
+                                                                            //echo "<td>" . $row2['ContabilidadAlumno'] . "</td>";
+                                                                            $consultaCat2 = "SELECT * FROM alumno WHERE AlumnoDni='" . $row2['ContabilidadAlumno'] . "'";
+                                                                            $resultado3 = $conexion->query($consultaCat2) or die($conexion->error);
+                                                                            while ($row3 = $resultado3->fetch_assoc()) {
+                                                                                echo "<td>" . $row3['AlumnoNombre'] ." ".$row3['AlumnoApellidos']. "</td>";
+                                                                            }
+                                                                        }
+                                                                        echo "<td>" . $row['BoletaMonto'] . "</td>";
                                                                         
                                                                         echo "<td><a href=\"page-modificar-boleta.php?id=" . $row['BoletaId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
                                                                         <td><a href=\"control/eliminarBoleta.php?id=" . $row['BoletaId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
@@ -116,10 +159,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
+
                                             </div>
                                         </div>
                                     </div>
@@ -132,17 +175,17 @@ if (!isset($_SESSION['usuario'])) {
                         <div id="modal1" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ERROR!!!</h4>
-                                <p>Nota no se encontrado en la base de datos</p>
+                                <p>Vouchers no encontrado en la base de datos</p>
                             </div>
                             <div class="modal-footer">
-                                <a href="page-ver-boletas.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                                <a href="page-ver-plan.php" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
                             </div>
                         </div>
                         <!--modal eliminar-->
                         <div id="modal2" class="modal">
                             <div class="modal-content">
                                 <h4 class="red-text">ELIMINAR!!!</h4>
-                                <p>¿Desea eliminar esta nota?</p>
+                                <p>¿Desea eliminar este voucher?</p>
                             </div>
                             <div class="modal-footer">                                
                                 <a href="#!" id="cancelar" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>

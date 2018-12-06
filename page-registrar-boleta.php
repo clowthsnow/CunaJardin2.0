@@ -116,6 +116,14 @@ if (!isset($_SESSION['usuario'])) {
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
+                                                                        <input id="nombre" type="text" class="validate" name="BoletaVoucher" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadNumeroRecibo'];} else {
+    
+                                                                        }{} ?>">
+                                                                        <label for="nombre">Nro Voucher:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="BoletaMonto" required="" value="<?php if(isset($provBD)){echo $provBD['ContabilidadMonto'];} else {
     
                                                                         }{} ?>">

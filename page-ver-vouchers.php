@@ -126,7 +126,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         $consultaCat = "SELECT * FROM alumno WHERE AlumnoDni='" . $row['ContabilidadAlumno'] . "'";
                                                                         $resultado2 = $conexion->query($consultaCat) or die($conexion->error);
                                                                         while ($row2 = $resultado2->fetch_assoc()) {
-                                                                            echo "<td>" . $row2['AlumnoNombre'] ." ".$row2['AlumnoNombre']. "</td>";
+                                                                            echo "<td>" . $row2['AlumnoNombre'] ." ".$row2['AlumnoApellidos']. "</td>";
                                                                             echo "<td>" . $row2['AlumnoDni'] . "</td>";
                                                                         }
 //                                                                        echo "<td>" . $row['ContabilidadNumeroRecibo'] . "</td>";

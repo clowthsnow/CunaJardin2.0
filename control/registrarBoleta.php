@@ -5,6 +5,7 @@ include '../conexion.php';
 $BoletaCodigo = $_POST['BoletaCodigo'];
 $BoletaFechaCanje = $_POST['BoletaFechaCanje'];
 $BoletaFechaPago = $_POST['BoletaFechaPago'];
+$BoletaVoucher = $_POST['BoletaVoucher'];
 $BoletaMonto = $_POST['BoletaMonto'];
 $BoletaDescripcion = $_POST['BoletaDescripcion'];
 
@@ -12,7 +13,7 @@ if (!isset($BoletaCodigo) ||  !isset($BoletaFechaCanje)|| !isset($BoletaFechaPag
     header("location:../page-registrar-boleta.php");
 }
 
-$insertar="INSERT INTO boleta(BoletaCodigo,BoletaFechaCanje, BoletaFechaPago,BoletaMonto, BoletaDescripcion) VALUES ('$BoletaCodigo','$BoletaFechaCanje','$BoletaFechaPago','$BoletaMonto','$BoletaDescripcion')";
+$insertar="INSERT INTO boleta(BoletaFechaCanje,BoletaVoucher, BoletaCodigo,BoletaDescripcion, BoletaFechaPago,BoletaMonto) VALUES ('$BoletaFechaCanje','$BoletaVoucher','$BoletaCodigo','$BoletaDescripcion','$BoletaFechaPago','$BoletaMonto')";
 
 if($conexion->query($insertar)==TRUE){
     echo '1';

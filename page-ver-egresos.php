@@ -90,12 +90,12 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <thead>
                                                                     <tr>
                                                                         
-                                                                        <th>Tipo de Recibo:</th>
-                                                                        <th>Nro de Recibo:</th>
-                                                                        <th>Fecha emitida:</th>
-                                                                        <th>cantidad</th>
-                                                                        <th>Precio Unitario</th>
-                                                                        <th>Monto Total</th>
+                                                                        <th>FECHA:</th>
+                                                                        <th>Nro DE OFICIO:</th>
+                                                                        <th>Nro DE EXPEDIENTE:</th>
+                                                                        <th>CONCEPTO</th>
+                                                                        <th>FECHA DE PAGO</th>
+                                                                        <th>MONTO</th>
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -104,12 +104,12 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <tfoot>
                                                                     <tr>
                                                                         
-                                                                        <th>Tipo de Recibo:</th>
-                                                                        <th>Nro de Recibo:</th>
-                                                                        <th>Fecha emitida:</th>
-                                                                        <th>cantidad</th>
-                                                                        <th>Precio Unitario</th>
-                                                                        <th>Monto Total</th>
+                                                                        <th>FECHA:</th>
+                                                                        <th>Nro DE OFICIO:</th>
+                                                                        <th>Nro DE EXPEDIENTE:</th>
+                                                                        <th>CONCEPTO</th>
+                                                                        <th>FECHA DE PAGO</th>
+                                                                        <th>MONTO</th>
                                                                         <th>Configurar</th>
                                                                         <th>Eliminar</th>
                                                                     </tr>
@@ -117,20 +117,20 @@ if (!isset($_SESSION['usuario'])) {
 
                                                                 <tbody>
                                                                     <?php
-                                                                    $consultaUser = "SELECT * FROM egresos WHERE EgresosEstReg='A'";
+                                                                    $consultaUser = "SELECT * FROM egreso WHERE EgresosEstReg='A'";
                                                                     $resultado = $conexion->query($consultaUser) or die($conexion->error);
                                                                     while ($row = $resultado->fetch_assoc()) {
                                                                         echo "<tr>
-                                                                        <td>" . $row['EgresosTipoRecibo'] . "</td>"
-                                                                                . "<td>" . $row['EgresosNumRecibo'] . "</td>"
-                                                                                . "<td>" . $row['EgresosFechaEmitida'] . "</td>"
-                                                                                . "<td>" . $row['EgresosCantidad'] . "</td>"
-                                                                                . "<td>" . $row['EgresosPrecioUnitario'] . "</td>"
-                                                                                . "<td>" . $row['EgresosTotal'] . "</td>";
+                                                                        <td>" . $row['EgresosFecha'] . "</td>"
+                                                                                . "<td>" . $row['EgresosNroOficio'] . "</td>"
+                                                                                . "<td>" . $row['EgresosNroExpediente'] . "</td>"
+                                                                                . "<td>" . $row['EgresosConcepto'] . "</td>"
+                                                                                . "<td>" . $row['EgresosFechaPago'] . "</td>"
+                                                                                . "<td>" . $row['EgresosMonto'] . "</td>";
                                                                         
                                                                                 
-                                                                        echo "<td><a href=\"page-configurar-ingreso.php?id=" . $row['EgresosId'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
-                                                                        <td><a href=\"control/eliminarIngreso.php?id=" . $row['EgresosId'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
+                                                                        echo "<td><a href=\"page-configurar-ingreso.php?id=" . $row['EgresosNroExpediente'] . "\"><span class=\"task-cat cyan\">Configurar</span></a></td>
+                                                                        <td><a href=\"control/eliminarIngreso.php?id=" . $row['EgresosNroExpediente'] . "\" class=\"delete\"><span class=\"task-cat red\">Eliminar</span></a></td>
                                                                         </tr>";
                                                                     }
                                                                     ?>
