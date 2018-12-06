@@ -1,3 +1,6 @@
+
+<?php ?>
+
 <?php
 SESSION_START();
 
@@ -9,13 +12,21 @@ if (!isset($_SESSION['usuario'])) {
     date_default_timezone_set('America/Lima');
     $fecha = new DateTime();
     $anio = $fecha->format('Y');
+    $id = $_GET['id'];
+    $anio = $_GET['anio'];
+    $ruta = "siageiEstudiantes/" . $id . "-" . $anio;
+    $directorio = opendir($ruta); //ruta actual
+    //
+    $consultaUser = "SELECT * FROM alumno WHERE AlumnoDni='$id'";
+    $resultado = $conexion->query($consultaUser) or die($conexion->error);
+    $row = $resultado->fetch_assoc();
     //echo $usuario;
     ?>
     <!DOCTYPE html>
     <html lang="es">
 
         <head>
-            <title>Ver Estudiantes</title>
+            <title>Ver Archivos</title>
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <!-- Favicons-->
@@ -56,11 +67,11 @@ if (!isset($_SESSION['usuario'])) {
                             <div class="container">
                                 <div class="row">
                                     <div class="col s12 m12 l12">
-                                        <h5 class="breadcrumbs-title">Ver Estudiantes</h5>
+                                        <h5 class="breadcrumbs-title">Ver Archivos</h5>
                                         <ol class="breadcrumb">
-                                            <li class=" grey-text lighten-4">Gestion de Estudiantes
+                                            <li class=" grey-text lighten-4">Gestion de Matriculas
                                             </li>
-                                            <li class="active blue-text">Ver Estudiantes</li>
+                                            <li class="active blue-text">Ver Archivos</li>
                                         </ol>
 
                                     </div>
@@ -75,74 +86,28 @@ if (!isset($_SESSION['usuario'])) {
                                 <div class="col s12 m12 l12">
                                     <div class="section">
                                         <div id="roboto">
-                                            <h4 class="header">Ver Estudiantes</h4>
+                                            <h4 class="header">Ver Archivos</h4>
                                             <p class="caption">
-                                                En este panel usted podra ver todos los Estudiantes almacenadas en el sistema y poder gestionarlas.
+                                                En este panel usted podra ver los Archivos almacenados en el sistema del respectivo alumno y poder descargarlas.
                                             </p>
                                             <div class="divider"></div>
                                             <div class="container">
                                                 <!--DataTables example-->
                                                 <div id="table-datatables">
-                                                    <h4 class="header">Estudiantes:</h4>
+                                                    <h4 class="header">Estudiante: <?php echo $row['AlumnoNombre']." ".$row['AlumnoApellidos'] ?></h4>
                                                     <div class="row">
 
                                                         <div class="col s12 m12 l12">
-                                                            <table id="data-table-simple" class="responsive-table display " cellspacing="0">
-                                                                <thead>
-                                                                    <tr>
 
-                                                                        <th>Dni</th>
-                                                                        <th>Nombre</th>
-                                                                        <th>Apellido</th>
-                                                                        <th>Año de Nac</th>
-                                                                        <th>Matricular</th>
-                                                                        <th>Archivos</th>
-                                                                        
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tfoot>
-                                                                    <tr>
-
-                                                                        <th>Dni</th>
-                                                                        <th>Nombre</th>
-                                                                        <th>Apellido</th>
-                                                                        <th>Año de Nac</th>
-                                                                        <th>Matricular</th>
-                                                                        <th>Archivos</th>
-                                                                        
-                                                                    </tr>
-                                                                </tfoot>
-
-                                                                <tbody>
-                                                                    <?php
-                                                                    $consultaUser = "SELECT * FROM alumno WHERE AlumnoEstReg='A'";
-                                                                    $resultado = $conexion->query($consultaUser) or die($conexion->error);
-                                                                    while ($row = $resultado->fetch_assoc()) {
-                                                                        $DNIA = $row['AlumnoDni'];
-                                                                        echo "<tr>
-                                                                       
-                                                                        <td>" . $row['AlumnoDni'] . "</td>
-                                                                        <td>" . $row['AlumnoNombre'] . "</td>
-                                                                        <td>" . $row['AlumnoApellidos'] . "</td>
-                                                                        <td>" . $row['AlumnoFechaNacimiento'] . "</td>";
-
-                                                                        $consultaMatri = "SELECT * FROM aulaalumnos WHERE AulaAlumnosAlumno='$DNIA' AND AulaAlumnosAnio='$anio'";
-                                                                        $resultado2 = $conexion->query($consultaMatri);
-                                                                        if ($resultado2->num_rows === 0) {
-                                                                            echo "<td><a href=\"page-declaracion-jurada.php?usuario=" . $row['AlumnoDni'] . "&padre=".$row['AlumnoTutorIdMadre']."\"><span class=\"task-cat green\">Matricular</span></a></td>"
-                                                                                    . "<td><span class=\"task-cat red lighten-2\">Sin Archivos</span></td>
-                                                                        </tr>";
-                                                                        } else {
-                                                                            echo "<td><span class=\"task-cat cyan\">Matriculado</span></a></td>"
-                                                                            . "<td><a href=\"page-ver-archivos.php?id=" . $row['AlumnoDni'] . "&anio=".$anio."\"><span class=\"task-cat teal\">Ver Archivos</span></a></td>
-                                                                        </tr>";
-                                                                        }
-                                                                        
-                                                                    }
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
+                                                            <?php
+                                                            while ($archivo = readdir($directorio)) { //obtenemos un archivo y luego otro sucesivamente
+                                                                if (is_dir($archivo)) {//verificamos si es o no un directorio
+                                                                } else {
+//                                                                    echo "<a download=\"$archivo\" href=\"$ruta/$archivo\">" . $archivo . "</a><br />";
+                                                                    echo "<a  download=\"$archivo\" href=\"$ruta/$archivo\"><span class=\"task-cat teal darken-4\"> Descargar " . $archivo . "</span></a> <br><br>";
+                                                                }
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </div>
                                                 </div> 
@@ -258,4 +223,5 @@ if (!isset($_SESSION['usuario'])) {
     <?php
 }
 ?>
+
 

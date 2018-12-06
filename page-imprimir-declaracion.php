@@ -137,7 +137,7 @@ $pdf->AddPage();
 $pdf->SetFont('Times', '', 12);
 //for ($i = 1; $i <= 40; $i++)
 
-$html = '<p>  Yo,' . $padres['PadreNombre'] . ' ' . $padres['PadreApellidos'] . ' identificado (a) con DNI N° ' . $padres['PadreDni'] . ' suscribo el presente documento, de acuerdo a lo establecido en el articulo 3° de la ley n° 26459  de los Centros Educativos Privados, concordante con el articul 5° del Decreto Legislativo n° 882 Ley de la Promocion de la Inversion en la Educacion, con el articulo 5° inciso d) y el articulo 6° inciso e) del Decreto supremo n°011-998-ED y el articulo 3° del Decreto Supremo n° 005-2002-ED.
+$html = '<p>  Yo, ' . ucwords($padres['PadreNombre']) . ' ' . ucwords($padres['PadreApellidos']) . ' identificado (a) con DNI N° ' . $padres['PadreDni'] . ' suscribo el presente documento, de acuerdo a lo establecido en el articulo 3° de la ley n° 26459  de los Centros Educativos Privados, concordante con el articul 5° del Decreto Legislativo n° 882 Ley de la Promocion de la Inversion en la Educacion, con el articulo 5° inciso d) y el articulo 6° inciso e) del Decreto supremo n°011-998-ED y el articulo 3° del Decreto Supremo n° 005-2002-ED.
     <br><br><b>Declaro conocer la informacion relacionada con el Costo del Servicio Educativo</b>, que sustenta la Educacion en la Cuna Jardin UNSA y por lo tanto, sus fines y obejitvos establecidos en el Reglamentos Interno de la Institucion; por lo que expreso mi comportamiento de observar y respetar el Reglamento.
     <br>
     <br>

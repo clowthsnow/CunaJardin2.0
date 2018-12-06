@@ -173,7 +173,7 @@ if (!isset($_SESSION['usuario'])) {
                                                             <h4 class="header2">El Alumno ya se encuentra matriculado</h4>
                                                             <div class="row">
                                                                 <div class="col s12 m12 l12">
-                                                                    <a href="page-imprimir-declaracion.php?usuario=<?php echo $usuario ?>" class="waves-effect waves-green btn">Imprimir Declaracion Jurada</a>
+                                                                    <a href="page-imprimir-declaracion.php?usuario=<?php echo $usuario ?>" target="a_blank" class="waves-effect waves-green btn">Imprimir Declaracion Jurada</a>
                                                                 </div>
                                                             </div> 
                                                             <br>
@@ -187,6 +187,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <th>Nombre</th>                                                                        
                                                                                 <th>Grado</th>
                                                                                 <th>Año</th>
+                                                                                <th>Archivos</th>
                                                                             </tr>
                                                                         </thead>
 
@@ -195,6 +196,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <th>Nombre</th>                                                                        
                                                                                 <th>Grado</th>
                                                                                 <th>Año</th>
+                                                                                <th>Archivos</th>
                                                                             </tr>
                                                                         </tfoot>
 
@@ -211,7 +213,8 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 echo "<tr>
                                                                         <td>" . $provBDA['AlumnoNombre'] . " " . $provBDA['AlumnoApellidos'] . "</td>
                                                                         <td>" . $row['AulaGrado'] . " años" . "</td>
-                                                                            <td>" . $row['AulaAlumnosAnio'] . "</td>";
+                                                                            <td>" . $row['AulaAlumnosAnio'] . "</td>"
+                                                                                        . "<td><a href=\"page-ver-archivos.php?id=" . $usuario . "&anio=".$row['AulaAlumnosAnio'] ."\"><span class=\"task-cat cyan\">Ver Archivos</span></a></td>";
                                                                             }
                                                                             ?>
                                                                         </tbody>

@@ -198,37 +198,37 @@ if (!isset($_SESSION['usuario'])) {
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreProcedenciaLugar" required="" value="<?php echo $provBD['PadreProcedenciaLugar']; ?>">
-                                                                        <label class="active" for="nombre">Lugar de Procedencia:</label>
+                                                                        <label class="active" for="nombre">Lugar de Procedencia: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreGradoInstruccion" required="" value="<?php echo $provBD['PadreGradoInstruccion']; ?>">
-                                                                        <label class="active" for="nombre">Grado de Instruccion:</label>
+                                                                        <label for="nombre">Grado de Instruccion: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreOcupacionTipo" required="" value="<?php echo $provBD['PadreOcupacionTipo']; ?>">
-                                                                        <label class="active" for="nombre">Tipo de ocupacion:</label>
+                                                                        <label  for="nombre">Tipo de ocupacion: *</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreOcupacionRubro" required="" value="<?php echo $provBD['PadreOcupacionRubro']; ?>">
-                                                                        <label class="active" for="nombre">Rubro:</label>
+                                                                        <label for="nombre">Rubro: * </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreDireccionTrabajo" required="" value="<?php echo $provBD['PadreDireccionTrabajo']; ?>">
-                                                                        <label class="active" for="nombre">Direccion de Trabajo:</label>
+                                                                        <label for="nombre">Direccion de Trabajo: * </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="input-field col s12">
                                                                         <input id="nombre" type="text" class="validate" name="PadreCentroTrabajo" required="" value="<?php echo $provBD['PadreCentroTrabajo']; ?>">
-                                                                        <label class="active" for="nombre">Centro de Trabajo:</label>
+                                                                        <label for="nombre">Centro de Trabajo: * </label>
                                                                     </div>
                                                                 </div>
 

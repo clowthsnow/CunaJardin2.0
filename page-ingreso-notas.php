@@ -151,7 +151,7 @@ if (!isset($_SESSION['usuario'])) {
                                         $buscarActivoA = "SELECT COUNT(*),notaarea.* FROM notaarea WHERE NotaAreaAlumno='$estudiante' AND NotaAreaCurso='$cursoID'";
                                         $resultadoBuscarActivoA = $conexion->query($buscarActivoA);
                                         $cantidadA = $resultadoBuscarActivoA->fetch_assoc();
-                                        print_r($cantidadA);
+//                                        print_r($cantidadA);
                                         $cantidad1A = $cantidadA['COUNT(*)'];
                                         $na = "";
                                         if ($cantidad1A == 1) {
@@ -355,7 +355,7 @@ if (!isset($_SESSION['usuario'])) {
                                     $notaA = $('#' + $tempnotaA);
 
                                     $url = "control/anadirNotasArea.php?alumno=" + alumno + "&area=" + $area.data("codigo") + "&nota=" + $notaA.val();
-                                    
+
                                     console.log($url);//                                    
                                     $.ajax({
                                         type: 'GET',
@@ -378,11 +378,11 @@ if (!isset($_SESSION['usuario'])) {
                                 var docente = "<?php echo $alumno['DocenteDni']; ?>";
                                 $coment = $('#textarea1').val();
                                 console.log($coment);
-                                $url = "control/anadirNotasDetalle.php?alumno=" + alumno + "&aula=" + aula + "&docente=" + docente +"&comentario="+$coment;
-//                                console.log($url);
+                                $url = "control/anadirNotasDetalle.php?alumno=" + alumno + "&aula=" + aula + "&docente=" + docente + "&comentario=" + $coment;
+    //                                console.log($url);
 
 
-                                                                    
+
                                 $.ajax({
                                     type: 'GET',
                                     url: $url,
@@ -391,7 +391,8 @@ if (!isset($_SESSION['usuario'])) {
                                     success: function (respuesta) {
                                         //                                            console.log(respuesta);
                                         console.log("detalles añadidos");
-                                        location.reload();
+                                        var mensaje = alert("Notas guardadas correctamente.");
+                                        location.href="page-ver-grupos.php";
                                     }
                                 });
 
