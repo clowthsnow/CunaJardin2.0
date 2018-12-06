@@ -22,7 +22,7 @@ if (isset($_SESSION['usuario'])) {
             <link href="css/style3.css" type="text/css" rel="stylesheet" >
             <link href="css/page-center.css" type="text/css" rel="stylesheet">
 
-            <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->s
+            <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
 
             <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet">
 

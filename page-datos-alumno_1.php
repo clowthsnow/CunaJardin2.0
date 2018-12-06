@@ -274,7 +274,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <div class="col s12 m6 l6">
                                                                             <label>*Control Medico en el Embarazo:</label>
                                                                             <select id="disco" class="browser-default" name="controlmed" required="">
-                                                                                <option value="" disabled selected>Control Medico:</option>
+                                                                                <option value="" disabled selected>*Control Medico:</option>
                                                                                 <option value="Si" >Si</option>
                                                                                 <option value="No" >No</option>
                                                                             </select>
@@ -283,7 +283,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                         <div class="col s12 m6 l6">
                                                                             <label>*Parto:</label>
                                                                             <select id="disco" class="browser-default" name="parto" required="">
-                                                                                <option value="" disabled selected>Tipo de Parto:</option>
+                                                                                <option value="" disabled selected>*Tipo de Parto:</option>
                                                                                 <option value="Normal" >Normal</option>
                                                                                 <option value="Cesarea" >Cesarea</option>
                                                                             </select>

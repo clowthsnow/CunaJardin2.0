@@ -18,13 +18,14 @@
 body {
   
   /*background-color: #fcfcfc;*/
-  background-image: url("http://www.unsa.edu.pe/wp-content/uploads/2017/12/cuna-unsa-anuncio-878x426.jpg");
+  background-image: url("../img/cunaunsaport.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size:cover;
+
   /*background-size: 1450px;*/
 }
 #main,

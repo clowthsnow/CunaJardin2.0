@@ -16,7 +16,7 @@ if (!isset($_SESSION['usuario'])) {
     }
     $provBD = $resultado->fetch_assoc();
     if ($provBD['AlumnoSiagie'] === '1') {
-        header("location:../page-matricula-estudiante.php?usuario=$usuario");
+        header("location:page-matricula-estudiante.php?usuario=$usuario");
     }
     ?>
     <!DOCTYPE html>
@@ -121,10 +121,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="row">
                                                                         <div class="col s12 l12 m12">
                                                                             <div class="file-field input-field ">
-                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
+                                                                                <input id="dni" class="file-path validate col s9 right" type="text" required="" readonly="" />
                                                                                 <div class="btn">
                                                                                     <span>*DNI</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input id="dni2"  type="file" name="dni" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -133,10 +133,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="row">
                                                                         <div class="col s12 l12 m12">
                                                                             <div class="file-field input-field ">
-                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
+                                                                                <input id="carnet" class="file-path validate col s9 right" type="text" required="" readonly="" onchange="cambiarNombre(carnet)"/>
                                                                                 <div class="btn">
                                                                                     <span>*Carnet</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="carnet" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -144,10 +144,10 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="row">
                                                                         <div class="col s12 l12 m12">
                                                                             <div class="file-field input-field ">
-                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
+                                                                                <input id="vacunas" class="file-path validate col s9 right" type="text" required="" readonly="" onchange="cambiarNombre(vacunas);"/>
                                                                                 <div class="btn">
                                                                                     <span>*Vacunas</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="vacunas" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -158,32 +158,23 @@ if (!isset($_SESSION['usuario'])) {
                                                                     <div class="row">
                                                                         <div class="col s12 m12 l12">
                                                                             <p>Soy Administrativo:</p>
-                                                                            <p>* Boleta de pago
-                                                                                <br>* DNI escaneado
+                                                                            <p>
+                                                                                * DNI escaneado
                                                                                 <br>* Carnet de atención integral de salud del niño
                                                                                 <br>* Carnet de vacunas
+                                                                                <br>* Boleta de pago
                                                                             </p>
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col s12 l12 m12">
-                                                                            <div class="file-field input-field ">
-                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
-                                                                                <div class="btn">
-                                                                                    <span>*Boleta</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+
                                                                     <div class="row">
                                                                         <div class="col s12 l12 m12">
                                                                             <div class="file-field input-field ">
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*DNI</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="dni" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -195,7 +186,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Carnet</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="carnet" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -206,42 +197,45 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Vacunas</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="vacunas" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>                                                                <?php } ?>
+                                                                    </div> 
+                                                                    <div class="row">
+                                                                        <div class="col s12 l12 m12">
+                                                                            <div class="file-field input-field ">
+                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
+                                                                                <div class="btn">
+                                                                                    <span>*Boleta</span>
+                                                                                    <input type="file" name="boleta" required="" readonly=""/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>                                                               
+                                                                <?php } ?>
 
                                                                 <?php if ($provBD['AlumnoTipoAlumno'] == '3') { ?>
                                                                     <div class="row">
                                                                         <div class="col s12 m12 l12">
                                                                             <p>Soy Pariente:</p>
-                                                                            <p>* Boleta del Trabajador
-                                                                                <br>* DNI escaneado
+                                                                            <p>* DNI escaneado
                                                                                 <br>* Carnet de atención integral de salud del niño
                                                                                 <br>* Carnet de vacunas
+                                                                                <br>* Boleta del Trabajador
+
                                                                             </p>
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col s12 l12 m12">
-                                                                            <div class="file-field input-field ">
-                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
-                                                                                <div class="btn">
-                                                                                    <span>*Boleta</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+
                                                                     <div class="row">
                                                                         <div class="col s12 l12 m12">
                                                                             <div class="file-field input-field ">
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*DNI</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="dni" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -253,7 +247,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Carnet</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="carnet" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -264,11 +258,22 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Vacunas</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="vacunas" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div> 
+                                                                    <div class="row">
+                                                                        <div class="col s12 l12 m12">
+                                                                            <div class="file-field input-field ">
+                                                                                <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
+                                                                                <div class="btn">
+                                                                                    <span>*Boleta</span>
+                                                                                    <input type="file" name="boleta" required="" readonly=""/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 <?php } ?>
 
                                                                 <?php if ($provBD['AlumnoTipoAlumno'] == '4') { ?>
@@ -290,7 +295,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Constancia</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="constancia" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -301,7 +306,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Libreta</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="libreta" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -312,7 +317,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*DNI</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="dni" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -324,7 +329,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Carnet</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="carnet" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -335,7 +340,7 @@ if (!isset($_SESSION['usuario'])) {
                                                                                 <input class="file-path validate col s9 right" type="text" required="" readonly=""/>
                                                                                 <div class="btn">
                                                                                     <span>*Vacunas</span>
-                                                                                    <input type="file" name="archivo[]" required="" readonly=""/>
+                                                                                    <input type="file" name="vacunas" required="" readonly=""/>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -425,33 +430,24 @@ if (!isset($_SESSION['usuario'])) {
             <script type="text/javascript" src="js/plugins.js"></script>
 
             <script>
-                var dni = $("#dni").text();
-                $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+                                                                                var dni = $("#dni").text();
+                                                                                $(document).ready(function () {
+                                                                                    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-                $('#modal2').modal();
-                $('#modal1').modal();
-                });
-                //                var frm = $('#create');
-                //                frm.submit(function (ev) {
-                ////                    ev.preventDefault();
-                //                    $.ajax({
-                //                        type: frm.attr('method'),
-                //                        url: frm.attr('action'),
-                //                        data: frm.serialize(),
-                //                        success: function (respuesta) {
-                //                            console.log(respuesta);
-                //                            
-                //                                //$('#modal2').openModal();
-                //                                document.location.href = "page-declaracion-jurada.php?alumno="+dni;
-                //                                //                                location.reload();
-                ////                                $('#modal2').openModal();
-                //
-                //                        }
-                //                    });
+                                                                                    $('#modal2').modal();
+                                                                                    $('#modal1').modal();
+                                                                                });
 
 
-                });
+//                                                                                function cambiarNombre(nombre) {
+//                                                                                    var user =<?php echo $usuario; ?>;
+//                                                                                    if (nombre === "dni") {
+//                                                                                        var nom = "dni-" + user + ".jpg";
+//                                                                                        $("#dni").val(nom);
+//
+//                                                                                        console.log(nom);
+//                                                                                    }
+//                                                                                }
             </script>
         </body>
 
